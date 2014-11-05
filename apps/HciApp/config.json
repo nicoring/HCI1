@@ -1,0 +1,16 @@
+{
+    "Plugins": {
+        "QMLScene": {
+            "pluginType": "QmlSceneViewer",
+            "qmlFile": "App.qml",
+            "primaryScreen": true
+        },
+        "gravitySpace": {
+            "pluginType": "GravitySpaceAdapter",
+            "attachContactImage": false
+        }
+    },
+    "Logging": {
+        "defaultLogLevel": 4
+    }
+}

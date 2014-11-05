@@ -1,0 +1,6 @@
+{
+    "runsThreaded": true,
+    "cameraDevideIds": [0, 1, 2, 3, 4, 5],
+    "showRawImage": false,
+    "showMarkerImage": true
+}

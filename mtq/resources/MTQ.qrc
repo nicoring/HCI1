@@ -1,0 +1,6 @@
+<RCC>
+	<qresource prefix="/">
+		<file>config/MTQ.json</file>
+		<file>config/Plugin.json</file>
+	</qresource>
+</RCC>

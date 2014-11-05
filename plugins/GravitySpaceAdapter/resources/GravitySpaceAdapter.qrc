@@ -1,0 +1,5 @@
+<RCC>
+	<qresource prefix="/">
+		<file>config/GravitySpaceAdapter.json</file>
+	</qresource>
+</RCC>

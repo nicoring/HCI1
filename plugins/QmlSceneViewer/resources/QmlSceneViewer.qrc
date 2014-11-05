@@ -1,0 +1,9 @@
+<RCC>
+	<qresource prefix="/">
+		<file>qml/QmlViewer.qml</file>
+		<file>qml/QmlViewerLoader.js</file>
+		<file>config/QmlSceneViewer.json</file>
+		<file>qml/PanZoom.js</file>
+		<file>qml/FramerateDisplay.qml</file>
+	</qresource>
+</RCC>

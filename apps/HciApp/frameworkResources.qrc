@@ -1,0 +1,39 @@
+<RCC>
+    <qresource prefix="/models">
+        <file>framework/arrow.3ds</file>
+        <file>framework/arrow.png</file>
+        <file>framework/butact.png</file>
+        <file>framework/butcase.png</file>
+        <file>framework/buttonActuator.3ds</file>
+        <file>framework/buttonCase.3ds</file>
+        <file>framework/buttontop.3ds</file>
+        <file>framework/cbcase.png</file>
+        <file>framework/cbcross.png</file>
+        <file>framework/checkboxCase.3ds</file>
+        <file>framework/checkboxCross.3ds</file>
+        <file>framework/componentBase.png</file>
+        <file>framework/componentHighlight.png</file>
+        <file>framework/HighResQuad.3ds</file>
+        <file>framework/radcase.png</file>
+        <file>framework/radcirc.png</file>
+        <file>framework/radioCase.3ds</file>
+        <file>framework/radioCirc.3ds</file>
+        <file>framework/sliderCa.png</file>
+        <file>framework/sliderCasing.3ds</file>
+        <file>framework/sliderSl.png</file>
+        <file>framework/sliderSlider.3ds</file>
+        <file>framework/zgBase.3ds</file>
+        <file>framework/zgBase.jpg</file>
+        <file>framework/zgStone0.3ds</file>
+        <file>framework/zgStone1.3ds</file>
+        <file>framework/zgStone2.3ds</file>
+        <file>framework/zgStone3.3ds</file>
+        <file>framework/zgStones.jpg</file>
+        <file>framework/zgLight.3ds</file>
+        <file>framework/button_paralax_flat_actuator.3ds</file>
+        <file>framework/button_paralax_flat_case.3ds</file>
+        <file>framework/bflat.png</file>
+        <file>framework/canvascase.3ds</file>
+        <file>framework/canvasca.png</file>
+    </qresource>
+</RCC>

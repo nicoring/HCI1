@@ -1,0 +1,25 @@
+{
+	"ConfigurationService": {
+		"configFile": "config.json"
+	},
+
+	"PluginRegistry": {
+		"pluginDir": "../../plugins",
+		"typeDir": "../../types"
+	},
+
+	"Plugins": {
+	},
+
+	"Logging": {
+		"defaultLogLevel": 3
+	},
+
+	"Shortcuts": {
+		"F2": "CalibrateAction",
+		"F5": "ReloadAction"
+	},
+
+	"Users": {
+	}
+}

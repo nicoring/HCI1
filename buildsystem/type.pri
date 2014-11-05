@@ -1,0 +1,17 @@
+TEMPLATE = lib
+
+QT *= core
+
+DEPENDENCIES += Qt ICU MTQ
+
+include(common.pri)
+
+DEFINES += \
+	MTQ_EXPORT_MTQ=Q_DECL_IMPORT \
+	MTQ_EXPORT_TYPE=Q_DECL_EXPORT
+
+win32 {
+	DLLDESTDIR = $${OUT_PWD}/$${TO_BASE_DIR}/$${CURRENT_CONFIG}/types
+} else {
+	DESTDIR = $${OUT_PWD}/$${TO_BASE_DIR}/$${CURRENT_CONFIG}/types
+}

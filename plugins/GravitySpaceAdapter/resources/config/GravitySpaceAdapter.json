@@ -1,0 +1,8 @@
+{
+	"rootDir": "\\\\TOUCHFLOOR\\Z\\GravitySpace",
+	"useConsole": false,
+	"sendPositionEvents": true,
+	"sendFrameImageEvents": false,
+	"attachContactImage": false,
+	"quitOnExitGesture": true
+}
