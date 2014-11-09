@@ -125,10 +125,10 @@ bool MtqIntegratorWidget::dispatch(PositionEvent::Ptr event){
 		processContactMove(floorPosition,floorEvent->id(), floorEvent->tiltDirection());
         return true;
     } else if (className == TapEvent::staticMetaObject.className()){
-        processTap(floorPosition);
+        processTap(floorPosition, floorEvent->id());
         return true;
     } else if (className == DoubleTapEvent::staticMetaObject.className()){
-        processDoubleTap(floorPosition);
+        processDoubleTap(floorPosition, floorEvent->id());
         return true;
     } else {
      return false;
@@ -181,11 +181,11 @@ void MtqIntegratorWidget::mouseClickEvent(QMouseEvent *event){
 }
 
 void MtqIntegratorWidget::mouseClicked(QPoint eventPoint){
-    processTap(eventPoint);   
+    processTap(eventPoint, 1337);
 }
 
 void MtqIntegratorWidget::mouseDoubleClick(QPoint eventPoint){
-    processDoubleTap(eventPoint);
+    processDoubleTap(eventPoint, 1337);
 }
 
 void MtqIntegratorWidget::mouseMove(QPoint eventPoint){
@@ -212,16 +212,32 @@ void MtqIntegratorWidget::setDebugContactUp(int contactId, QPointF position){
     processContactUp(QPoint((int)qRound(position.x()),(int)qRound(position.y())), contactId);
 }
 
-void MtqIntegratorWidget::setDebugContactTap(QPointF position){
-    processTap(QPoint((int)qRound(position.x()),(int)qRound(position.y())));
+void MtqIntegratorWidget::setDebugContactTap(int contactId, QPointF position){
+    processTap(QPoint((int)qRound(position.x()),(int)qRound(position.y())), contactId);
 }
 
-void MtqIntegratorWidget::processTap(QPoint position){
-    itemAt(position, EVENT_TAP);
+void MtqIntegratorWidget::processTap(QPoint position, int contactId){
+    int resVal = EVENT_TAP | contactId;
+    itemAt(position, resVal);
+
+    ContactStruct c;
+    c.position = position;
+    c.age = 0;
+
+    m_contacts.remove(contactId);
+    m_contacts.insert(contactId, c);
 }
 
-void MtqIntegratorWidget::processDoubleTap(QPoint position){
-    itemAt(position,EVENT_DOUBLETAP);
+void MtqIntegratorWidget::processDoubleTap(QPoint position, int contactId){
+    int resVal = EVENT_DOUBLETAP | contactId;
+    itemAt(position, resVal);
+
+    ContactStruct c;
+    c.position = position;
+    c.age = 0;
+
+    m_contacts.remove(contactId);
+    m_contacts.insert(contactId, c);
 }
 
 void MtqIntegratorWidget::processContactDown(QPoint position, int contactId, QVector2D tiltDirection, bool IsDebugContact){
@@ -306,6 +322,14 @@ void MtqIntegratorWidget::itemAtResult(QObject *object, int identifier){
         case EVENT_CONTACTUP:
             if (object->metaObject()->indexOfMethod("mtqContactUp(QVariant,QVariant)") >= 0)
                 QMetaObject::invokeMethod(object,"mtqContactUp",Q_ARG(QVariant,idVar),Q_ARG(QVariant,eventPos));
+            break;
+    }
+
+    //Remove contacts after Tap
+    switch(flag){
+        case EVENT_TAP:
+        case EVENT_DOUBLETAP:
+            m_contacts.remove(id);
             break;
     }
 }

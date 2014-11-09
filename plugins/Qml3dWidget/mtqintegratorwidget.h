@@ -40,7 +40,7 @@ namespace mtq{
         Q_INVOKABLE void setDebugContactDown(int contactId, QPointF position);
         Q_INVOKABLE void setDebugContactMove(int contactId, QPointF position);
         Q_INVOKABLE void setDebugContactUp(int contactId, QPointF position);
-        Q_INVOKABLE void setDebugContactTap(QPointF position);
+        Q_INVOKABLE void setDebugContactTap(int contactId, QPointF position);
     signals:
         void userPositionChanged(QPointF qmlUserPosition);
         void adjustCameraHeightToSceneChanged(bool value);
@@ -82,8 +82,8 @@ namespace mtq{
         virtual void mouseReleaseEvent (QMouseEvent *event);
 
         //Processing MTQ Events
-        void processTap(QPoint position);
-        void processDoubleTap(QPoint position);
+        void processTap(QPoint position, int contactId);
+        void processDoubleTap(QPoint position, int contactId);
         void processContactDown(QPoint position, int contactId, QVector2D tiltDirection = QVector2D(0,0), bool isDebugContact = false);
         void processContactMove(QPoint position, int contactId, QVector2D tiltDirection = QVector2D(0,0));
         void processContactUp(QPoint position, int contactId);

@@ -9,7 +9,7 @@ Image{
     signal positionChanged(var contactId, var x, var y);
     signal contactDown(var contactId, var x, var y);
     signal contactUp(var contactId, var x, var y)
-    signal tap(var x, var y);
+    signal tap(var contactId, var x, var y);
 
     source: "shoe_s.png"
     id: shoe
@@ -75,7 +75,7 @@ Image{
 
         onClicked: {
             var pos = shoe.displayedPosition();
-            tap(pos.x,pos.y);
+            tap(shoe.contactId, pos.x,pos.y);
         }
 
         onPressed: {
