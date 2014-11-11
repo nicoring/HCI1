@@ -14,28 +14,37 @@ namespace mtq{
     {
         Q_OBJECT
         MTQ_QML_PLUGIN_REGISTRATION(MtqIntegratorWidget, "qml3d")
+
+        Q_PROPERTY(bool smoothCamera READ smoothCamera WRITE setSmoothCamera)
+        Q_PROPERTY(bool paintDebugInfo READ paintDebugInfo WRITE setPaintDebugInfo)
+        Q_PROPERTY(bool adjustCameraHeightToScene READ adjustCameraHeightToScene WRITE setAdjustCameraHeightToScene NOTIFY adjustCameraHeightToSceneChanged)
+        Q_PROPERTY(int tiltingMultiplicator READ tiltingMultiplicator WRITE setTiltingMultiplicator)
+        Q_PROPERTY(bool moveCamera READ moveCamera WRITE setMoveCamera)
+        Q_PROPERTY(bool printDebugOutput READ printDebugOutput WRITE setPrintDebugOutput)
+        Q_PROPERTY(bool fuzzyInput READ fuzzyInput WRITE setFuzzyInput NOTIFY fuzzyInputChanged)
     public:
         explicit MtqIntegratorWidget(QQuickItem *parent = 0);
         void itemChange(ItemChange change, const ItemChangeData &d);
         virtual void paint(QPainter* painter);
 
-        Q_PROPERTY(bool smoothCamera READ smoothCamera WRITE setSmoothCamera)
         bool smoothCamera() { return m_smoothCamera; }
         void setSmoothCamera(bool value){ m_smoothCamera = value; }
 
-        Q_PROPERTY(bool paintDebugInfo READ paintDebugInfo WRITE setPaintDebugInfo)
         bool paintDebugInfo() { return m_paintDebugInfo; }
         void setPaintDebugInfo(bool value){ m_paintDebugInfo = value;}
 
-        Q_PROPERTY(bool adjustCameraHeightToScene READ adjustCameraHeightToScene WRITE setAdjustCameraHeightToScene NOTIFY adjustCameraHeightToSceneChanged)
         bool adjustCameraHeightToScene() { return m_adjustHeight; }
         void setAdjustCameraHeightToScene(bool value) { m_adjustHeight = value; emit adjustCameraHeightToSceneChanged(value);}
 
-		Q_PROPERTY(int tiltingMultiplicator READ tiltingMultiplicator WRITE setTiltingMultiplicator)
 		int tiltingMultiplicator(){ return m_tiltingMultiplicator; } void setTiltingMultiplicator(int value){ m_tiltingMultiplicator = value;}
 
-        Q_PROPERTY(bool moveCamera READ moveCamera WRITE setMoveCamera)
         bool moveCamera(){ return m_moveCamera; } void setMoveCamera(bool value){ m_moveCamera = value; }
+
+        bool printDebugOutput() {return m_printDebug;}
+        void setPrintDebugOutput(bool value) {m_printDebug = value;}
+
+        bool fuzzyInput() {return m_fuzzyInput;}
+        void setFuzzyInput(bool value) {m_fuzzyInput = value; emit fuzzyInputChanged();}
 
         Q_INVOKABLE void setDebugContactDown(int contactId, QPointF position);
         Q_INVOKABLE void setDebugContactMove(int contactId, QPointF position);
@@ -44,6 +53,7 @@ namespace mtq{
     signals:
         void userPositionChanged(QPointF qmlUserPosition);
         void adjustCameraHeightToSceneChanged(bool value);
+        void fuzzyInputChanged();
     public slots:
         virtual bool dispatch(PositionEvent::Ptr);
         void itemAtResult(QObject* object, int identifier);
@@ -88,6 +98,8 @@ namespace mtq{
         void processContactMove(QPoint position, int contactId, QVector2D tiltDirection = QVector2D(0,0));
         void processContactUp(QPoint position, int contactId);
 
+        QPoint randomize(QPoint position, float percentage = 0.005);
+
         //Item interaction
         bool itemAt(QPoint screenPosition, int customIdentifier);
 
@@ -105,6 +117,7 @@ namespace mtq{
 
         bool m_moveCamera;
         bool m_validParentItem;
+        bool m_printDebug;
         QQuickItem* m_parentItem;
         QMetaMethod m_depthAtMethod;
         QMetaMethod m_itemAtMethod;
@@ -113,6 +126,7 @@ namespace mtq{
         bool m_adjustHeight;
         QPoint m_userPosition;
         bool m_paintDebugInfo;
+        bool m_fuzzyInput;
 
 		int m_tiltingMultiplicator;
 

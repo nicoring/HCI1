@@ -17,6 +17,8 @@ MtqIntegratorWidget::MtqIntegratorWidget(QQuickItem *parent) :
     m_smoothCamera = true;
 	m_oldDepth = 0.0f;
     m_moveCamera = true;
+    m_printDebug = false;
+    m_fuzzyInput = true;
 }
 
 void MtqIntegratorWidget::paint(QPainter *painter){
@@ -181,42 +183,101 @@ void MtqIntegratorWidget::mouseClickEvent(QMouseEvent *event){
 }
 
 void MtqIntegratorWidget::mouseClicked(QPoint eventPoint){
-    processTap(eventPoint, 1337);
+    if (m_fuzzyInput)
+        processTap(randomize(eventPoint), 1337);
+    else
+        processTap(eventPoint, 1337);
 }
 
 void MtqIntegratorWidget::mouseDoubleClick(QPoint eventPoint){
-    processDoubleTap(eventPoint, 1337);
+    if (m_fuzzyInput)
+        processDoubleTap(randomize(eventPoint), 1337);
+    else
+        processDoubleTap(eventPoint, 1337);
 }
 
 void MtqIntegratorWidget::mouseMove(QPoint eventPoint){
-    processContactMove(eventPoint,1337);
+    if (m_fuzzyInput)
+        processContactMove(randomize(eventPoint),1337);
+    else
+        processContactMove(eventPoint,1337);
 }
 
 void MtqIntegratorWidget::mouseRelease(QPoint eventPoint){
-    processContactUp(eventPoint,1337);
+    if (m_fuzzyInput)
+        processContactUp(randomize(eventPoint),1337);
+    else
+        processContactUp(eventPoint,1337);
 }
 
 void MtqIntegratorWidget::mousePress(QPoint eventPoint){
-    processContactDown(eventPoint,1337);
+    if (m_fuzzyInput)
+        processContactDown(randomize(eventPoint),1337);
+    else
+        processContactDown(eventPoint,1337);
+}
+
+QPoint MtqIntegratorWidget::randomize(QPoint position, float percentage){
+    //get float 0.0 to 1.0
+    float randx = qrand() / (float)RAND_MAX;
+    float randy = qrand() / (float)RAND_MAX;
+
+    //map to -1 to 1
+    randx = randx * 2.0f - 1.0f;
+    randy = randy * 2.0f - 1.0f;
+
+    //error calculated on hd screen
+    float maxError = 1900 * percentage;
+
+    int newX = (int) qRound(position.x() + randx * maxError);
+    int newY = (int) qRound(position.y() + randy * maxError);
+
+    return QPoint(newX, newY);
 }
 
 void MtqIntegratorWidget::setDebugContactDown(int contactId, QPointF position){
-    processContactDown(QPoint((int)qRound(position.x()),(int)qRound(position.y())),contactId, QVector2D(0,0), true);
+    QPoint p = QPoint((int)qRound(position.x()),(int)qRound(position.y()));
+
+    if (m_fuzzyInput)
+        processContactDown(randomize(p),contactId, QVector2D(0,0), true);
+    else
+        processContactDown(p,contactId, QVector2D(0,0), true);
 }
 
 void MtqIntegratorWidget::setDebugContactMove(int contactId, QPointF position){
-    processContactMove(QPoint((int)qRound(position.x()),(int)qRound(position.y())), contactId);
+    QPoint p = QPoint((int)qRound(position.x()),(int)qRound(position.y()));
+
+    if (m_fuzzyInput)
+        processContactMove(randomize(p),contactId, QVector2D(0,0));
+    else
+        processContactMove(p,contactId, QVector2D(0,0));
 }
 
 void MtqIntegratorWidget::setDebugContactUp(int contactId, QPointF position){
-    processContactUp(QPoint((int)qRound(position.x()),(int)qRound(position.y())), contactId);
+    QPoint p = QPoint((int)qRound(position.x()),(int)qRound(position.y()));
+
+    if (m_fuzzyInput)
+        processContactUp(randomize(p),contactId);
+    else
+        processContactUp(p,contactId);
 }
+
 
 void MtqIntegratorWidget::setDebugContactTap(int contactId, QPointF position){
-    processTap(QPoint((int)qRound(position.x()),(int)qRound(position.y())), contactId);
+    QPoint p = QPoint((int)qRound(position.x()),(int)qRound(position.y()));
+
+    if (m_fuzzyInput)
+        processTap(randomize(p),contactId);
+    else
+        processTap(p,contactId);
 }
 
+
 void MtqIntegratorWidget::processTap(QPoint position, int contactId){
+    if (m_printDebug){
+        qDebug() << "MtqIntegrator: processing Tap #" << contactId << " at " << position;
+    }
+
     int resVal = EVENT_TAP | contactId;
     itemAt(position, resVal);
 
@@ -228,7 +289,12 @@ void MtqIntegratorWidget::processTap(QPoint position, int contactId){
     m_contacts.insert(contactId, c);
 }
 
+
 void MtqIntegratorWidget::processDoubleTap(QPoint position, int contactId){
+    if (m_printDebug){
+        qDebug() << "MtqIntegrator: processing DoubleTap #" << contactId << " at " << position;
+    }
+
     int resVal = EVENT_DOUBLETAP | contactId;
     itemAt(position, resVal);
 
@@ -241,6 +307,10 @@ void MtqIntegratorWidget::processDoubleTap(QPoint position, int contactId){
 }
 
 void MtqIntegratorWidget::processContactDown(QPoint position, int contactId, QVector2D tiltDirection, bool IsDebugContact){
+    if (m_printDebug){
+        qDebug() << "MtqIntegrator: processing ContactDown #" << contactId << " at " << position;
+    }
+
     int resVal = EVENT_CONTACTDOWN | contactId;
     itemAt(position,resVal);    
 
@@ -258,6 +328,10 @@ void MtqIntegratorWidget::processContactDown(QPoint position, int contactId, QVe
 }
 
 void MtqIntegratorWidget::processContactMove(QPoint position, int contactId, QVector2D tiltDirection){
+    if (m_printDebug){
+        qDebug() << "MtqIntegrator: processing ContactMove #" << contactId << " at " << position;
+    }
+
     itemAt(position,EVENT_CONTACTMOVE | contactId);
 
 	ContactStruct c = m_contacts.value(contactId);
@@ -280,6 +354,10 @@ void MtqIntegratorWidget::processContactMove(QPoint position, int contactId, QVe
 }
 
 void MtqIntegratorWidget::processContactUp(QPoint position, int contactId){
+    if (m_printDebug){
+        qDebug() << "MtqIntegrator: processing ContactUp #" << contactId << " at " << position;
+    }
+
     itemAt(position,EVENT_CONTACTUP | contactId);
 
 	m_contacts.remove(contactId);
@@ -304,24 +382,44 @@ void MtqIntegratorWidget::itemAtResult(QObject *object, int identifier){
 
     switch(flag){
         case EVENT_TAP:
-            if (object->metaObject()->indexOfMethod("mtqTap(QVariant,QVariant)") >= 0)
+            if (object->metaObject()->indexOfMethod("mtqTap(QVariant,QVariant)") >= 0){
+                if (m_printDebug){ qDebug() << "MtqIntegrator: calling Tap #" << id; }
                 QMetaObject::invokeMethod(object,"mtqTap",Q_ARG(QVariant,idVar),Q_ARG(QVariant,eventPos));
+            } else {
+                if (m_printDebug){ qDebug() << "MtqIntegrator: No object to call Tap #" << id; }
+            }
             break;
         case EVENT_DOUBLETAP:
-            if (object->metaObject()->indexOfMethod("mtqDoubleTap(QVariant,QVariant)") >= 0)
+            if (object->metaObject()->indexOfMethod("mtqDoubleTap(QVariant,QVariant)") >= 0){
+                    if (m_printDebug){ qDebug() << "MtqIntegrator: calling DoubleTap #" << id; }
                     QMetaObject::invokeMethod(object,"mtqDoubleTap",Q_ARG(QVariant,idVar),Q_ARG(QVariant,eventPos));
+            } else {
+                if (m_printDebug){ qDebug() << "MtqIntegrator: No object to call DoubleTap #" << id; }
+            }
             break;
         case EVENT_CONTACTDOWN:
-            if (object->metaObject()->indexOfMethod("mtqContactDown(QVariant,QVariant)") >= 0)
+            if (object->metaObject()->indexOfMethod("mtqContactDown(QVariant,QVariant)") >= 0){
+                if (m_printDebug){ qDebug() << "MtqIntegrator: calling ContactDown #" << id; }
                 QMetaObject::invokeMethod(object,"mtqContactDown",Q_ARG(QVariant,idVar),Q_ARG(QVariant,eventPos));
+            } else {
+                if (m_printDebug){ qDebug() << "MtqIntegrator: No object to call ContactDown #" << id; }
+            }
             break;
         case EVENT_CONTACTMOVE:
-            if (object->metaObject()->indexOfMethod("mtqContactMove(QVariant,QVariant)") >= 0)
+            if (object->metaObject()->indexOfMethod("mtqContactMove(QVariant,QVariant)") >= 0){
+                if (m_printDebug){ qDebug() << "MtqIntegrator: calling ContactMove #" << id; }
                 QMetaObject::invokeMethod(object,"mtqContactMove",Q_ARG(QVariant,idVar),Q_ARG(QVariant,eventPos));
+            } else {
+                if (m_printDebug){ qDebug() << "MtqIntegrator: No object to call ContactMove #" << id; }
+            }
             break;
         case EVENT_CONTACTUP:
-            if (object->metaObject()->indexOfMethod("mtqContactUp(QVariant,QVariant)") >= 0)
+            if (object->metaObject()->indexOfMethod("mtqContactUp(QVariant,QVariant)") >= 0){
+                if (m_printDebug){ qDebug() << "MtqIntegrator: calling ContactUp #" << id; }
                 QMetaObject::invokeMethod(object,"mtqContactUp",Q_ARG(QVariant,idVar),Q_ARG(QVariant,eventPos));
+            } else {
+                if (m_printDebug){ qDebug() << "MtqIntegrator: No object to call ContactUp #" << id; }
+            }
             break;
     }
 

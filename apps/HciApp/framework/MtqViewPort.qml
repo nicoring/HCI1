@@ -12,6 +12,8 @@ Viewport {
     property bool displayDebugInfo: false
     //display the debug layer (shoes etc)
     property bool displayDebugLayer: true
+    //slightly randomizes the input of the mouse (good for simulating the incurracy of feet on floor)
+    property bool fuzzyInput: true
 
     //enable shadowmapping at all?
     property bool drawShadows: true
@@ -210,6 +212,7 @@ Viewport {
         moveCamera: true
         adjustCameraHeightToScene: quickViewPort.adjustCameraHeightToScene
         paintDebugInfo: displayDebugInfo
+        fuzzyInput: parent.fuzzyInput
         onUserPositionChanged:{
             mtqUserPositionChanged(qmlUserPosition);
         }               

@@ -50,8 +50,6 @@ signals:
     void penColorChanged();
     void brushColorChanged();
     void penWidthChanged();
-public slots:
-
 protected:
     QPainter* getPainter();
 private:
