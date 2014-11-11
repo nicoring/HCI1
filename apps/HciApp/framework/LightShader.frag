@@ -23,15 +23,15 @@ varying vec3 light2Color;
 varying vec3 light3Color;
 varying vec3 objectGlow;
 
-const vec2 poissonDisk[4] = vec2[](
-   vec2( -0.94201624, -0.39906216 ),
-   vec2( 0.94558609, -0.76890725 ),
-   vec2( -0.094184101, -0.92938870 ),
-   vec2( 0.34495938, 0.29387760 )
-);
 
 void main(void)
 {
+    vec2 poissonDisk[4];
+    poissonDisk[0] = vec2( -0.94201624, -0.39906216 );
+    poissonDisk[1] = vec2( 0.94558609, -0.76890725 );
+    poissonDisk[2] = vec2( -0.094184101, -0.92938870 );
+    poissonDisk[3] = vec2( 0.34495938, 0.29387760 );
+
     vec2 textCoord = texCoord.st;
     textCoord.x = texCoord.x * texScale.x;
     textCoord.y = texCoord.y * texScale.y;
@@ -45,7 +45,7 @@ void main(void)
 
     //Shadow map reading
     float bias = 0.004;
-    float poissonDiv = 700;
+    float poissonDiv = 700.0;
 
     float l0shadowMult = 1.0;
     float l1shadowMult = 1.0;
@@ -57,7 +57,7 @@ void main(void)
          if (texture2D(qt_Texture1, light0shadowCoord.xy + poissonDisk[i]/poissonDiv).z < (light0shadowCoord.z - bias)){
              l0shadowMult -= 0.20;
          }
-      }      
+      }
     }
 
     if (light1BrightnessMultiplicator > 0.0){
@@ -65,7 +65,7 @@ void main(void)
          if (texture2D(qt_Texture1, light1shadowCoord.xy + poissonDisk[i]/poissonDiv).z < (light1shadowCoord.z - bias)){
              l1shadowMult -= 0.20;
          }
-      }      
+      }
     }
 
     if (light2BrightnessMultiplicator > 0.0){
@@ -73,7 +73,7 @@ void main(void)
          if (texture2D(qt_Texture1, light2shadowCoord.xy + poissonDisk[i]/poissonDiv).z < (light2shadowCoord.z - bias)){
              l2shadowMult -= 0.20;
          }
-      }      
+      }
     }
 
     if (light3BrightnessMultiplicator > 0.0){
@@ -81,8 +81,8 @@ void main(void)
          if (texture2D(qt_Texture1, light3shadowCoord.xy + poissonDisk[i]/poissonDiv).z < (light3shadowCoord.z - bias)){
              l3shadowMult -= 0.20;
          }
-      }      
-    }  
+      }
+    }
 
     //calculating individual values
     vec3 light0final = textureColor.xyz * light0Color * abs(light0BrightnessMultiplicator) * l0shadowMult;
@@ -95,7 +95,7 @@ void main(void)
     light2final = clamp(light2final, vec3(0,0,0), vec3(1,1,1));
 
     vec3 light3final = textureColor.xyz * light3Color * abs(light3BrightnessMultiplicator) * l3shadowMult;
-    light3final = clamp(light3final, vec3(0,0,0), vec3(1,1,1));   
+    light3final = clamp(light3final, vec3(0,0,0), vec3(1,1,1));
 
     vec3 lightsFinal = light0final + light1final + light2final + light3final;
 

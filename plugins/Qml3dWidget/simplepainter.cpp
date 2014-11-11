@@ -18,6 +18,7 @@ void SimplePainter::paint(QPainter *painter){
 
 void SimplePainter::clear(QColor clearColor){
     m_image.fill(clearColor);
+    emit paintedImageChanged();
 }
 
 QImage SimplePainter::paintedImage(){

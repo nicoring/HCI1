@@ -33,8 +33,8 @@ Item{
          }
     }
 
-    function debugTap(x, y){
-        mtqIntegrator.setDebugContactTap(Qt.point(x,y));
+    function debugTap(contactId, x, y){
+        mtqIntegrator.setDebugContactTap(contactId, Qt.point(x,y));
     }
 
     function contactDown(contactId, x, y){

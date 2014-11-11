@@ -10,6 +10,8 @@ Item3D{
     property int repetitions: 0
 
     property string mode: "incremental"
+    property variant generatedObjects: []
+    signal objectGenerationFinished(var objects)
 
     //if mode is incremental, use this
     property vector3d translationPerRepetition: Qt.vector3d(0,0,0)
@@ -45,6 +47,8 @@ Item3D{
             }
         }
 
+        generatedObjects = objects
+        objectGenerationFinished(objects)
     }
 
     function assignIncremental(i, obj){

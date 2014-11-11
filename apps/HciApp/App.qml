@@ -63,6 +63,8 @@ import "framework"
             previousScene: zenGardenScene
         }
 
+        Keys.onDigit0Pressed: worldMapScene.content.toggleRoute();
+
         Vehicle{
             id: vehicle
 

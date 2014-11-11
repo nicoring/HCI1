@@ -35,5 +35,7 @@
         <file>framework/bflat.png</file>
         <file>framework/canvascase.3ds</file>
         <file>framework/canvasca.png</file>
+        <file>framework/marker.3ds</file>
+        <file>framework/mred.png</file>
     </qresource>
 </RCC>
