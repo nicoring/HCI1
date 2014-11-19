@@ -66,6 +66,10 @@ void MtqIntegratorWidget::paintDebugLayer(QPainter *p){
 }
 
 void MtqIntegratorWidget::itemChange(ItemChange change, const ItemChangeData &d){
+    //remove warnings by touching unused items (we want to react to all changes)
+    change;
+    d;
+
     //Only initialize once
     if (m_validParentItem){
         //updateCamera();
@@ -262,6 +266,7 @@ void MtqIntegratorWidget::setDebugContactUp(int contactId, QPointF position){
         processContactUp(p,contactId);
 }
 
+
 void MtqIntegratorWidget::setDebugContactTap(int contactId, QPointF position){
     QPoint p = QPoint((int)qRound(position.x()),(int)qRound(position.y()));
 
@@ -270,6 +275,7 @@ void MtqIntegratorWidget::setDebugContactTap(int contactId, QPointF position){
     else
         processTap(p,contactId);
 }
+
 
 void MtqIntegratorWidget::processTap(QPoint position, int contactId){
     if (m_printDebug){
@@ -286,6 +292,7 @@ void MtqIntegratorWidget::processTap(QPoint position, int contactId){
     m_contacts.remove(contactId);
     m_contacts.insert(contactId, c);
 }
+
 
 void MtqIntegratorWidget::processDoubleTap(QPoint position, int contactId){
     if (m_printDebug){
@@ -532,7 +539,7 @@ void MtqIntegratorWidget::updateCameraValues(){
     bool needsUpdateAgain = false;
 
     if (m_smoothCamera){
-        float minimalMovementDistance = 0.025;
+        float minimalMovementDistance = 0.025f;
         QVector3D eyeMovingDirection = (m_goalEye - m_camera->eye());
         float moveLength = eyeMovingDirection.length();
 
@@ -563,9 +570,9 @@ void MtqIntegratorWidget::updateCameraValues(){
 
 				float newHeightAdjustment = currentHeightAdjustment ;
 				if (depth > 0.0f){
-                    newHeightAdjustment -= 0.02;
+                    newHeightAdjustment -= 0.02f;
 				} else {
-                    newHeightAdjustment += 0.02;
+                    newHeightAdjustment += 0.02f;
 				}
 
 				if (abs(newHeightAdjustment) < 1.5){

@@ -29,5 +29,6 @@ void TextDrawer::updateImage(){
 }
 
 void TextDrawer::paint(QPainter *painter){
-
+    //Do nothing, since it is an invisible element
+    painter;
 }

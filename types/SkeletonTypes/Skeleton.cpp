@@ -98,42 +98,42 @@ void Skeleton::initializeDefaultBones()
 
 	bone = new Bone(Bone::Type::NECK);
 	bone->parent = m_bones.value(Bone::Type::RIBS);
-	bone->updatePointsToParent(QVector3D(2.70618, 33.3702, 83.3179));
+    bone->updatePointsToParent(QVector3D(2.70618f, 33.3702f, 83.3179f));
 	m_bones.insert(Bone::Type::NECK, Bone::Ptr(bone));
 
 	bone = new Bone(Bone::Type::HEAD);
 	bone->parent = m_bones.value(Bone::Type::NECK);
-	bone->updatePointsToParent(QVector3D(7.44226, 70.5485, 144.033));
+    bone->updatePointsToParent(QVector3D(7.44226f, 70.5485f, 144.033f));
 	m_bones.insert(Bone::Type::HEAD, Bone::Ptr(bone));
 
 	bone = new Bone(Bone::Type::UPPERARM_LEFT);
 	bone->parent = m_bones.value(Bone::Type::SHOULDER_LEFT);
-	bone->updatePointsToParent(QVector3D(297.702, -14.7026, 35.5535));
+    bone->updatePointsToParent(QVector3D(297.702f, -14.7026f, 35.5535f));
 	m_bones.insert(Bone::Type::UPPERARM_LEFT, Bone::Ptr(bone));
 
 	bone = new Bone(Bone::Type::UPPERARM_RIGHT);
 	bone->parent = m_bones.value(Bone::Type::SHOULDER_RIGHT);
-	bone->updatePointsToParent(QVector3D(-247.703, 48.4504, -21.2448));
+    bone->updatePointsToParent(QVector3D(-247.703f, 48.4504f, -21.2448f));
 	m_bones.insert(Bone::Type::UPPERARM_RIGHT, Bone::Ptr(bone));
 
 	bone = new Bone(Bone::Type::FOREARM_LEFT);
 	bone->parent = m_bones.value(Bone::Type::UPPERARM_LEFT);
-	bone->updatePointsToParent(QVector3D(186.106, -43.1801, -64.4078));
+    bone->updatePointsToParent(QVector3D(186.106f, -43.1801f, -64.4078f));
 	m_bones.insert(Bone::Type::FOREARM_LEFT, Bone::Ptr(bone));
 
 	bone = new Bone(Bone::Type::FOREARM_RIGHT);
 	bone->parent = m_bones.value(Bone::Type::UPPERARM_RIGHT);
-	bone->updatePointsToParent(QVector3D(-187.366, 61.1865, -71.6442));
+    bone->updatePointsToParent(QVector3D(-187.366f, 61.1865f, -71.6442f));
 	m_bones.insert(Bone::Type::FOREARM_RIGHT, Bone::Ptr(bone));
 
 	bone = new Bone(Bone::Type::HAND_LEFT);
 	bone->parent = m_bones.value(Bone::Type::FOREARM_LEFT);
-	bone->updatePointsToParent(QVector3D(130.091, -37.0628, 42.0972));
+    bone->updatePointsToParent(QVector3D(130.091f, -37.0628f, 42.0972f));
 	m_bones.insert(Bone::Type::HAND_LEFT, Bone::Ptr(bone));
 
 	bone = new Bone(Bone::Type::HAND_RIGHT);
 	bone->parent = m_bones.value(Bone::Type::FOREARM_RIGHT);
-	bone->updatePointsToParent(QVector3D(-140.164, 8.3147, 18.8257));
+    bone->updatePointsToParent(QVector3D(-140.164f, 8.3147f, 18.8257f));
 	m_bones.insert(Bone::Type::HAND_RIGHT, Bone::Ptr(bone));
 
 	bone = new Bone(Bone::Type::TOE_LEFT);

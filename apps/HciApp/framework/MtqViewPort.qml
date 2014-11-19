@@ -47,15 +47,15 @@ Viewport {
     showPicking: false
     blending: true
     renderDepthMap: true
-    enableShadows: true
+    enableShadows: drawShadows
     shadowMapEngineStartOffset: 1
-
-    onDrawShadowsChanged: {
-        enableShadows = drawShadows;
-    }
 
     onHeightChanged: {
         adjustCameraViewSize();
+    }
+
+    onDrawShadowsChanged: {
+        GlobalLight.EnableShadowsAtAll = drawShadows;
     }
 
     onWidthChanged: {
@@ -120,8 +120,9 @@ Viewport {
             console.log("LightDefinition.qml component error: " + component.errorString());
         }
 
-        GlobalLight.GlobalLightDefinition.onLightDefinitionChange.connect(updateShadowEngine);
+        GlobalLight.EnableShadowsAtAll = drawShadows;
 
+        GlobalLight.GlobalLightDefinition.onLightDefinitionChange.connect(updateShadowEngine);
         quickViewPort.onShadowMapRenderingComplete.connect(updateShadowMatrices);
     }
 

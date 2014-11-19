@@ -72,7 +72,7 @@ Item{
             //For directional lights, the shader only needs the direction of the light
             positionReadOut = center.minus(position).normalized();
         } else {
-            //for point lights, the shader needs the position
+            //for point/spot lights, the shader needs the position
             positionReadOut = position;
         }
     }

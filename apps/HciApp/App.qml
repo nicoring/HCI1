@@ -14,7 +14,13 @@ import "framework"
         displayDebugLayer: true
 
         //projectionMode: "Orthographic"
+
+        //for debug uses only
         saveShadowMapsToDisk: false
+
+        //Disable shadows if they cause problems on your system (mainly in VMs)
+        drawShadows: true
+
         property var currentScene;
 
         Component.onCompleted: {
