@@ -46,14 +46,23 @@ namespace mtq{
         bool fuzzyInput() {return m_fuzzyInput;}
         void setFuzzyInput(bool value) {m_fuzzyInput = value; emit fuzzyInputChanged();}
 
-        Q_INVOKABLE void setDebugContactDown(int contactId, QPointF position);
-        Q_INVOKABLE void setDebugContactMove(int contactId, QPointF position);
+        Q_INVOKABLE void setDebugContactDown(int contactId, QPointF position, QString user = QLatin1String(""));
+		Q_INVOKABLE void setDebugContactMove(int contactId, QPointF position, QString user = QLatin1String(""));
         Q_INVOKABLE void setDebugContactUp(int contactId, QPointF position);
-        Q_INVOKABLE void setDebugContactTap(int contactId, QPointF position);
+        Q_INVOKABLE void setDebugContactTap(int contactId, QPointF position, QString user = QLatin1String(""));
+
+        Q_INVOKABLE QVector2D getContactTilting(int contactId);
+        Q_INVOKABLE QString getContactUser(int contactId);
     signals:
         void userPositionChanged(QPointF qmlUserPosition);
         void adjustCameraHeightToSceneChanged(bool value);
         void fuzzyInputChanged();
+
+        void mtqTap(int contactId, QPointF position);
+        void mtqDoubleTap(int contactId, QPointF position);
+        void mtqContactDown(int contactId, QPointF position);
+        void mtqContactMove(int contactId, QPointF position);
+        void mtqContactUp(int contactId, QPointF position);
     public slots:
         virtual bool dispatch(PositionEvent::Ptr);
         void itemAtResult(QObject* object, int identifier);
@@ -79,6 +88,7 @@ namespace mtq{
         };
 
 		struct ContactStruct{
+            QString userName;
             bool isDebugContact;
 			int age;
 			QPoint position;
@@ -92,10 +102,10 @@ namespace mtq{
         virtual void mouseReleaseEvent (QMouseEvent *event);
 
         //Processing MTQ Events
-        void processTap(QPoint position, int contactId);
-        void processDoubleTap(QPoint position, int contactId);
-        void processContactDown(QPoint position, int contactId, QVector2D tiltDirection = QVector2D(0,0), bool isDebugContact = false);
-        void processContactMove(QPoint position, int contactId, QVector2D tiltDirection = QVector2D(0,0));
+        void processTap(QPoint position, int contactId, QString userName = QLatin1String(""));
+        void processDoubleTap(QPoint position, int contactId, QString userName = QLatin1String(""));
+        void processContactDown(QPoint position, int contactId, QString userName = QLatin1String(""), QVector2D tiltDirection = QVector2D(0,0), bool isDebugContact = false);
+		void processContactMove(QPoint position, int contactId, QString userName = QLatin1String(""),QVector2D tiltDirection = QVector2D(0,0));
         void processContactUp(QPoint position, int contactId);
 
         QPoint randomize(QPoint position, float percentage = 0.005);

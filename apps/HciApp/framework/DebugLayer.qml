@@ -34,11 +34,11 @@ Item{
     }
 
     function debugTap(contactId, x, y){
-        mtqIntegrator.setDebugContactTap(contactId, Qt.point(x,y));
+        mtqIntegrator.setDebugContactTap(contactId, Qt.point(x,y), "DebugShoe #" + contactId);
     }
 
     function contactDown(contactId, x, y){
-        mtqIntegrator.setDebugContactDown(contactId, Qt.point(x,y));
+        mtqIntegrator.setDebugContactDown(contactId, Qt.point(x,y), "DebugShoe #" + contactId);
     }
 
     function contactUp(contactId, x, y){
