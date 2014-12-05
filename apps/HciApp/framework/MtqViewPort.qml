@@ -47,15 +47,15 @@ Viewport {
     showPicking: false
     blending: true
     renderDepthMap: true
-    enableShadows: true
+    enableShadows: drawShadows
     shadowMapEngineStartOffset: 1
-
-    onDrawShadowsChanged: {
-        enableShadows = drawShadows;
-    }
 
     onHeightChanged: {
         adjustCameraViewSize();
+    }
+
+    onDrawShadowsChanged: {
+        GlobalLight.EnableShadowsAtAll = drawShadows;
     }
 
     onWidthChanged: {
@@ -120,8 +120,9 @@ Viewport {
             console.log("LightDefinition.qml component error: " + component.errorString());
         }
 
-        GlobalLight.GlobalLightDefinition.onLightDefinitionChange.connect(updateShadowEngine);
+        GlobalLight.EnableShadowsAtAll = drawShadows;
 
+        GlobalLight.GlobalLightDefinition.onLightDefinitionChange.connect(updateShadowEngine);
         quickViewPort.onShadowMapRenderingComplete.connect(updateShadowMatrices);
     }
 
@@ -213,9 +214,35 @@ Viewport {
         adjustCameraHeightToScene: quickViewPort.adjustCameraHeightToScene
         paintDebugInfo: displayDebugInfo
         fuzzyInput: parent.fuzzyInput
+        printDebugOutput: false
         onUserPositionChanged:{
             mtqUserPositionChanged(qmlUserPosition);
-        }               
+        }
+
+        //You can use these signals to react globally to all tap/contact down/... events.
+        //remember that the corresponding mtqXYZ(...) methods are called on each
+        //Object that ist actually touched by the user
+        onMtqContactDown: {
+        }
+
+        onMtqContactUp:{
+        }
+
+        onMtqContactMove: {
+            /*
+            //All events supply contactId and position
+            var user = mtqIntegrator.getContactUser(contactId);
+            var tilting = mtqIntegrator.getContactTilting(contactId);
+
+            console.log("JS Event: contact move for " + user + " tilting " + tilting);
+            */
+        }
+
+        onMtqTap:{
+        }
+
+        onMtqDoubleTap:{
+        }
     }
 
     DebugLayer{

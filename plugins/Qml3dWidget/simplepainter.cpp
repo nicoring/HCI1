@@ -13,7 +13,7 @@ SimplePainter::SimplePainter(QQuickItem *parent) :
 }
 
 void SimplePainter::paint(QPainter *painter){
-
+    painter;
 }
 
 void SimplePainter::clear(QColor clearColor){

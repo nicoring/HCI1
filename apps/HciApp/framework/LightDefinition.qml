@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "GlobalLight.js" as GlobalLight
 
 Item {
     property list<LightDefinitionEntry> lightEntries: [
@@ -72,7 +73,7 @@ Item {
             return 0;
 
         var r = lightEntry.type; //1,2 or 3
-        if (!lightEntry.createsShadows){
+        if ((!lightEntry.createsShadows) || (!GlobalLight.EnableShadowsAtAll)){
             r = r + 3; //4,5,6
         }
 
