@@ -19,7 +19,7 @@ import "framework"
         saveShadowMapsToDisk: false
 
         //Disable shadows if they cause problems on your system (mainly in VMs)
-        drawShadows: false // true
+        drawShadows: false
 
         property var currentScene;
 

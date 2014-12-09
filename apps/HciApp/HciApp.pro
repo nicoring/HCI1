@@ -80,7 +80,8 @@ OTHER_FILES += \
     framework/ImageCanvas.qml \
     framework/Marker.qml \
     floorScene.qml \
-    widgets/Slice.qml
+    widgets/Slice.qml \
+    widgets/MainMenu.qml
 
 RESOURCES += \
     frameworkResources.qrc

@@ -23,29 +23,38 @@ Item3D {
         l.position = Qt.vector3d(-2, 0, 3)
         l.center = Qt.vector3d(0,0,0);
         l.type = 1;
-        l.color = Qt.vector3d(0.8,0.8,0.8)
+        l.color = Qt.vector3d(4.8,4.8,4.8)
         l.createsShadows = true;
         l.enabled = true;
     }
 
-    Slice {
-        id: slice1
-        position: Qt.vector3d(1.5,1.5,0)
+    MainMenu {
+        id: mainmenu
     }
 
-    Slice {
-        id: slice2
-        position: Qt.vector3d(-1.5,-1.5,0)
-    }
+    Item3D {
+        id: floor
 
-    Slice {
-        id: slice3
-        position: Qt.vector3d(-1.5,1.5,0)
-    }
+        position: Qt.vector3d(0,-1.5,0)
+        Slice {
+            id: slice1
+            position: Qt.vector3d(1.5,1.5,0)
+        }
 
-    Slice {
-        id: slice4
-        position: Qt.vector3d(1.5,-1.5,0)
+        Slice {
+            id: slice2
+            position: Qt.vector3d(-1.5,-1.5,0)
+        }
+
+        Slice {
+            id: slice3
+            position: Qt.vector3d(-1.5,1.5,0)
+        }
+
+        Slice {
+            id: slice4
+            position: Qt.vector3d(1.5,-1.5,0)
+        }
     }
 
 }
