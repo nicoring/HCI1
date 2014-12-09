@@ -8,9 +8,9 @@ import "../framework"
 
 
 HighResQuad {
-    id: mainQuad
+    id: mainItem
     scale: 3
-    position: Qt.vector3d(1,1,0)
+
     effect: LightShader {
         texture: "../framework/componentBase.png"
     }
