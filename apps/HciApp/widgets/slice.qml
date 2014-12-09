@@ -10,8 +10,7 @@ import "../framework"
 HighResQuad {
     id: mainItem
     scale: 3
-
-    effect: LightShader {
+    effect : LightShader {
         texture: "../framework/componentBase.png"
     }
 }
