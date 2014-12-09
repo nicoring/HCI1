@@ -79,7 +79,8 @@ OTHER_FILES += \
     framework/PaintedCanvas.qml \
     framework/ImageCanvas.qml \
     framework/Marker.qml \
-    floorScene.qml
+    floorScene.qml \
+    widgets/Slice.qml
 
 RESOURCES += \
     frameworkResources.qrc
