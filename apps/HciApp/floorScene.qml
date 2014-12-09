@@ -28,8 +28,41 @@ Item3D {
         l.enabled = true;
     }
 
-    Slice {
+    //uncomment to load a sclice
+    /* Slice {
         id: mysclice
+    } */
+
+    HighResQuad {
+        scale: 3
+        position: Qt.vector3d(1.5,1.5,0)
+        effect: LightShader {
+            texture: "framework/componentBase.png"
+        }
+    }
+
+    HighResQuad {
+        scale: 3
+        position: Qt.vector3d(-1.5,-1.5,0)
+        effect: LightShader {
+            texture: "framework/componentBase.png"
+        }
+    }
+
+    HighResQuad {
+        scale: 3
+        position: Qt.vector3d(-1.5,1.5,0)
+        effect: LightShader {
+            texture: "framework/componentBase.png"
+        }
+    }
+
+    HighResQuad {
+        scale: 3
+        position: Qt.vector3d(1.5,-1.5,0)
+        effect: LightShader {
+            texture: "framework/componentBase.png"
+        }
     }
 
 }
