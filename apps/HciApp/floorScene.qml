@@ -32,6 +32,32 @@ Item3D {
             texture: "framework/componentBase.png"
         }
     }
+
+    FlatButton{
+        scale: 0.4
+        position: Qt.vector3d(0.0,0,0.1);
+
+        onPushed: {
+            naEnabled.start()
+        }
+
+        onReleased: {
+            naDisabled.start()
+        }
+    }
+
+    MovingCube{
+        id: cube4
+        position: Qt.vector3d(0,2,0.1)
+
+        onContactDown: {
+            GlobalLight.GlobalLightDefinition.lightEntries[1].enabled = false;
+        }
+        onContactUp: {
+            GlobalLight.GlobalLightDefinition.lightEntries[1].enabled = true;
+        }
+    }
+
     HighResQuad {
         scale: 3
         position: Qt.vector3d(-1.5,-1.5,0)
