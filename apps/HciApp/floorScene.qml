@@ -28,10 +28,10 @@ Item3D {
         l.enabled = true;
     }
 
-    //uncomment to load a sclice
-    /* Slice {
+
+     Slice {
         id: mysclice
-    } */
+    }
 
     HighResQuad {
         scale: 3
