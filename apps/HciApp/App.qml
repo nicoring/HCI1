@@ -19,14 +19,14 @@ import "framework"
         saveShadowMapsToDisk: false
 
         //Disable shadows if they cause problems on your system (mainly in VMs)
-        drawShadows: true
+        drawShadows: false // true
 
         property var currentScene;
 
         Component.onCompleted: {
             mtqViewPort.getShadowMapEngine().shadowMapSize = 1024;
 
-            currentScene = firstScene
+            currentScene = floorScene
             vehicle.updateArrows();
             currentScene.showScene(true);
         }
@@ -44,29 +44,8 @@ import "framework"
         }
 
         Scene{
-            id:firstScene
-            file:"../firstScene.qml"
-            nextScene: secondScene
-        }
-
-        Scene{
-            id:secondScene
-            file:"../secondScene.qml"
-            previousScene: firstScene
-            nextScene: zenGardenScene
-        }
-
-        Scene{
-            id:zenGardenScene
-            file:"../ZenGardenScene.qml"
-            previousScene: secondScene
-            nextScene: fourthScene
-        }
-
-        Scene{
-            id:fourthScene
-            file:"../fourthScene.qml"
-            previousScene: zenGardenScene
+            id: floorScene
+            file: "../floorScene.qml"
         }
 
         Keys.onDigit0Pressed: worldMapScene.content.toggleRoute();

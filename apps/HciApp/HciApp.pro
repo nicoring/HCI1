@@ -78,7 +78,8 @@ OTHER_FILES += \
     framework/DebugShoe.qml \
     framework/PaintedCanvas.qml \
     framework/ImageCanvas.qml \
-    framework/Marker.qml
+    framework/Marker.qml \
+    floorScene.qml
 
 RESOURCES += \
     frameworkResources.qrc
