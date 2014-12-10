@@ -36,7 +36,7 @@ Item3D {
         id: floor
 
         position: Qt.vector3d(0,-1.5,0)
-        Slice {
+        CubeQuad {
             id: slice1
             position: Qt.vector3d(1.5,1.5,0)
         }

@@ -81,7 +81,8 @@ OTHER_FILES += \
     framework/Marker.qml \
     floorScene.qml \
     widgets/Slice.qml \
-    widgets/MainMenu.qml
+    widgets/MainMenu.qml \
+    widgets/CubeQuad.qml
 
 RESOURCES += \
     frameworkResources.qrc
