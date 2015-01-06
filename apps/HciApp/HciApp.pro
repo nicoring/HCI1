@@ -82,7 +82,8 @@ OTHER_FILES += \
     floorScene.qml \
     widgets/Slice.qml \
     widgets/MainMenu.qml \
-    widgets/CubeQuad.qml
+    widgets/CubeQuad.qml \
+    widgets/MIDIButton.qml
 
 RESOURCES += \
     frameworkResources.qrc
