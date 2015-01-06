@@ -6,7 +6,6 @@ import QtQuick.Window 2.1
 import "../framework/GlobalLight.js" as GlobalLight
 import "../framework"
 
-
 HighResQuad {
     id: mainItem
     effect : LightShader {
