@@ -82,7 +82,10 @@ OTHER_FILES += \
     floorScene.qml \
     widgets/Slice.qml \
     widgets/MainMenu.qml \
-    widgets/CubeQuad.qml
+    widgets/CubeQuad.qml \
+    framework/floorscene.3ds \
+    widgets/TestScene.qml \
+    floorscene-2.3ds
 
 RESOURCES += \
     frameworkResources.qrc

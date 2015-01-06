@@ -37,5 +37,8 @@
         <file>framework/canvasca.png</file>
         <file>framework/marker.3ds</file>
         <file>framework/mred.png</file>
+        <file>framework/floorscene.3ds</file>
+        <file>floorscene-2.3ds</file>
+        <file>surf.jpg</file>
     </qresource>
 </RCC>

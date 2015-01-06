@@ -28,10 +28,33 @@ Item3D {
         l.enabled = true;
     }
 
-    MainMenu {
-        id: mainmenu
+    CubeQuad {
+        id: quad
+        position: Qt.vector3d(0,0,-10)
+        transform: [
+            Scale3D {
+                scale: Qt.vector3d(100,100,0)
+            }
+        ]
     }
 
+    TestScene {
+        scale: 0.022
+        id: testScene
+        transform {
+            Rotation3D {
+                angle: 90;
+                axis: Qt.vector3d(1,0,0)
+            }
+            Rotation3D {
+                angle: 90;
+                axis: Qt.vector3d(0,0,1)
+            }
+        }
+    }
+
+
+    /*
     Item3D {
         id: floor
 
@@ -57,6 +80,7 @@ Item3D {
         }
 
     }
+    */
 
 }
 
