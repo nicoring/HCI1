@@ -10,6 +10,7 @@ Item3D{
     Component.onCompleted: {
         parent.sceneEnabled.connect(setupLight);
     }
+
     function setupLight(){
         //set up 4 directional lights from each side
 

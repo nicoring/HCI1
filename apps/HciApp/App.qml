@@ -67,9 +67,7 @@ import "framework"
             id:fourthScene
             file:"../fourthScene.qml"
             previousScene: zenGardenScene
-        }
-
-        Keys.onDigit0Pressed: worldMapScene.content.toggleRoute();
+        }        
 
         Vehicle{
             id: vehicle
