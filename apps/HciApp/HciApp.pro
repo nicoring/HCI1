@@ -85,7 +85,8 @@ OTHER_FILES += \
     widgets/CubeQuad.qml \
     framework/floorscene.3ds \
     widgets/TestScene.qml \
-    floorscene-2.3ds
+    floorscene-2.3ds \
+    surf.jpeg
 
 RESOURCES += \
     frameworkResources.qrc

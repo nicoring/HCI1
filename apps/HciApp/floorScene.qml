@@ -39,18 +39,7 @@ Item3D {
     }
 
     TestScene {
-        scale: 0.022
         id: testScene
-        transform {
-            Rotation3D {
-                angle: 90;
-                axis: Qt.vector3d(1,0,0)
-            }
-            Rotation3D {
-                angle: 90;
-                axis: Qt.vector3d(0,0,1)
-            }
-        }
     }
 
 
