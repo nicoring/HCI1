@@ -64,6 +64,7 @@ ShaderProgram{
             }
 
             GlobalLight.GlobalLightDefinition.onLightDefinitionChange.connect(updateShader);
+            GlobalLight.GlobalLightDefinition.updateLightShader(localShaderProgramId);
         }
     }
 

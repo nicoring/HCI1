@@ -162,8 +162,15 @@ QPointF MtqIntegratorWidget::mapScreenToQml(QPoint screen){
     ndcPos.setY(ndcPos.y() - 0.5);
     ndcPos.setY(ndcPos.y() * -1.0);
 
+    if (m_camera->projectionType() == QGLCamera::OffCenterProjection){
+        //Adjust coordinates, since the off center projection is a bit larger than the specified viewport
+        ndcPos.setX(ndcPos.x() * 1.11f);
+        ndcPos.setY(ndcPos.y() * 1.16f);
+    }
+
     QPointF qmlPos = QPointF(m_camera->viewSize().width() * ndcPos.x(),
                              m_camera->viewSize().height() * ndcPos.y());
+
     return qmlPos;
 }
 
