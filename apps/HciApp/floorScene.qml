@@ -28,33 +28,23 @@ Item3D {
         l.enabled = true;
     }
 
-    MainMenu {
-        id: mainmenu
-    }
-
     Item3D {
         id: floor
 
         position: Qt.vector3d(0,-1.5,0)
-        CubeQuad {
-            id: slice1
+
+        // create a test midi button
+        // see widgets/MidiButton.qml
+        MidiButton {
+            id: button1
+
+            // these properties change per button
+            player_id: 1
+            button_id: 1
+
             position: Qt.vector3d(1.5,1.5,0)
         }
 
-        Slice {
-            id: slice2
-            position: Qt.vector3d(1.5, -1.5, 0)
-        }
-
-        Slice {
-            id: slice3
-            position: Qt.vector3d(-1.5, 1.5, 0)
-        }
-
-        Slice {
-            id: slice4
-            position: Qt.vector3d(-1.5, -1.5, 0)
-        }
 
     }
 

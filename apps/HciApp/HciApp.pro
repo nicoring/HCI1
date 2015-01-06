@@ -83,8 +83,13 @@ OTHER_FILES += \
     widgets/Slice.qml \
     widgets/MainMenu.qml \
     widgets/CubeQuad.qml \
-    widgets/MIDIButton.qml
+    widgets/MidiButton.qml
 
 RESOURCES += \
     frameworkResources.qrc
+
+HEADERS +=
+
+SOURCES += \
+
 

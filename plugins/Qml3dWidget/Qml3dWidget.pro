@@ -12,11 +12,12 @@ HEADERS += \
     qml3dwidget.h \
     mtqintegratorwidget.h \
     textdrawer.h \
-    simplepainter.h
-
+    simplepainter.h \
+    midiinterface.h
 
 SOURCES += \
     qml3dwidget.cpp \
     mtqintegratorwidget.cpp \
     textdrawer.cpp \
-    simplepainter.cpp
+    simplepainter.cpp \
+    midiinterface.cpp
