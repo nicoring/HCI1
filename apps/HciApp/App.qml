@@ -26,7 +26,7 @@ import "framework"
         Component.onCompleted: {
             mtqViewPort.getShadowMapEngine().shadowMapSize = 1024;
 
-            currentScene = firstScene
+            currentScene = floorScene
             vehicle.updateArrows();
             currentScene.showScene(true);
         }
@@ -44,8 +44,8 @@ import "framework"
         }
 
         Scene{
-            id: firstScene
-            file: "../firstScene.qml"
+            id: floorScene
+            file: "../floorScene.qml"
         }
 
         Vehicle{
