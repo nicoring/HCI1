@@ -26,7 +26,7 @@ import "framework"
         Component.onCompleted: {
             mtqViewPort.getShadowMapEngine().shadowMapSize = 1024;
 
-            currentScene = floorScene
+            currentScene = firstScene
             vehicle.updateArrows();
             currentScene.showScene(true);
         }
@@ -44,8 +44,8 @@ import "framework"
         }
 
         Scene{
-            id: floorScene
-            file: "../floorScene.qml"
+            id: firstScene
+            file: "../firstScene.qml"
         }
 
         Keys.onDigit0Pressed: worldMapScene.content.toggleRoute();
