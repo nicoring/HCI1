@@ -43,18 +43,19 @@ Item3D {
 
         Slice {
             id: slice2
-            position: Qt.vector3d(-1.5,-1.5,0)
+            position: Qt.vector3d(1.5, -1.5, 0)
         }
 
         Slice {
             id: slice3
-            position: Qt.vector3d(-1.5,1.5,0)
+            position: Qt.vector3d(-1.5, 1.5, 0)
         }
 
         Slice {
             id: slice4
-            position: Qt.vector3d(1.5,-1.5,0)
+            position: Qt.vector3d(-1.5, -1.5, 0)
         }
+
     }
 
 }
