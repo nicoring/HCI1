@@ -2,18 +2,19 @@
 #define MIDIINTERFACE_H
 
 
+#include <QtQuick/QQuickItem>
 #include <QObject>
 #include <QDebug>
 #include <mtq/core/PluginRegistry.h>
 
-class MidiInterface : public QObject
+class MidiInterface : public QQuickItem
 {
     Q_OBJECT
     // TODO: does not seem to register correctly. please check.
     MTQ_QML_PLUGIN_REGISTRATION(MidiInterface, "qml3d")
 
 public:
-    explicit MidiInterface(QObject *parent = 0);
+    MidiInterface(QQuickItem *parent = 0):QQuickItem(parent){}
 
     // triggered by user interaction
     // signal the midi transmission class from Alex

@@ -1,12 +1,12 @@
 #include "midiinterface.h"
 
-MTQ_REGISTER_PLUGIN(MidiInterface)
+MTQ_QML_REGISTER_PLUGIN(MidiInterface)
 
-MidiInterface::MidiInterface(QObject *parent) :
+/*MidiInterface::MidiInterface(QObject *parent) :
     QObject(parent)
 {
 }
-
+*/
 /**
  * Triggered when button was tapped by player.
  * This should notify the ableton project to start midi signal transmission.
