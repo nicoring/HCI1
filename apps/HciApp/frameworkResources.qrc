@@ -44,5 +44,7 @@
         <file>meshs/circle.jpg</file>
         <file>meshs/topleft.3ds</file>
         <file>meshs/topleft.jpg</file>
+        <file>meshs/test1.3ds</file>
+        <file>meshs/test1.jpg</file>
     </qresource>
 </RCC>
