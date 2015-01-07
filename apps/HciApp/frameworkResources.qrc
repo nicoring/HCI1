@@ -40,5 +40,9 @@
         <file>framework/floorscene.3ds</file>
         <file>floorscene-2.3ds</file>
         <file>surf.jpg</file>
+        <file>meshs/circle.3ds</file>
+        <file>meshs/circle.jpg</file>
+        <file>meshs/topleft.3ds</file>
+        <file>meshs/topleft.jpg</file>
     </qresource>
 </RCC>

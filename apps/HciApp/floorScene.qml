@@ -11,6 +11,7 @@ Item3D {
 
     Component.onCompleted: {
         parent.sceneEnabled.connect(setupLight);
+        //test();
     }
 
     function setupLight(){
@@ -41,6 +42,11 @@ Item3D {
     TestScene {
         id: testScene
     }
+
+    function test() {
+     testScene.rotateOneRound()
+    }
+
 
 
     /*

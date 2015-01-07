@@ -86,7 +86,11 @@ OTHER_FILES += \
     framework/floorscene.3ds \
     widgets/TestScene.qml \
     floorscene-2.3ds \
-    surf.jpeg
+    surf.jpeg \
+    meshs/circle.jpeg \
+    meshs/circle.3ds \
+    meshs/topleft.jpeg \
+    meshs/topleft.3ds
 
 RESOURCES += \
     frameworkResources.qrc
