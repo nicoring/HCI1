@@ -2,12 +2,14 @@
 #define MIDIINTERFACE_H
 
 
+#include <QtQuick/QQuickItem>
 #include <QObject>
 #include <QDebug>
 #include <QQuickPaintedItem>
 
 #include <mtq/core/PluginRegistry.h>
 namespace mtq {
+
 class MTQ_EXPORT_PLUGIN MidiInterface : public QQuickPaintedItem
 {
     Q_OBJECT
@@ -30,5 +32,6 @@ signals:
 public slots:
 
 };
+
 }
 #endif // MIDIINTERFACE_H
