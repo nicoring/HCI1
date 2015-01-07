@@ -87,3 +87,13 @@ OTHER_FILES += \
 RESOURCES += \
     frameworkResources.qrc
 
+SOURCES += \
+    RtMidi.cpp \
+    MidiSender.cpp \
+    MidiConnection.cpp
+
+HEADERS += \
+    RtMidi.h \
+    MidiConnection.h \
+    MidiSender.h
+
