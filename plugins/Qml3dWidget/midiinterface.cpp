@@ -1,10 +1,15 @@
-#include "midiinterface.h"
+ #include "midiinterface.h"
+using namespace mtq;
 
-MTQ_REGISTER_PLUGIN(MidiInterface)
+MTQ_QML_REGISTER_PLUGIN(MidiInterface)
 
-MidiInterface::MidiInterface(QObject *parent) :
-    QObject(parent)
+MidiInterface::MidiInterface(QQuickItem *parent) :
+    QQuickPaintedItem(parent)
 {
+}
+
+void MidiInterface::paint(QPainter *painter){
+    painter;
 }
 
 /**

@@ -4,16 +4,19 @@
 
 #include <QObject>
 #include <QDebug>
-#include <mtq/core/PluginRegistry.h>
+#include <QQuickPaintedItem>
 
-class MidiInterface : public QObject
+#include <mtq/core/PluginRegistry.h>
+namespace mtq {
+class MTQ_EXPORT_PLUGIN MidiInterface : public QQuickPaintedItem
 {
     Q_OBJECT
     // TODO: does not seem to register correctly. please check.
     MTQ_QML_PLUGIN_REGISTRATION(MidiInterface, "qml3d")
 
 public:
-    explicit MidiInterface(QObject *parent = 0);
+    explicit MidiInterface(QQuickItem *parent = 0);
+    virtual void paint(QPainter* painter);
 
     // triggered by user interaction
     // signal the midi transmission class from Alex
@@ -27,5 +30,5 @@ signals:
 public slots:
 
 };
-
+}
 #endif // MIDIINTERFACE_H
