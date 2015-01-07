@@ -11,7 +11,7 @@ Item3D {
      //texture: "../framework/componentBase.png"
     }
 
-    scale: 0.022
+    //scale: 0.022
     transform {
 
         Rotation3D {
