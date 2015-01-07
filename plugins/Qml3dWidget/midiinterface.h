@@ -23,6 +23,8 @@ public:
     // triggered by user interaction
     // signal the midi transmission class from Alex
     Q_INVOKABLE void buttonTapped(int player_id, int button_id);
+    Q_INVOKABLE void buttonUp(int player_id, int button_id);
+    Q_INVOKABLE void buttonDown(int player_id, int button_id);
 
 signals:
     // player tapped a button and requests the linked midi sound
