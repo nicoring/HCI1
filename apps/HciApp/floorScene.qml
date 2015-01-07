@@ -28,24 +28,39 @@ Item3D {
         l.enabled = true;
     }
 
-    Item3D {
-        id: floor
+    // create midi interface only once
+    MidiInterface {
+        id: midiInterface
+    }
 
-        position: Qt.vector3d(0,-1.5,0)
+    /** create a test midi button set for each player **/
 
-        // create a test midi button
-        // see widgets/MidiButton.qml
-        MidiButton {
-            id: button1
+    Player {
+        id: player1
+        player_id: 1
+        midiInterface: midiInterface
+        position: Qt.vector3d(-2,1,0)
+    }
 
-            // these properties change per button
-            player_id: 1
-            button_id: 1
+    Player {
+        id: player2
+        player_id: 2
+        midiInterface: midiInterface
+        position: Qt.vector3d(2,1,0)
+    }
 
-            position: Qt.vector3d(1.5,1.5,0)
-        }
+    Player {
+        id: player3
+        player_id: 3
+        midiInterface: midiInterface
+        position: Qt.vector3d(-2,-1.5,0)
+    }
 
-
+    Player {
+        id: player4
+        player_id: 4
+        midiInterface: midiInterface
+        position: Qt.vector3d(2,-1.5,0)
     }
 
 }
