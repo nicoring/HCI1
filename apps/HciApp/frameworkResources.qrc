@@ -42,9 +42,15 @@
         <file>surf.jpg</file>
         <file>meshs/circle.3ds</file>
         <file>meshs/middle_c.jpg</file>
+        <file>meshs/notifica.jpg</file>
+        <file>meshs/ring.3ds</file>
+        <file>meshs/top_left.jpg</file>
         <file>meshs/topleft.3ds</file>
-        <file>meshs/topleft.jpg</file>
-        <file>meshs/test1.3ds</file>
-        <file>meshs/test1.jpg</file>
+        <file>meshs/bottomleft.3ds</file>
+        <file>meshs/bottomright.3ds</file>
+        <file>meshs/left_bot.jpg</file>
+        <file>meshs/right_bo.jpg</file>
+        <file>meshs/top_righ.jpg</file>
+        <file>meshs/topright.3ds</file>
     </qresource>
 </RCC>

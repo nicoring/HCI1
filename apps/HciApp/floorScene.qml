@@ -39,43 +39,42 @@ Item3D {
         ]
     }
 
-    TestScene {
-        id: testScene
-    }
-
-    function test() {
-     testScene.rotateOneRound()
-    }
-
-
-
-    /*
     Item3D {
-        id: floor
+        id:floorElems
+        transform {
+            Rotation3D {
+                angle: 90
+                axis: Qt.vector3d(0,0,1)
+            }
+        }
+        scale: 2.3
 
-        position: Qt.vector3d(0,-1.5,0)
-        CubeQuad {
-            id: slice1
-            position: Qt.vector3d(1.5,1.5,0)
+        Ring3D {
+            id: ring
         }
 
-        Slice {
-            id: slice2
-            position: Qt.vector3d(1.5, -1.5, 0)
+        Circle3D {
+            id: circle
         }
 
-        Slice {
-            id: slice3
-            position: Qt.vector3d(-1.5, 1.5, 0)
+        StageTopLeft {
+            id: topleftStage
         }
 
-        Slice {
-            id: slice4
-            position: Qt.vector3d(-1.5, -1.5, 0)
+        StageTopRight {
+            id: toprightStage
         }
 
+        StageBottomLeft {
+            id: bottomleftStage
+        }
+
+        StageBottomRight {
+            id: bottomrightStage
+        }
     }
-    */
+
+
 
 }
 

@@ -87,10 +87,25 @@ OTHER_FILES += \
     widgets/TestScene.qml \
     floorscene-2.3ds \
     surf.jpeg \
-    meshs/circle.jpeg \
     meshs/circle.3ds \
-    meshs/topleft.jpeg \
-    meshs/topleft.3ds
+    meshs/middle_c.jpg \
+    meshs/ring.3ds \
+    meshs/notifica.jpg \
+    meshs/topleft.3ds \
+    meshs/top_left.jpg \
+    meshs/topright.3ds \
+    meshs/top_righ.jpg \
+    meshs/bottomleft.3ds \
+    meshs/left_bot.jpg \
+    meshs/bottomright.3ds \
+    meshs/right_bo.jpg \
+    widgets/Circle3D.qml \
+    widgets/Ring3D.qml \
+    widgets/Stage3D.qml \
+    widgets/StageTopLeft.qml \
+    widgets/StageTopRight.qml \
+    widgets/StageBottomLeft.qml \
+    widgets/StageBottomRight.qml
 
 RESOURCES += \
     frameworkResources.qrc

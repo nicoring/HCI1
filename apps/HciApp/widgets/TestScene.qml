@@ -6,7 +6,7 @@ import QtQuick.Window 2.1
 import "../framework"
 Item3D {
     id: testscene
-    mesh: Mesh { source: "qrc:/models/meshs/circle.3ds" }
+    mesh: Mesh { source: "qrc:/models/meshs/topleft.3ds" }
     effect: LightShader {
      //texture: "../framework/componentBase.png"
     }
