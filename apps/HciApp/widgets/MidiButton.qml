@@ -7,35 +7,46 @@ import "../framework/GlobalLight.js" as GlobalLight
 import "../framework"
 import "."
 
-Cube {
+FlatButton {
     id: midiButton
 
     property int button_id
     property int player_id
 
+    // load midi interface qml widget
+    property MidiInterface midiInterface
 
-    // class does not compile correctly
-    // check against TravelingSalesmanCalculator form inClassHacking branch
-    MidiInterface {
-        id: midiInterface
-    }
-
+    // 3d elements --> push into floor to be visible
     position: Qt.vector3d(0,0,-1)
+
+    // scale to small button size
     transform: [
         Scale3D {
-            scale: Qt.vector3d(2.7,2.7,0.1)
+            scale: Qt.vector3d(1,1,0.1)
         }
     ]
-    effect : LightShader {
-        texture: "../framework/componentBase.png"
-    }
 
     /**
      * when button was tapped, signal the midi interface
      */
     function mtqTap(id, position) {
-        console.info(id, position);
+        console.info(id, position, button_id, player_id);
         midiInterface.buttonTapped(button_id, player_id)
     }
 
+   /**
+    * when foot is on button, signal the midi interface
+    */
+    function mtqContactDown(id, position) {
+        console.info('contact down', id, position, button_id, player_id);
+        midiInterface.buttonDown(button_id, player_id);
+    }
+
+   /**
+    * when foot is on button, signal the midi interface
+    */
+    function mtqContactUp(id, position) {
+        console.info('contact up', id, position, button_id, player_id);
+        midiInterface.buttonUp(button_id, player_id);
+    }
 }
