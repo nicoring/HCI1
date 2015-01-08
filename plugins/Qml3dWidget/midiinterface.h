@@ -1,13 +1,20 @@
 #ifndef MIDIINTERFACE_H
 #define MIDIINTERFACE_H
 
-
 #include <QtQuick/QQuickItem>
 #include <QObject>
 #include <QDebug>
 #include <QQuickPaintedItem>
-
 #include <mtq/core/PluginRegistry.h>
+
+#define __WINDOWS_MM__
+#include <iostream>
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
+#include "Rtmidi.h"
+using namespace std;
+
 namespace mtq {
 
 class MTQ_EXPORT_PLUGIN MidiInterface : public QQuickPaintedItem
@@ -25,6 +32,8 @@ public:
     Q_INVOKABLE void buttonTapped(int player_id, int button_id);
     Q_INVOKABLE void buttonUp(int player_id, int button_id);
     Q_INVOKABLE void buttonDown(int player_id, int button_id);
+    void myCallback(double deltaTime, vector< unsigned char > *message);
+    static void tunnelCallBack(double deltaTime, std::vector<unsigned char> *message, void *userData);
 
 signals:
     // player tapped a button and requests the linked midi sound
@@ -33,6 +42,11 @@ signals:
 
 public slots:
 
+private:
+    RtMidiOut *midiOut;
+    RtMidiIn *midiIn;
+    vector<unsigned char> messenger;
+    char beatScheduler;
 };
 
 }

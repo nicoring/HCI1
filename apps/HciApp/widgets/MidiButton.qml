@@ -31,7 +31,7 @@ FlatButton {
      */
     function mtqTap(id, position) {
         console.info(id, position, button_id, player_id);
-        midiInterface.buttonTapped(button_id, player_id)
+        midiInterface.buttonTapped(player_id, button_id)
     }
 
    /**
@@ -39,7 +39,7 @@ FlatButton {
     */
     function mtqContactDown(id, position) {
         console.info('contact down', id, position, button_id, player_id);
-        midiInterface.buttonDown(button_id, player_id);
+        midiInterface.buttonDown(player_id, button_id);
     }
 
    /**
@@ -47,6 +47,6 @@ FlatButton {
     */
     function mtqContactUp(id, position) {
         console.info('contact up', id, position, button_id, player_id);
-        midiInterface.buttonUp(button_id, player_id);
+        midiInterface.buttonUp(player_id, button_id);
     }
 }
