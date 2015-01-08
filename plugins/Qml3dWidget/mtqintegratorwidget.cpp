@@ -5,6 +5,7 @@ using namespace mtq;
 #include <QPen>
 #include <QPainter>
 #include <qmath.h>
+#include "flooreventwidget.h"
 
 MTQ_QML_REGISTER_PLUGIN(MtqIntegratorWidget)
 
@@ -19,6 +20,8 @@ MtqIntegratorWidget::MtqIntegratorWidget(QQuickItem *parent) :
     m_moveCamera = true;
     m_printDebug = false;
     m_fuzzyInput = true;
+
+    FloorEventWidget::setMtqIntegratorInstance(this);
 }
 
 void MtqIntegratorWidget::paint(QPainter *painter){
@@ -49,9 +52,21 @@ void MtqIntegratorWidget::paintDebugLayer(QPainter *p){
 		p->drawEllipse(contact.position,150,150);
         p->drawText(contact.position.x()+50,contact.position.y()+12,contact.position.x()+100,contact.position.y()+62,0,QString("Age: ") + QString::number(contact.age));
         p->drawText(contact.position.x()+50,contact.position.y()+24,contact.position.x()+100,contact.position.y()+84,0,QString("User: ") + contact.userName);
+        p->drawText(contact.position.x()+50,contact.position.y()+36,contact.position.x()+100,contact.position.y()+96,0,QString("Direction: ") + QString::number(contact.direction));
 
         if (contact.tiltingDirection != QVector2D(0,0)){
             p->drawLine(contact.position, contact.position + (contact.tiltingDirection*100*QVector2D(-1,1)).toPointF() );
+        }
+
+        if (contact.direction > -10.0 && contact.direction < 10.0){
+            QLineF l;
+            l.setP1(contact.position);
+            //add pi/2 and convert radian to degree
+            l.setAngle((contact.direction + 1.572)* 57.296f);
+            l.setLength(150);
+
+            p->setPen(Qt::red);
+            p->drawLine(l);
         }
 
         p->setPen(Qt::blue);
@@ -130,13 +145,13 @@ bool MtqIntegratorWidget::dispatch(PositionEvent::Ptr event){
     QVector2D tiltDirection = floorEvent->tiltDirection();
 
     if (className == ContactDownEvent::staticMetaObject.className()){
-        processContactDown(floorPosition, id, user, tiltDirection, false);
+        processContactDown(floorPosition, id, user, tiltDirection, false, floorEvent->rotation());
         return true;
     } else if (className == ContactUpEvent::staticMetaObject.className()){
         processContactUp(floorPosition, id);
         return true;
     } else if (className == ContactMoveEvent::staticMetaObject.className()){
-		processContactMove(floorPosition, id, user, floorEvent->tiltDirection());
+        processContactMove(floorPosition, id, user, floorEvent->tiltDirection(), floorEvent->rotation());
         return true;
     } else if (className == TapEvent::staticMetaObject.className()){
         processTap(floorPosition, id, user);
@@ -254,22 +269,22 @@ QPoint MtqIntegratorWidget::randomize(QPoint position, float percentage){
     return QPoint(newX, newY);
 }
 
-void MtqIntegratorWidget::setDebugContactDown(int contactId, QPointF position, QString user){
+void MtqIntegratorWidget::setDebugContactDown(int contactId, QPointF position, QString user, qreal direction){
     QPoint p = QPoint((int)qRound(position.x()),(int)qRound(position.y()));
 
     if (m_fuzzyInput)
-        processContactDown(randomize(p),contactId, user, QVector2D(0,0), true);
+        processContactDown(randomize(p),contactId, user, QVector2D(0,0), true, direction);
     else
-        processContactDown(p,contactId, user, QVector2D(0,0), true);
+        processContactDown(p,contactId, user, QVector2D(0,0), true, direction);
 }
 
-void MtqIntegratorWidget::setDebugContactMove(int contactId, QPointF position, QString userName){
+void MtqIntegratorWidget::setDebugContactMove(int contactId, QPointF position, QString userName, qreal direction){
     QPoint p = QPoint((int)qRound(position.x()),(int)qRound(position.y()));
 
     if (m_fuzzyInput)
-		processContactMove(randomize(p),contactId, userName, QVector2D(0,0));
+        processContactMove(randomize(p),contactId, userName, QVector2D(0,0), direction);
     else
-		processContactMove(p,contactId, userName, QVector2D(0,0));
+        processContactMove(p,contactId, userName, QVector2D(0,0), direction);
 }
 
 void MtqIntegratorWidget::setDebugContactUp(int contactId, QPointF position){
@@ -306,6 +321,8 @@ void MtqIntegratorWidget::processTap(QPoint position, int contactId, QString use
 	m_contacts.remove(contactId);
 	m_contacts.insert(contactId, c);
 
+    emit mtqTap(contactId, position);
+
     int resVal = EVENT_TAP | contactId;
     itemAt(position, resVal);
 }
@@ -325,11 +342,13 @@ void MtqIntegratorWidget::processDoubleTap(QPoint position, int contactId, QStri
 	m_contacts.remove(contactId);
 	m_contacts.insert(contactId, c);
 
+    emit mtqDoubleTap(contactId, position);
+
     int resVal = EVENT_DOUBLETAP | contactId;
     itemAt(position, resVal);
 }
 
-void MtqIntegratorWidget::processContactDown(QPoint position, int contactId, QString userName, QVector2D tiltDirection, bool IsDebugContact){
+void MtqIntegratorWidget::processContactDown(QPoint position, int contactId, QString userName, QVector2D tiltDirection, bool IsDebugContact, qreal direction){
     if (m_printDebug){
         qDebug() << "MtqIntegrator: processing ContactDown #" << contactId << " at " << position;
     }
@@ -343,6 +362,7 @@ void MtqIntegratorWidget::processContactDown(QPoint position, int contactId, QSt
 	c.userName = userName.mid(0); //copy string
 	c.tiltingDirection = tiltDirection;
     c.isDebugContact = IsDebugContact;
+    c.direction = direction;
 
 	m_contacts.remove(contactId);
 	m_contacts.insert(contactId, c);
@@ -353,7 +373,7 @@ void MtqIntegratorWidget::processContactDown(QPoint position, int contactId, QSt
     updateCamera();
 }
 
-void MtqIntegratorWidget::processContactMove(QPoint position, int contactId, QString userName, QVector2D tiltDirection){
+void MtqIntegratorWidget::processContactMove(QPoint position, int contactId, QString userName, QVector2D tiltDirection, qreal direction){
 	ContactStruct c;
 	if (m_contacts.contains(contactId)){
 		c = m_contacts.value(contactId);
@@ -379,6 +399,7 @@ void MtqIntegratorWidget::processContactMove(QPoint position, int contactId, QSt
 	c.position = position;
 	c.tiltingDirection = tiltDirection;
 	c.userName = userName.mid(0); //copy string
+    c.direction = direction;
 	m_contacts.insert(contactId, c);
 
     emit mtqContactMove(contactId, position);
@@ -644,5 +665,14 @@ QString MtqIntegratorWidget::getContactUser(int contactId){
 			return QLatin1String("unknown");
     } else {
         return QLatin1String("unknown");
+    }
+}
+
+qreal MtqIntegratorWidget::getContactDirection(int contactId){
+    if (m_contacts.contains(contactId)){
+        ContactStruct c = m_contacts.value(contactId);
+        return c.direction;
+    } else {
+        return std::numeric_limits<qreal>::quiet_NaN();
     }
 }

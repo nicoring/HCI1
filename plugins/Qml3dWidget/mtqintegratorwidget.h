@@ -46,13 +46,14 @@ namespace mtq{
         bool fuzzyInput() {return m_fuzzyInput;}
         void setFuzzyInput(bool value) {m_fuzzyInput = value; emit fuzzyInputChanged();}
 
-        Q_INVOKABLE void setDebugContactDown(int contactId, QPointF position, QString user = QLatin1String(""));
-		Q_INVOKABLE void setDebugContactMove(int contactId, QPointF position, QString user = QLatin1String(""));
+        Q_INVOKABLE void setDebugContactDown(int contactId, QPointF position, QString user = QLatin1String(""), qreal direction = std::numeric_limits<qreal>::quiet_NaN());
+        Q_INVOKABLE void setDebugContactMove(int contactId, QPointF position, QString user = QLatin1String(""), qreal direction = std::numeric_limits<qreal>::quiet_NaN());
         Q_INVOKABLE void setDebugContactUp(int contactId, QPointF position);
         Q_INVOKABLE void setDebugContactTap(int contactId, QPointF position, QString user = QLatin1String(""));
 
         Q_INVOKABLE QVector2D getContactTilting(int contactId);
         Q_INVOKABLE QString getContactUser(int contactId);
+        Q_INVOKABLE qreal getContactDirection(int contactId);
     signals:
         void userPositionChanged(QPointF qmlUserPosition);
         void adjustCameraHeightToSceneChanged(bool value);
@@ -93,6 +94,7 @@ namespace mtq{
 			int age;
 			QPoint position;
 			QVector2D tiltingDirection;
+            double direction;
 		};
 
         virtual void mouseDoubleClickEvent(QMouseEvent *event);
@@ -104,8 +106,8 @@ namespace mtq{
         //Processing MTQ Events
         void processTap(QPoint position, int contactId, QString userName = QLatin1String(""));
         void processDoubleTap(QPoint position, int contactId, QString userName = QLatin1String(""));
-        void processContactDown(QPoint position, int contactId, QString userName = QLatin1String(""), QVector2D tiltDirection = QVector2D(0,0), bool isDebugContact = false);
-		void processContactMove(QPoint position, int contactId, QString userName = QLatin1String(""),QVector2D tiltDirection = QVector2D(0,0));
+        void processContactDown(QPoint position, int contactId, QString userName = QLatin1String(""), QVector2D tiltDirection = QVector2D(0,0), bool isDebugContact = false, qreal direction = std::numeric_limits<qreal>::quiet_NaN());
+        void processContactMove(QPoint position, int contactId, QString userName = QLatin1String(""),QVector2D tiltDirection = QVector2D(0,0), qreal direction = std::numeric_limits<qreal>::quiet_NaN());
         void processContactUp(QPoint position, int contactId);
 
         QPoint randomize(QPoint position, float percentage = 0.005);
