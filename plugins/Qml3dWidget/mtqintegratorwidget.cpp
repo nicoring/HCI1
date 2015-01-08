@@ -321,7 +321,8 @@ void MtqIntegratorWidget::processTap(QPoint position, int contactId, QString use
 	m_contacts.remove(contactId);
 	m_contacts.insert(contactId, c);
 
-    emit mtqTap(contactId, position);
+    QPointF qmlPos = mapScreenToQml(position);
+    emit mtqTap(contactId, qmlPos);
 
     int resVal = EVENT_TAP | contactId;
     itemAt(position, resVal);
@@ -342,7 +343,8 @@ void MtqIntegratorWidget::processDoubleTap(QPoint position, int contactId, QStri
 	m_contacts.remove(contactId);
 	m_contacts.insert(contactId, c);
 
-    emit mtqDoubleTap(contactId, position);
+    QPointF qmlPos = mapScreenToQml(position);
+    emit mtqDoubleTap(contactId, qmlPos);
 
     int resVal = EVENT_DOUBLETAP | contactId;
     itemAt(position, resVal);
@@ -367,7 +369,8 @@ void MtqIntegratorWidget::processContactDown(QPoint position, int contactId, QSt
 	m_contacts.remove(contactId);
 	m_contacts.insert(contactId, c);
 
-    emit mtqContactDown(contactId, position);
+    QPointF qmlPos = mapScreenToQml(position);
+    emit mtqContactDown(contactId, qmlPos);
 
     calculateAveragePosition();
     updateCamera();
@@ -402,7 +405,8 @@ void MtqIntegratorWidget::processContactMove(QPoint position, int contactId, QSt
     c.direction = direction;
 	m_contacts.insert(contactId, c);
 
-    emit mtqContactMove(contactId, position);
+    QPointF qmlPos = mapScreenToQml(position);
+    emit mtqContactMove(contactId, qmlPos);
 
     calculateAveragePosition();
     updateCamera();
@@ -414,7 +418,9 @@ void MtqIntegratorWidget::processContactUp(QPoint position, int contactId){
     }
 
     itemAt(position,EVENT_CONTACTUP | contactId);
-    emit mtqContactUp(contactId, position);
+
+    QPointF qmlPos = mapScreenToQml(position);
+    emit mtqContactUp(contactId, qmlPos);
 
 	m_contacts.remove(contactId);
 
