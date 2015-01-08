@@ -7,4 +7,9 @@ import "../framework"
 
 Stage3D {
     mesh: Mesh { source: "qrc:/models/meshs/topleft.3ds" }
+    effect: LightShader {
+        //glow: Qt.vector3d(232,192,32)
+    }
+
+
 }

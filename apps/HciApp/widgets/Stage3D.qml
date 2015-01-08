@@ -8,6 +8,17 @@ import "../framework"
 Item3D {
     id: stageElem
     effect: LightShader {
-     //texture: "../framework/componentBase.png"
+        texture: "../framework/componentBase.png"
+    }
+
+    Translation3D {
+        translate: Qt.vector3d(0,0,-1)
+    }
+
+    transform {
+        Rotation3D {
+            angle: 90
+            axis: Qt.vector3d(0,0,1)
+        }
     }
 }

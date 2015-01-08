@@ -40,7 +40,6 @@
         <file>framework/floorscene.3ds</file>
         <file>floorscene-2.3ds</file>
         <file>surf.jpg</file>
-        <file>meshs/circle.3ds</file>
         <file>meshs/middle_c.jpg</file>
         <file>meshs/notifica.jpg</file>
         <file>meshs/ring.3ds</file>
@@ -52,5 +51,8 @@
         <file>meshs/right_bo.jpg</file>
         <file>meshs/top_righ.jpg</file>
         <file>meshs/topright.3ds</file>
+        <file>meshs/circle.3ds</file>
+        <file>meshs/circle2.3ds</file>
+        <file>meshs/circle3.3ds</file>
     </qresource>
 </RCC>

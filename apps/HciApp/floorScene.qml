@@ -9,9 +9,20 @@ import "widgets"
 
 Item3D {
 
+    /**
+      *******************************
+      *             *               *
+      *  player 1   *    player 2   *
+      *             *               *
+      *******************************
+      *             *               *
+      *  player 3   *    player 4   *
+      *             *               *
+      *******************************
+      */
+
     Component.onCompleted: {
         parent.sceneEnabled.connect(setupLight);
-        //test();
     }
 
     function setupLight(){
@@ -41,12 +52,6 @@ Item3D {
 
     Item3D {
         id:floorElems
-        transform {
-            Rotation3D {
-                angle: 90
-                axis: Qt.vector3d(0,0,1)
-            }
-        }
         scale: 2.3
 
         Ring3D {
