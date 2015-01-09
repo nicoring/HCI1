@@ -40,8 +40,8 @@ void CircleController::beat() {
       *******************************
 
  */
-void CircleController::rotateToPlayer(int num) {
-    emit rotateToPlayer(num);
+void CircleController::rotateToPlayer(int playerNum) {
+    emit rotateToPlayer(playerNum);
 }
 
 // TODO: should be implemented in a main controller class
