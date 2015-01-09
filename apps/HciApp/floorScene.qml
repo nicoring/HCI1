@@ -80,6 +80,20 @@ Item3D {
         }
     }
 
+    CircleController {
+        id: circleController
+
+        onBeat: {
+            circle.beat();
+        }
+
+        onRotateToPlayer: {
+            // playerNum is defined in circlecontroller.h should work:
+            // http://qt-project.org/forums/viewthread/3502
+            circle.rotateToPlayer(playerNum);
+        }
+    }
+
     // create midi interface only once
     MidiInterface {
         id: midiInterface
