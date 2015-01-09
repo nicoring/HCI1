@@ -16,7 +16,8 @@ HEADERS += \
     textdrawer.h \
     simplepainter.h \
     midiinterface.h \
-    RtMidi.h
+    RtMidi.h \
+    circlecontroller.h
 
 SOURCES += \
     qml3dwidget.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
     textdrawer.cpp \
     simplepainter.cpp \
     midiinterface.cpp \
-    RtMidi.cpp
+    RtMidi.cpp \
+    circlecontroller.cpp
 
 
