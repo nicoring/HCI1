@@ -40,8 +40,9 @@ Item3D {
         l.enabled = true;
     }
 
+
     CubeQuad {
-        id: quad
+        id: underground
         position: Qt.vector3d(0,0,-10)
         transform: [
             Scale3D {
@@ -79,7 +80,39 @@ Item3D {
         }
     }
 
+    // create midi interface only once
+    MidiInterface {
+        id: midiInterface
+    }
 
+    /** create a test midi button set for each player **/
 
+    Player {
+        id: player1
+        player_id: 1
+        midiInterface: midiInterface
+        position: Qt.vector3d(-2,1,0)
+    }
+
+    Player {
+        id: player2
+        player_id: 2
+        midiInterface: midiInterface
+        position: Qt.vector3d(2,1,0)
+    }
+
+    Player {
+        id: player3
+        player_id: 3
+        midiInterface: midiInterface
+        position: Qt.vector3d(-2,-1.5,0)
+    }
+
+    Player {
+        id: player4
+        player_id: 4
+        midiInterface: midiInterface
+        position: Qt.vector3d(2,-1.5,0)
+    }
 }
 

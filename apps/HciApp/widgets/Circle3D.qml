@@ -115,5 +115,6 @@ Item3D {
         zAxisAngleRotationAnimation.to = angle
         zAxisAngleRotationAnimation.duration = duration
         arrowRotationAnimation.start()
+
     }
 }

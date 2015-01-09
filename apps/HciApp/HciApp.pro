@@ -84,7 +84,6 @@ OTHER_FILES += \
     widgets/MainMenu.qml \
     widgets/CubeQuad.qml \
     framework/floorscene.3ds \
-    widgets/TestScene.qml \
     floorscene-2.3ds \
     surf.jpeg \
     meshs/circle.3ds \
@@ -105,8 +104,15 @@ OTHER_FILES += \
     widgets/StageTopLeft.qml \
     widgets/StageTopRight.qml \
     widgets/StageBottomLeft.qml \
-    widgets/StageBottomRight.qml
+    widgets/StageBottomRight.qml \
+    widgets/MidiButton.qml \
+    widgets/Player.qml
 
 RESOURCES += \
     frameworkResources.qrc
+
+HEADERS +=
+
+SOURCES += \
+
 
