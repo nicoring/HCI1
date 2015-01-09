@@ -23,6 +23,29 @@ Item3D {
             angle: 0
             axis: Qt.vector3d(0,0,1)
         }
+
+        Scale3D {
+            id: radiusScale
+            scale: Qt.vector3d(1.1,1.1,1)
+        }
+    }
+
+    SequentialAnimation {
+        id: beatAnimation
+        Vector3dAnimation {
+            id: circleBigAnimation
+            target: radiusScale
+            properties: "scale"
+            duration: 50
+            to: Qt.vector3d(1.5,1.5,1)
+        }
+        Vector3dAnimation {
+            id: circleLittleAnimation
+            target: radiusScale
+            properties: "scale"
+            duration: 100
+            to: Qt.vector3d(1.1,1.1,1)
+        }
     }
 
     SequentialAnimation {
@@ -34,7 +57,7 @@ Item3D {
             duration: 1400
             from: 0
             to: 360
-            loops: 0
+            loops: 3
         }
 
         NumberAnimation {
@@ -49,6 +72,11 @@ Item3D {
 
     function mtqTap(position, id) {
         rotateToPlayer(3)
+        //beat()
+    }
+
+    function beat() {
+        beatAnimation.start()
     }
 
 
