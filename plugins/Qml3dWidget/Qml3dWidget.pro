@@ -17,13 +17,18 @@ HEADERS += \
     simplepainter.h \
     midiinterface.h \
     RtMidi.h
+    flooreventwidget.h
 
 SOURCES += \
     qml3dwidget.cpp \
     mtqintegratorwidget.cpp \
     textdrawer.cpp \
     simplepainter.cpp \
+<<<<<<< HEAD
     midiinterface.cpp \
     RtMidi.cpp
 
 
+=======
+    flooreventwidget.cpp
+>>>>>>> aa669793656deb3831b4519b2608aad367887ea9
