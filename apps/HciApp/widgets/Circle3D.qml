@@ -9,7 +9,7 @@ Item3D {
     id: middleCircle
     mesh: Mesh { source: "qrc:/models/meshs/circle3.3ds" }
     effect: LightShader {
-     //texture: "../framework/componentBase.png"
+     texture: "../framework/componentBase.png"
     }
 
     transform {

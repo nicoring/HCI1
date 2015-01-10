@@ -9,6 +9,6 @@ Item3D {
     id: middleRing
     mesh: Mesh { source: "qrc:/models/meshs/ring.3ds" }
     effect: LightShader {
-     //texture: "../framework/componentBase.png"
+     texture: "../framework/componentBase.png"
     }
 }
