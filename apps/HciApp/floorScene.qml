@@ -99,6 +99,7 @@ Item3D {
     Item3D {
         id: floorElems
         scale: 2.3
+        position: Qt.vectord(0,0,0)
 
         Ring3D {
             id: ring
