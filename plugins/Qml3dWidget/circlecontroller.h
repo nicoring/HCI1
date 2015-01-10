@@ -13,7 +13,7 @@ namespace mtq {
 class MTQ_EXPORT_PLUGIN CircleController : public QQuickItem
 {
     Q_OBJECT
-    MTQ_QML_PLUGIN_REGISTRATION(MidiInterface, "qml3d")
+    MTQ_QML_PLUGIN_REGISTRATION(CircleController, "qml3d")
 
 public:
     explicit CircleController(QQuickItem *parent = 0);
@@ -23,8 +23,8 @@ public:
     void chooseRandomSoloPlayer();
 
 signals:
-    void beat();
-    void rotateToPlayer(int playerNum);
+    void doBeat();
+    void doRotateToPlayer(int playerNum);
 
 public slots:
 

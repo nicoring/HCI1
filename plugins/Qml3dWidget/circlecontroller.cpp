@@ -19,7 +19,7 @@ void CircleController::paint(QPainter *painter){
  * @brief CircleController::beat
  */
 void CircleController::beat() {
-    emit beat();
+    emit doBeat();
 }
 
 /**
@@ -41,7 +41,7 @@ void CircleController::beat() {
 
  */
 void CircleController::rotateToPlayer(int playerNum) {
-    emit rotateToPlayer(playerNum);
+    emit doRotateToPlayer(playerNum);
 }
 
 // TODO: should be implemented in a main controller class
