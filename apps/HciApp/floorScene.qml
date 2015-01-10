@@ -106,24 +106,50 @@ Item3D {
 
     InstrumentButton {
         id: instrument_player1
-        position: Qt.vector3d(-3.5,0.8,0.2)
-    }
+        position: Qt.vector3d(-2.2,1.4,0.2)
+        scale: 0.8
+        enabled: false
 
+        transform: Rotation3D {
+            angle: -120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
 
     InstrumentButton {
         id: instrument_player2
-        position: Qt.vector3d(2.2,0.8,0.2)
+        position: Qt.vector3d(2.2,1.4,0.2)
+        scale: 0.8
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 120
+            axis: Qt.vector3d(0,0,1)
+        }
     }
 
     InstrumentButton {
         id: instrument_player3
-        position: Qt.vector3d(-3.5,-2,0.2)
-    }
+        position: Qt.vector3d(-2.2,-1.4,0.2)
+        scale: 0.8
+        enabled: false
 
+        transform: Rotation3D {
+            angle: -40
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
 
     InstrumentButton {
         id: instrument_player4
-        position: Qt.vector3d(2.2,-2,0.2)
+        position: Qt.vector3d(2.2,-1.4,0.2)
+        scale: 0.8
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 40
+            axis: Qt.vector3d(0,0,1)
+        }
     }
 
     /** create midi button sets for each player **/
