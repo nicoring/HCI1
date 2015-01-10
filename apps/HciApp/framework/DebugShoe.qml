@@ -6,8 +6,8 @@ Image{
     property bool isTapping: false;
     property bool isLeftShoe: true;
 
-    signal positionChanged(var contactId, var x, var y);
-    signal contactDown(var contactId, var x, var y);
+    signal contactMove(var contactId, var x, var y, var rotation);
+    signal contactDown(var contactId, var x, var y, var rotation);
     signal contactUp(var contactId, var x, var y)
     signal tap(var contactId, var x, var y);
 
@@ -52,7 +52,7 @@ Image{
             contactUp(contactId, pos.x, pos.y);
         } else {
             shoe.source = "shoe_s.png";
-            contactDown(contactId, pos.x, pos.y)
+            contactDown(contactId, pos.x, pos.y, shoeRotation.angle)
         }
     }
 
@@ -90,11 +90,14 @@ Image{
 
         onWheel:{
             wheel.accepted = true;
+            var pos = displayedPosition();
 
             if (wheel.angleDelta.y > 0){
                 shoeRotation.angle += rotationResolution;
+                contactMove(contactId, pos.x, pos.y, shoeRotation.angle)
             } else {
                 shoeRotation.angle -= rotationResolution;
+                contactMove(contactId, pos.x, pos.y, shoeRotation.angle)
             }
         }
     }

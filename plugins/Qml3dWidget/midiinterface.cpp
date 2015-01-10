@@ -11,6 +11,7 @@ void MidiInterface::tunnelCallBack(double deltaTime, std::vector<unsigned char> 
 MidiInterface::MidiInterface(QQuickItem *parent) :
     QQuickPaintedItem(parent)
 {
+
     /************Ports used*************/
     unsigned char outPort = 1;
     unsigned char inPort = 0;
@@ -29,14 +30,16 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
         qDebug() << "No more Out-Ports available!";
         delete midiOut;
     }
+    else {
+        // try to open defined port
+        try {
+            midiOut->openPort(outPort);
+        }
+        catch(RtMidiError &error) {
+            error.printMessage();
+        }
+    }
 
-    // try to open defined port
-    try {
-        midiOut->openPort(outPort);
-    }
-    catch(RtMidiError &error) {
-        error.printMessage();
-    }
     //******************************
 
     //****************MIDI IN*******
@@ -50,18 +53,22 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
     // Check available ports
     if (midiIn->getPortCount() == 0) {
         qDebug() << "No more In-Ports available";
-            delete midiIn;
+        delete midiIn;
     }
-    try {
-        midiIn->openPort(inPort);
+    else {
+        try {
+            midiIn->openPort(inPort);
+        }
+        catch(RtMidiError &error) {
+            error.printMessage();
+        }
+        // Set callback function
+        midiIn->setCallback( &tunnelCallBack );
+        // Don't ignore sysex, timing, or active sensing messages.
+        midiIn->ignoreTypes( false, false, false );
     }
-    catch(RtMidiError &error) {
-        error.printMessage();
-    }
-    // Set callback function
-    midiIn->setCallback( &tunnelCallBack );
-    // Don't ignore sysex, timing, or active sensing messages.
-    midiIn->ignoreTypes( false, false, false );
+
+
     //******************************
 
 
@@ -109,7 +116,9 @@ void MidiInterface::buttonDown(int player_id, int button_id)
     // set and send given Note
     messenger[1] = note;
     messenger[2] = velocity;
-    midiOut->sendMessage(&messenger);
+    if (midiOut != NULL) {
+        midiOut->sendMessage(&messenger);
+    }
     qDebug() << "sent note " << note << "with velocity" << velocity;
 }
 
@@ -131,7 +140,9 @@ void MidiInterface::buttonUp(int player_id, int button_id)
     // set and send given Note
     messenger[1] = note;
     messenger[2] = velocity;
-    midiOut->sendMessage(&messenger);
+    if (midiOut != NULL) {
+        midiOut->sendMessage(&messenger);
+    }
     qDebug() << "stop note " << note << "with velocity" << velocity;
 }
 
