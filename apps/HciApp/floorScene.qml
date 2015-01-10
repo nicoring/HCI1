@@ -40,15 +40,20 @@ Item3D {
         l.enabled = true;
     }
 
-
-    CubeQuad {
+    HighResQuad {
         id: underground
-        position: Qt.vector3d(0,0,-1)
-        transform: [
+        scale:5
+        position: Qt.vector3d(0,0,-4)
+
+        transform:[
             Scale3D {
-                scale: Qt.vector3d(100,100,0)
+                scale: Qt.vector3d(2,1,1)
             }
         ]
+
+        effect: LightShader {
+            texture: "qrc:/models/floorPanels.jpg"
+        }
     }
 
     // create midi interface only once
