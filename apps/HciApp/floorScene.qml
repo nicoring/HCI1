@@ -43,7 +43,7 @@ Item3D {
 
     CubeQuad {
         id: underground
-        position: Qt.vector3d(0,0,-10)
+        position: Qt.vector3d(0,0,-1)
         transform: [
             Scale3D {
                 scale: Qt.vector3d(100,100,0)
@@ -51,8 +51,14 @@ Item3D {
         ]
     }
 
+    // create midi interface only once
+    MidiInterface {
+        id: midiInterface
+    }
+
+    // group stage elements
     Item3D {
-        id:floorElems
+        id: floorElems
         scale: 2.3
 
         Ring3D {
@@ -63,20 +69,32 @@ Item3D {
             id: circle
         }
 
-        StageTopLeft {
+        Stage3D {
             id: topleftStage
+            midiInterface: midiInterface
+            player_id: 1
+            mesh: Mesh { source: "qrc:/models/meshs/topleft.3ds" }
         }
 
-        StageTopRight {
+        Stage3D {
             id: toprightStage
+            midiInterface: midiInterface
+            player_id: 2
+            mesh: Mesh { source: "qrc:/models/meshs/topright.3ds" }
         }
 
-        StageBottomLeft {
+        Stage3D {
             id: bottomleftStage
+            midiInterface: midiInterface
+            player_id: 3
+            mesh: Mesh { source: "qrc:/models/meshs/bottomleft.3ds" }
         }
 
-        StageBottomRight {
+        Stage3D {
             id: bottomrightStage
+            midiInterface: midiInterface
+            player_id: 4
+            mesh: Mesh { source: "qrc:/models/meshs/bottomright.3ds" }
         }
     }
 
@@ -89,44 +107,11 @@ Item3D {
 
         onDoRotateToPlayer: {
             // playerNum is defined in circlecontroller.h should work:
+            // playerNum is emitted by doRotateToPlayer
             // http://qt-project.org/forums/viewthread/3502
             circle.rotateToPlayer(playerNum);
         }
     }
 
-    // create midi interface only once
-    MidiInterface {
-        id: midiInterface
-    }
-
-    /** create a test midi button set for each player **/
-
-    Player {
-        id: player1
-        player_id: 1
-        midiInterface: midiInterface
-        position: Qt.vector3d(-2,1,0)
-    }
-
-    Player {
-        id: player2
-        player_id: 2
-        midiInterface: midiInterface
-        position: Qt.vector3d(2,1,0)
-    }
-
-    Player {
-        id: player3
-        player_id: 3
-        midiInterface: midiInterface
-        position: Qt.vector3d(-2,-1.5,0)
-    }
-
-    Player {
-        id: player4
-        player_id: 4
-        midiInterface: midiInterface
-        position: Qt.vector3d(2,-1.5,0)
-    }
 }
 

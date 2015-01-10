@@ -101,12 +101,8 @@ OTHER_FILES += \
     widgets/Circle3D.qml \
     widgets/Ring3D.qml \
     widgets/Stage3D.qml \
-    widgets/StageTopLeft.qml \
-    widgets/StageTopRight.qml \
-    widgets/StageBottomLeft.qml \
-    widgets/StageBottomRight.qml \
     widgets/MidiButton.qml \
-    widgets/Player.qml
+    widgets/MidiButtonSet.qml
 
 RESOURCES += \
     frameworkResources.qrc
