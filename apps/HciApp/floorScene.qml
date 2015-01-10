@@ -64,6 +64,13 @@ Item3D {
         id: midiInterface
     }
 
+    /** each player needs a controlled menu flow **/
+
+    property var settings1
+    property var settings2
+    property var settings3
+    property var settings4
+
     /** create start labels for each player **/
 
     StartLabel {
