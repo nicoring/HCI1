@@ -61,7 +61,41 @@ Item3D {
         id: midiInterface
     }
 
+    /** create midi button sets for each player **/
+
+    MidiButtonSet {
+        id: player1
+        player_id: 1
+        midiInterface: midiInterface
+        position: Qt.vector3d(-3.5,0.8,0.2)
+    }
+
+    MidiButtonSet {
+        id: player2
+        player_id: 2
+        midiInterface: midiInterface
+        position: Qt.vector3d(2.2,0.8,0.2)
+    }
+
+    MidiButtonSet {
+        id: player3
+        player_id: 3
+        midiInterface: midiInterface
+        position: Qt.vector3d(-3.5,-2,0.2)
+    }
+
+    MidiButtonSet {
+        id: player4
+        player_id: 4
+        midiInterface: midiInterface
+        position: Qt.vector3d(2.2,-2,0.2)
+    }
+
+    /** stage environment **/
+
     // group stage elements
+    // exported from cinema4d
+    // 3ds meshes have their own positions and scaling
     Item3D {
         id: floorElems
         scale: 2.3
@@ -76,32 +110,26 @@ Item3D {
 
         Stage3D {
             id: topleftStage
-            midiInterface: midiInterface
-            player_id: 1
             mesh: Mesh { source: "qrc:/models/meshs/topleft.3ds" }
         }
 
         Stage3D {
             id: toprightStage
-            midiInterface: midiInterface
-            player_id: 2
             mesh: Mesh { source: "qrc:/models/meshs/topright.3ds" }
         }
 
         Stage3D {
             id: bottomleftStage
-            midiInterface: midiInterface
-            player_id: 3
             mesh: Mesh { source: "qrc:/models/meshs/bottomleft.3ds" }
         }
 
         Stage3D {
             id: bottomrightStage
-            midiInterface: midiInterface
-            player_id: 4
             mesh: Mesh { source: "qrc:/models/meshs/bottomright.3ds" }
         }
     }
+
+    /** controller widget for "beat-button" **/
 
     CircleController {
         id: circleController
@@ -112,40 +140,10 @@ Item3D {
 
         onDoRotateToPlayer: {
             // playerNum is defined in circlecontroller.h should work:
-            // playerNum is emitted by doRotateToPlayer
             // http://qt-project.org/forums/viewthread/3502
+            // playerNum is emitted by doRotateToPlayer
             circle.rotateToPlayer(playerNum);
         }
     }
-
-//    /** create a test midi button set for each player **/
-
-//    Player {
-//        id: player1
-//        player_id: 1
-//        midiInterface: midiInterface
-//        position: Qt.vector3d(-3.5,0.8,0.2)
-//    }
-
-//    Player {
-//        id: player2
-//        player_id: 2
-//        midiInterface: midiInterface
-//        position: Qt.vector3d(2.2,0.8,0.2)
-//    }
-
-//    Player {
-//        id: player3
-//        player_id: 3
-//        midiInterface: midiInterface
-//        position: Qt.vector3d(-3.5,-2,0.2)
-//    }
-
-//    Player {
-//        id: player4
-//        player_id: 4
-//        midiInterface: midiInterface
-//        position: Qt.vector3d(2.2,-2,0.2)
-//    }
 
 }
