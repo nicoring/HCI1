@@ -108,6 +108,7 @@ Item3D {
         id: instrument_player1
         position: Qt.vector3d(-2.2,1.4,0.2)
         scale: 0.8
+        enabled: false
 
         transform: Rotation3D {
             angle: -120
@@ -119,6 +120,7 @@ Item3D {
         id: instrument_player2
         position: Qt.vector3d(2.2,1.4,0.2)
         scale: 0.8
+        enabled: false
 
         transform: Rotation3D {
             angle: 120
@@ -130,6 +132,7 @@ Item3D {
         id: instrument_player3
         position: Qt.vector3d(-2.2,-1.4,0.2)
         scale: 0.8
+        enabled: false
 
         transform: Rotation3D {
             angle: -40
@@ -141,6 +144,7 @@ Item3D {
         id: instrument_player4
         position: Qt.vector3d(2.2,-1.4,0.2)
         scale: 0.8
+        enabled: false
 
         transform: Rotation3D {
             angle: 40
