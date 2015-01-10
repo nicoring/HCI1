@@ -133,6 +133,7 @@ Item3D {
         player_id: 1
         midiInterface: midiInterface
         position: Qt.vector3d(-3.5,0.8,0.2)
+        enabled: false
     }
 
     MidiButtonSet {
@@ -140,6 +141,7 @@ Item3D {
         player_id: 2
         midiInterface: midiInterface
         position: Qt.vector3d(2.2,0.8,0.2)
+        enabled: false
     }
 
     MidiButtonSet {
@@ -147,6 +149,7 @@ Item3D {
         player_id: 3
         midiInterface: midiInterface
         position: Qt.vector3d(-3.5,-2,0.2)
+        enabled: false
     }
 
     MidiButtonSet {
@@ -154,6 +157,7 @@ Item3D {
         player_id: 4
         midiInterface: midiInterface
         position: Qt.vector3d(2.2,-2,0.2)
+        enabled: false
     }
 
     /** stage environment **/
