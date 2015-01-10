@@ -40,6 +40,8 @@ Item3D {
         l.enabled = true;
     }
 
+    /** load background **/
+
     HighResQuad {
         id: underground
         scale:5
@@ -56,9 +58,72 @@ Item3D {
         }
     }
 
-    // create midi interface only once
+    /** create midi interface only once **/
+
     MidiInterface {
         id: midiInterface
+    }
+
+    /** create start labels for each player **/
+
+    StartLabel {
+        id: label_player1
+        position: Qt.vector3d(-3.5,0.8,0.2)
+        transform: Rotation3D {
+            angle: 275
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    StartLabel {
+        id: label_player2
+        position: Qt.vector3d(2.2,0.8,0.2)
+        transform: Rotation3D {
+            angle: 275
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    StartLabel {
+        id: label_player3
+        position: Qt.vector3d(-3.5,-2,0.2)
+        transform: Rotation3D {
+            angle: 275
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    StartLabel {
+        id: label_player4
+        position: Qt.vector3d(2.2,-2,0.2)
+        transform: Rotation3D {
+            angle: 275
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    /** create insturment menu buttons for each player **/
+
+    InstrumentButton {
+        id: instrument_player1
+        position: Qt.vector3d(-3.5,0.8,0.2)
+    }
+
+
+    InstrumentButton {
+        id: instrument_player2
+        position: Qt.vector3d(2.2,0.8,0.2)
+    }
+
+    InstrumentButton {
+        id: instrument_player3
+        position: Qt.vector3d(-3.5,-2,0.2)
+    }
+
+
+    InstrumentButton {
+        id: instrument_player4
+        position: Qt.vector3d(2.2,-2,0.2)
     }
 
     /** create midi button sets for each player **/
