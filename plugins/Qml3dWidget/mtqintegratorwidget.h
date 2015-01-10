@@ -50,6 +50,7 @@ namespace mtq{
         Q_INVOKABLE void setDebugContactMove(int contactId, QPointF position, QString user = QLatin1String(""), qreal direction = std::numeric_limits<qreal>::quiet_NaN());
         Q_INVOKABLE void setDebugContactUp(int contactId, QPointF position);
         Q_INVOKABLE void setDebugContactTap(int contactId, QPointF position, QString user = QLatin1String(""));
+        Q_INVOKABLE void setDebugContactDoubleTap(int contactId, QPointF position, QString user = QLatin1String(""));
 
         Q_INVOKABLE QVector2D getContactTilting(int contactId);
         Q_INVOKABLE QString getContactUser(int contactId);

@@ -306,6 +306,15 @@ void MtqIntegratorWidget::setDebugContactTap(int contactId, QPointF position, QS
         processTap(p,contactId, user);
 }
 
+void MtqIntegratorWidget::setDebugContactDoubleTap(int contactId, QPointF position, QString user){
+    QPoint p = QPoint((int)qRound(position.x()),(int)qRound(position.y()));
+
+    if (m_fuzzyInput)
+        processDoubleTap(randomize(p),contactId, user);
+    else
+        processDoubleTap(p,contactId, user);
+}
+
 
 void MtqIntegratorWidget::processTap(QPoint position, int contactId, QString userName){
     if (m_printDebug){

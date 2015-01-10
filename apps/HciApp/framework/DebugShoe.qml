@@ -10,6 +10,7 @@ Image{
     signal contactDown(var contactId, var x, var y, var rotation);
     signal contactUp(var contactId, var x, var y)
     signal tap(var contactId, var x, var y);
+    signal doubleTap(var contactId, var x, var y);
 
     source: "shoe_s.png"
     id: shoe
@@ -74,8 +75,12 @@ Image{
         drag.axis: Drag.XandYAxis
 
         onClicked: {
-            var pos = shoe.displayedPosition();
-            tap(shoe.contactId, pos.x,pos.y);
+            var pos = shoe.displayedPosition()
+            if (mouse.modifiers == Qt.ShiftModifier){
+                doubleTap(shoe.contactId, pos.x,pos.y)
+            } else {
+                tap(shoe.contactId, pos.x,pos.y)
+            }
         }
 
         onPressed: {
