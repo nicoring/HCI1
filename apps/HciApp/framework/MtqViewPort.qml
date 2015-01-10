@@ -210,7 +210,7 @@ Viewport {
         id: mtqIntegrator
         anchors.fill: parent
         smoothCamera: true
-        moveCamera: true
+        moveCamera: false
         adjustCameraHeightToScene: quickViewPort.adjustCameraHeightToScene
         paintDebugInfo: displayDebugInfo
         fuzzyInput: parent.fuzzyInput

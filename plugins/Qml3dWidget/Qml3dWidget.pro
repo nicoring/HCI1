@@ -28,5 +28,4 @@ SOURCES += \
     midiinterface.cpp \
     RtMidi.cpp \
     circlecontroller.cpp \
-    flooreventwidget.cpp \
-
+    flooreventwidget.cpp

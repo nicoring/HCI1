@@ -44,17 +44,17 @@ Item3D {
 
     HighResQuad {
         id: underground
-        scale:5
-        position: Qt.vector3d(0,0,-4)
+        scale:6
+        position: Qt.vector3d(0,0,-0.5)
 
         transform:[
             Scale3D {
-                scale: Qt.vector3d(2,1,1)
+                scale: Qt.vector3d(2,1.3,1)
             }
         ]
 
         effect: LightShader {
-            texture: "images/floorPanels.jpg"
+            texture: "floorPanelsquad.jpg"
         }
     }
 
@@ -164,6 +164,7 @@ Item3D {
     Item3D {
         id: floorElems
         scale: 2.3
+        position: Qt.vector3d(0,0,0)
 
         Ring3D {
             id: ring
