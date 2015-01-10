@@ -52,7 +52,6 @@
         <file>meshs/top_righ.jpg</file>
         <file>meshs/topright.3ds</file>
         <file>meshs/circle.3ds</file>
-        <file>meshs/circle2.3ds</file>
         <file>meshs/circle3.3ds</file>
     </qresource>
 </RCC>
