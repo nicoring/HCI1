@@ -17,7 +17,7 @@ Item3D {
 
     FlatButton {
 
-        position: Qt.vector3d(-1, 0, 0)
+        position: Qt.vector3d(-0.6, 0, 0)
 
         Label {
             text: "Floor"
@@ -37,7 +37,7 @@ Item3D {
 
     FlatButton {
 
-        position: Qt.vector3d(1, 0, 0)
+        position: Qt.vector3d(0.6, 0, 0)
 
         Label {
             text: "Own"
