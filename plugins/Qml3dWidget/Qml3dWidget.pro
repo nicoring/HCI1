@@ -17,7 +17,7 @@ HEADERS += \
     simplepainter.h \
     midiinterface.h \
     RtMidi.h \
-    flooreventwidget.h \
+    flooreventwidget.h
 
 SOURCES += \
     qml3dwidget.cpp \
@@ -26,4 +26,4 @@ SOURCES += \
     simplepainter.cpp \
     midiinterface.cpp \
     RtMidi.cpp \
-    flooreventwidget.cpp \
+    flooreventwidget.cpp

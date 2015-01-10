@@ -3,8 +3,48 @@ using namespace mtq;
 
 MTQ_QML_REGISTER_PLUGIN(MidiInterface)
 
+int beatCounter;
+
+/**
+ * Callback function passed to RtMidiIn held by Interface-Class. Receives messages
+ * confirm to 24 ppqn - pulses per quarter note. So counting starts after receiving
+ * DAWs start message, encoded by first byte = 250. Stop resets counter, encoded
+ * by first byte = 252. Beat Clocks first byte is = 248. 251 is 'continue' (track mode)
+ *
+ * @brief MidiInterface::myCallback
+ * @param deltaTime
+ * @param message   Midi-Triple - In our use case usually only first byte (midi-clock)
+ */
 void MidiInterface::tunnelCallBack(double deltaTime, std::vector<unsigned char> *message, void *userData){
     qDebug() << "**BEAT**";
+    unsigned int size = message->size();
+    if(size == 0) return;
+
+    unsigned char byte = (unsigned char) message->at(0);
+    switch (byte) {
+    case 248:
+        if(beatCounter == 0){
+            //TODO: do something here to represent the beat
+            qDebug() << "**************BEAT************** DELTA: " << deltaTime;
+        }
+        else if(beatCounter == 23){
+            beatCounter = -1;
+        }
+        beatCounter++;
+        break;
+    case 250:
+    case 251:
+        //TODO: do something here (green light for start? prbly)
+        qDebug() << "**************START/CONTINUE**************";
+        beatCounter = 0;
+        break;
+    case 252:
+        //TODO: do something here (red light for stop? prbly)
+        qDebug() << "**************STOP**************";
+        beatCounter = 0;
+        break;
+    }
+    // useless compiler warning >.<
     return;
 }
 
@@ -77,7 +117,7 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
     messenger.push_back(0);
     messenger.push_back(0);
 
-    beatScheduler = 0;
+    beatCounter = 0;
 }
 
 // inherited from abstract method, but unused
@@ -109,7 +149,7 @@ void MidiInterface::buttonTapped(int player_id, int button_id)
 void MidiInterface::buttonDown(int player_id, int button_id)
 {
     qDebug() << "Player " << player_id << " on button " << button_id;
-    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1));
+    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + 32;
     unsigned char velocity = 127;
 
     messenger[0] = 144;
@@ -133,7 +173,7 @@ void MidiInterface::buttonDown(int player_id, int button_id)
 void MidiInterface::buttonUp(int player_id, int button_id)
 {
     qDebug() << "Player " << player_id << " released button " << button_id;
-    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1));
+    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + 32;
     unsigned char velocity = 127;
 
     messenger[0] = 128;
@@ -144,45 +184,4 @@ void MidiInterface::buttonUp(int player_id, int button_id)
         midiOut->sendMessage(&messenger);
     }
     qDebug() << "stop note " << note << "with velocity" << velocity;
-}
-
-/**
- * Callback function passed to RtMidiIn held by Interface-Class. Receives messages
- * confirm to 24 ppqn - pulses per quarter note. So counting starts after receiving
- * DAWs start message, encoded by first byte = 250. Stop resets counter, encoded
- * by first byte = 252. Beat Clocks first byte is = 248. 251 is 'continue' (track mode)
- *
- * @brief MidiInterface::myCallback
- * @param deltaTime
- * @param message   Midi-Triple - In our use case usually only first byte (midi-clock)
- */
-void MidiInterface::myCallback(double deltaTime, std::vector<unsigned char> *message){
-    unsigned int size = message->size();
-    if(size == 0) return;
-
-    unsigned char byte = (unsigned char) message->at(0);
-    switch (byte) {
-    case 248:
-        if(beatScheduler == 0){
-            //TODO: do something here to represent the beat
-            qDebug() << "**************BEAT************** DELTA: " << deltaTime;
-        }
-        else if(beatScheduler == 23){
-            beatScheduler = -1;
-        }
-        beatScheduler++;
-        break;
-    case 250:
-    case 251:
-        //TODO: do something here (green light for start? prbly)
-        qDebug() << "**************START/CONTINUE**************";
-        beatScheduler = 0;
-        break;
-    case 252:
-        //TODO: do something here (red light for stop? prbly)
-        qDebug() << "**************STOP**************";
-        beatScheduler = 0;
-        break;
-    }
-    // useless compiler warning >.<
 }
