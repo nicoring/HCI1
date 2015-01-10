@@ -105,28 +105,28 @@ Item3D {
         id: player1
         player_id: 1
         midiInterface: midiInterface
-        position: Qt.vector3d(-2,1,0)
+        position: Qt.vector3d(-3.5,0.8,0.2)
     }
 
     Player {
         id: player2
         player_id: 2
         midiInterface: midiInterface
-        position: Qt.vector3d(2,1,0)
+        position: Qt.vector3d(2.2,0.8,0.2)
     }
 
     Player {
         id: player3
         player_id: 3
         midiInterface: midiInterface
-        position: Qt.vector3d(-2,-1.5,0)
+        position: Qt.vector3d(-3.5,-2,0.2)
     }
 
     Player {
         id: player4
         player_id: 4
         midiInterface: midiInterface
-        position: Qt.vector3d(2,-1.5,0)
+        position: Qt.vector3d(2.2,-2,0.2)
     }
 }
 
