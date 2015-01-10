@@ -25,11 +25,4 @@ Item3D {
             axis: Qt.vector3d(0,0,1)
         }
     }
-
-    MidiButtonSet {
-        id: player
-        player_id: stage.player_id
-        midiInterface: stage.midiInterface
-        position: Qt.vector3d(-2,1,0)
-    }
 }
