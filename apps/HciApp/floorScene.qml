@@ -52,7 +52,7 @@ Item3D {
         ]
 
         effect: LightShader {
-            texture: "qrc:/models/floorPanels.jpg"
+            texture: "images/floorPanels.jpg"
         }
     }
 
