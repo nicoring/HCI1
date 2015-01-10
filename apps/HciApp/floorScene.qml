@@ -6,6 +6,7 @@ import QtQuick.Window 2.1
 import "framework/GlobalLight.js" as GlobalLight
 import "framework"
 import "widgets"
+import "widgets/settings.js" as Settings
 
 Item3D {
 
@@ -21,8 +22,22 @@ Item3D {
       *******************************
       */
 
+
+    /** each player needs a controlled menu flow **/
+
+    property var settings1
+    property var settings2
+    property var settings3
+    property var settings4
+
     Component.onCompleted: {
         parent.sceneEnabled.connect(setupLight);
+
+        // init settings
+        settings1 = Settings.createSettings(topleftStage);
+        settings2 = Settings.createSettings(toprightStage);
+        settings3 = Settings.createSettings(bottomleftStage);
+        settings4 = Settings.createSettings(bottomrightStage);
     }
 
     function setupLight(){
@@ -63,13 +78,6 @@ Item3D {
     MidiInterface {
         id: midiInterface
     }
-
-    /** each player needs a controlled menu flow **/
-
-    property var settings1
-    property var settings2
-    property var settings3
-    property var settings4
 
     /** create start labels for each player **/
 

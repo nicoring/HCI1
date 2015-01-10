@@ -1,4 +1,4 @@
-function ButtonsetSettings(buttonset) {
+function Settings(buttonset) {
 
     this.buttonset = buttonset;
 
@@ -14,7 +14,7 @@ function ButtonsetSettings(buttonset) {
     // this.checkContacts();
 }
 
-ButtonsetSettings.prototype.showStartScreen = function() {
+Settings.prototype.showStartScreen = function() {
     this.buttonset.startLabel.enabled = true;
 
     if (this.startedOnce) {
@@ -25,25 +25,25 @@ ButtonsetSettings.prototype.showStartScreen = function() {
 
 }
 
-ButtonsetSettings.prototype.showInstrumentScreen = function() {
+Settings.prototype.showInstrumentScreen = function() {
     this.buttonset.instrumentButtons.enabled = true
 }
 
-ButtonsetSettings.prototype.showResumeButtons = function() {
+Settings.prototype.showResumeButtons = function() {
     this.buttonset.resumeButtons.enabled = true;
 }
 
-ButtonsetSettings.prototype.hideResumeButtons = function() {
+Settings.prototype.hideResumeButtons = function() {
     this.buttonset.resumeButtons.enabled = false;
 }
 
-ButtonsetSettings.prototype.hideAll = function() {
+Settings.prototype.hideAll = function() {
     this.hideMidiButtons();
     this.hideResumeButtons();
     this.hideInstrumentButtons();
 }
 
-ButtonsetSettings.prototype.updateContact = function() {
+Settings.prototype.updateContact = function() {
     // get time delta
     var now = Date.now();
     var delta = now - this.lastContact;
@@ -62,6 +62,6 @@ ButtonsetSettings.prototype.updateContact = function() {
 
 }
 
-//ButtonsetSettings.prototype.checkContacts = function() {
+//Settings.prototype.checkContacts = function() {
 
 //}
