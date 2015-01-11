@@ -140,7 +140,7 @@ Settings.prototype.showFloorInstrumentScreen = function() {
  * Own Instrument Screen
  * show chord hints
  */
-Settings.prototype.showFloorInstrumentScreen = function() {
+Settings.prototype.showOwnInstrumentScreen = function() {
     // TODO: no chord hints yet
     // empty floor for now
 }
