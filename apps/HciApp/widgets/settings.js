@@ -77,7 +77,6 @@ Settings.prototype.setupScreens = function() {
 
     // instrument buttons
     this.items.instrumentbuttons.floorInstrument.onTap = function() {
-        console.log("show floor instrument");
         _this.switchScreenTo(_this.showFloorInstrumentScreen);
     }
     this.items.instrumentbuttons.ownInstrument.onTap = function() {
