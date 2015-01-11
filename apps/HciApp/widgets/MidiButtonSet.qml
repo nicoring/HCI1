@@ -8,48 +8,65 @@ import "../framework"
 import "."
 
 Item3D {
-    id: player
+    id: buttonset
 
     property int player_id
     property MidiInterface midiInterface
 
-    MidiButton {
-        id: btn1
+    /*********************
+     * initialize buttonset
+     * --> show 'come here' label
+     * --> on over, tag as active
+     *     -> show menu buttons
+     * --> on out and longer than time threshold
+     *     -> show 'come here' label
+     *     -> resume button which loads previous settings
+     */
 
-        button_id: 1
-        player_id: player.player_id
-        midiInterface: player.midiInterface
+    /** keyboard buttons **/
 
-        position: Qt.vector3d(0,0,0)
-    }
+    Item3D {
+        id: midibuttons
+        enabled: true
 
-    MidiButton {
-        id: btn2
+        MidiButton {
+            id: btn1
 
-        button_id: 2
-        player_id: player.player_id
-        midiInterface: player.midiInterface
+            button_id: 1
+            player_id: buttonset.player_id
+            midiInterface: buttonset.midiInterface
 
-        position: Qt.vector3d(1.1, 0, 0)
-    }
+            position: Qt.vector3d(0,0,0)
+        }
 
-    MidiButton {
-        id: btn3
+        MidiButton {
+            id: btn2
 
-        button_id: 3
-        player_id: player.player_id
-        midiInterface: player.midiInterface
+            button_id: 2
+            player_id: buttonset.player_id
+            midiInterface: buttonset.midiInterface
 
-        position: Qt.vector3d(0, 1.1, 0)
-    }
+            position: Qt.vector3d(1.1, 0, 0)
+        }
 
-    MidiButton {
-        id: btn4
+        MidiButton {
+            id: btn3
 
-        button_id: 4
-        player_id: player.player_id
-        midiInterface: player.midiInterface
+            button_id: 3
+            player_id: buttonset.player_id
+            midiInterface: buttonset.midiInterface
 
-        position: Qt.vector3d(1.1, 1.1, 0)
+            position: Qt.vector3d(0, 1.1, 0)
+        }
+
+        MidiButton {
+            id: btn4
+
+            button_id: 4
+            player_id: buttonset.player_id
+            midiInterface: buttonset.midiInterface
+
+            position: Qt.vector3d(1.1, 1.1, 0)
+        }
     }
 }

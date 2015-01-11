@@ -102,7 +102,10 @@ OTHER_FILES += \
     widgets/Ring3D.qml \
     widgets/Stage3D.qml \
     widgets/MidiButton.qml \
-    widgets/MidiButtonSet.qml
+    widgets/MidiButtonSet.qml \
+    widgets/StartLabel.qml \
+    widgets/InstrumentButton.qml \
+    widgets/settings.js
 
 RESOURCES += \
     frameworkResources.qrc

@@ -30,6 +30,10 @@ FlatButton {
      * when button was tapped, signal the midi interface
      */
     function mtqTap(id, position) {
+        if (parent.mtqTap) {
+            parent.mtqTap(id, position);
+        }
+
         console.info(id, position, button_id, player_id);
         midiInterface.buttonTapped(player_id, button_id)
     }
@@ -38,6 +42,10 @@ FlatButton {
     * when foot is on button, signal the midi interface
     */
     function mtqContactDown(id, position) {
+        if (parent.mtqTap) {
+            parent.mtqTap(id, position);
+        }
+
         console.info('contact down', id, position, button_id, player_id);
         midiInterface.buttonDown(player_id, button_id);
     }
@@ -46,6 +54,10 @@ FlatButton {
     * when foot is on button, signal the midi interface
     */
     function mtqContactUp(id, position) {
+        if (parent.mtqTap) {
+            parent.mtqTap(id, position);
+        }
+
         console.info('contact up', id, position, button_id, player_id);
         midiInterface.buttonUp(player_id, button_id);
     }

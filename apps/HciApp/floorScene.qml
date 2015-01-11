@@ -6,6 +6,7 @@ import QtQuick.Window 2.1
 import "framework/GlobalLight.js" as GlobalLight
 import "framework"
 import "widgets"
+import "widgets/settings.js" as Settings
 
 Item3D {
 
@@ -21,8 +22,22 @@ Item3D {
       *******************************
       */
 
+
+    /** each player needs a controlled menu flow **/
+
+    property var settings1
+    property var settings2
+    property var settings3
+    property var settings4
+
     Component.onCompleted: {
         parent.sceneEnabled.connect(setupLight);
+
+        // init settings
+        settings1 = Settings.createSettings(topleftStage);
+        settings2 = Settings.createSettings(toprightStage);
+        settings3 = Settings.createSettings(bottomleftStage);
+        settings4 = Settings.createSettings(bottomrightStage);
     }
 
     function setupLight(){
@@ -39,6 +54,8 @@ Item3D {
         l.createsShadows = true;
         l.enabled = true;
     }
+
+    /** load background **/
 
     HighResQuad {
         id: underground
@@ -57,6 +74,94 @@ Item3D {
     }
 
 
+    /** create start labels for each player **/
+
+    StartLabel {
+        id: label_player1
+        position: Qt.vector3d(-3,1.8,0.2)
+        transform: Rotation3D {
+            angle: 225
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    StartLabel {
+        id: label_player2
+        position: Qt.vector3d(3,1.6,0.2)
+        transform: Rotation3D {
+            angle: 135
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    StartLabel {
+        id: label_player3
+        position: Qt.vector3d(-3,-1.8,0.2)
+        transform: Rotation3D {
+            angle: 315
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    StartLabel {
+        id: label_player4
+        position: Qt.vector3d(2.8,-2,0.2)
+        transform: Rotation3D {
+            angle: 45
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    /** create insturment menu buttons for each player **/
+
+    InstrumentButton {
+        id: instrument_player1
+        position: Qt.vector3d(-2.2,1.4,0.2)
+        scale: 0.8
+        enabled: false
+
+        transform: Rotation3D {
+            angle: -120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    InstrumentButton {
+        id: instrument_player2
+        position: Qt.vector3d(2.2,1.4,0.2)
+        scale: 0.8
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    InstrumentButton {
+        id: instrument_player3
+        position: Qt.vector3d(-2.2,-1.4,0.2)
+        scale: 0.8
+        enabled: false
+
+        transform: Rotation3D {
+            angle: -40
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    InstrumentButton {
+        id: instrument_player4
+        position: Qt.vector3d(2.2,-1.4,0.2)
+        scale: 0.8
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 40
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
     /** create midi button sets for each player **/
 
     MidiButtonSet {
@@ -64,6 +169,7 @@ Item3D {
         player_id: 1
         midiInterface: midiInterface
         position: Qt.vector3d(-3.5,0.8,0.2)
+        enabled: false
     }
 
     MidiButtonSet {
@@ -71,6 +177,7 @@ Item3D {
         player_id: 2
         midiInterface: midiInterface
         position: Qt.vector3d(2.2,0.8,0.2)
+        enabled: false
     }
 
     MidiButtonSet {
@@ -78,6 +185,7 @@ Item3D {
         player_id: 3
         midiInterface: midiInterface
         position: Qt.vector3d(-3.5,-2,0.2)
+        enabled: false
     }
 
     MidiButtonSet {
@@ -85,6 +193,7 @@ Item3D {
         player_id: 4
         midiInterface: midiInterface
         position: Qt.vector3d(2.2,-2,0.2)
+        enabled: false
     }
 
     /** stage environment **/

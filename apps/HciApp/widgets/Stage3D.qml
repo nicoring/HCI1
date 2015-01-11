@@ -25,4 +25,12 @@ Item3D {
             axis: Qt.vector3d(0,0,1)
         }
     }
+
+
+    function mtqTap(id, position) { console.log("tap\n\n"); }
+
+    function mtqContactDown(id, position) {
+        console.log("contact down");
+        //player1.settings.updateContact();
+    }
 }
