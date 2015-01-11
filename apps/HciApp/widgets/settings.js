@@ -22,6 +22,7 @@ function Settings(items) {
     this.lastContact = Date.now();
     this.noOneOnStage = true;
 
+    this.setupScreens();
     this.switchScreenTo(this.showStartScreen);
 }
 
@@ -68,11 +69,26 @@ Settings.prototype.hideAll = function() {
 
 /** screens **/
 
+/**
+ * assign static buttons with functionality
+ */
+Settings.prototype.setupScreens = function() {
+    var _this = this;
+
+    // instrument buttons
+    this.items.instrumentbuttons.floorInstrument.onTap = function() {
+        _this.switchScreenTo(_this.showFloorInstrumentScreen);
+    }
+    this.items.instrumentbuttons.ownInstrument.onTap = function() {
+        _this.switchScreenTo(_this.showOwnInstrumentScreen);
+    }
+}
+
 Settings.prototype.switchScreenTo = function(screenCallback) {
     this.hideAll();
 
     // noop
-    this.items.stage.onMtqContactDownOnce = function() {};
+    this.items.stage.onContactDown = function() {};
 
     screenCallback.apply(this);
 }
@@ -95,7 +111,7 @@ Settings.prototype.showStartScreen = function() {
         this.showResumeButtons();
     } else {
         var _this = this;
-        this.items.stage.onMtqContactDownOnce = function() {
+        this.items.stage.onContactDown = function() {
             _this.switchScreenTo(_this.showInstrumentScreen);
         }
     }
@@ -109,6 +125,23 @@ Settings.prototype.showStartScreen = function() {
  */
 Settings.prototype.showInstrumentScreen = function() {
     this.showInstrumentbuttons();
+}
+
+/**
+ * Floor Instrument Screen
+ * show 4 midi buttons
+ */
+Settings.prototype.showFloorInstrumentScreen = function() {
+    this.showMidibuttons();
+}
+
+/**
+ * Own Instrument Screen
+ * show chord hints
+ */
+Settings.prototype.showOwnInstrumentScreen = function() {
+    // TODO: no chord hints yet
+    // empty floor for now
 }
 
 /** pausing **/

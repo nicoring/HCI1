@@ -234,22 +234,22 @@ Item3D {
         }
 
         Stage3D {
-            id: topleftStage
+            id: bottomrightStage
             mesh: Mesh { source: "qrc:/models/meshs/topleft.3ds" }
         }
 
         Stage3D {
-            id: toprightStage
+            id: bottomleftStage
             mesh: Mesh { source: "qrc:/models/meshs/topright.3ds" }
         }
 
         Stage3D {
-            id: bottomleftStage
+            id: toprightStage
             mesh: Mesh { source: "qrc:/models/meshs/bottomleft.3ds" }
         }
 
         Stage3D {
-            id: bottomrightStage
+            id: topleftStage
             mesh: Mesh { source: "qrc:/models/meshs/bottomright.3ds" }
         }
     }
