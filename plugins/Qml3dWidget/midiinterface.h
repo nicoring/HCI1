@@ -14,6 +14,7 @@
 #pragma comment(lib, "winmm.lib")
 #include "Rtmidi.h"
 using namespace std;
+//#include "circlecontroller.h"
 
 namespace mtq {
 
@@ -32,7 +33,7 @@ public:
     Q_INVOKABLE void buttonTapped(int player_id, int button_id);
     Q_INVOKABLE void buttonUp(int player_id, int button_id);
     Q_INVOKABLE void buttonDown(int player_id, int button_id);
-    void myCallback(double deltaTime, vector< unsigned char > *message);
+    void clockBeat(double time);
     static void tunnelCallBack(double deltaTime, std::vector<unsigned char> *message, void *userData);
 
 signals:

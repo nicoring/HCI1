@@ -4,6 +4,7 @@ using namespace mtq;
 MTQ_QML_REGISTER_PLUGIN(MidiInterface)
 
 int beatCounter;
+MidiInterface *instance;
 
 /**
  * Callback function passed to RtMidiIn held by Interface-Class. Receives messages
@@ -16,7 +17,6 @@ int beatCounter;
  * @param message   Midi-Triple - In our use case usually only first byte (midi-clock)
  */
 void MidiInterface::tunnelCallBack(double deltaTime, std::vector<unsigned char> *message, void *userData){
-    qDebug() << "**BEAT**";
     unsigned int size = message->size();
     if(size == 0) return;
 
@@ -24,7 +24,7 @@ void MidiInterface::tunnelCallBack(double deltaTime, std::vector<unsigned char> 
     switch (byte) {
     case 248:
         if(beatCounter == 0){
-            //TODO: do something here to represent the beat
+            QMetaObject::invokeMethod(instance, "showBeat");
             qDebug() << "**************BEAT************** DELTA: " << deltaTime;
         }
         else if(beatCounter == 23){
@@ -118,6 +118,8 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
     messenger.push_back(0);
 
     beatCounter = 0;
+
+    instance = this;
 }
 
 // inherited from abstract method, but unused
@@ -185,3 +187,4 @@ void MidiInterface::buttonUp(int player_id, int button_id)
     }
     qDebug() << "stop note " << note << "with velocity" << velocity;
 }
+

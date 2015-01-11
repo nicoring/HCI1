@@ -35,7 +35,7 @@ Item3D {
         l.position = Qt.vector3d(-2, 0, 3)
         l.center = Qt.vector3d(0,0,0);
         l.type = 1;
-        l.color = Qt.vector3d(4.8,4.8,4.8)
+        l.color = Qt.vector3d(2,2,2)
         l.createsShadows = true;
         l.enabled = true;
     }
@@ -56,10 +56,6 @@ Item3D {
         }
     }
 
-    // create midi interface only once
-    MidiInterface {
-        id: midiInterface
-    }
 
     /** create midi button sets for each player **/
 
@@ -134,6 +130,7 @@ Item3D {
 
     CircleController {
         id: circleController
+        objectName: "circle"
 
         onDoBeat: {
             circle.beat();
@@ -146,5 +143,17 @@ Item3D {
             circle.rotateToPlayer(playerNum);
         }
     }
+
+
+
+    // create midi interface only once
+    MidiInterface {
+        id: midiInterface
+
+        function showBeat() {
+            circle.beat();
+        }
+    }
+
 
 }
