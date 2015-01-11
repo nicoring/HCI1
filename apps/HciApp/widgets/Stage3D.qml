@@ -10,6 +10,7 @@ Item3D {
 
     property int player_id
     property MidiInterface midiInterface
+    property var onMtqContactDownOnce
 
     effect: LightShader {
         texture: "../framework/componentBase.png"
@@ -26,11 +27,13 @@ Item3D {
         }
     }
 
-
-    function mtqTap(id, position) { console.log("tap\n\n"); }
-
     function mtqContactDown(id, position) {
-        console.log("contact down");
-        //player1.settings.updateContact();
+        console.log("contact down\n");
+
+        if (typeof onMtqContactDownOnce === "function") {
+            console.log("exec user func on contact down on stage\n");
+            onMtqContactDownOnce();
+            onMtqContactDownOnce = null;
+        }
     }
 }

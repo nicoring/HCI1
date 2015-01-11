@@ -1,47 +1,117 @@
-function Settings(buttonset) {
+function createSettings(stage, label, resumebuttons, instrumentbuttons, midibuttons) {
+    return new Settings({
+                            stage: stage,
+                            label: label,
+                            resumebuttons: resumebuttons,
+                            instrumentbuttons: instrumentbuttons,
+                            midibuttons: midibuttons
+                        });
+}
 
-    this.buttonset = buttonset;
+function Settings(items) {
 
+    this.items = items;
+
+    // states
     this.startedOnce = false;
-
     this.floorInstrument = false;
     this.ownInstrument = false;
 
+    // pausing
     this.timeThreshold = 4000;
     this.lastContact = Date.now();
     this.noOneOnStage = true;
 
-    // this.checkContacts();
+    this.switchScreenTo(this.showStartScreen);
 }
 
-Settings.prototype.showStartScreen = function() {
-    this.buttonset.startLabel.enabled = true;
+/** show/ hide helpers **/
 
-    if (this.startedOnce) {
-        this.showResumeButtons();
-    }
-
-    this.startedOnce = true;
-
+Settings.prototype.showLabel = function() {
+    this.items.label.enabled = true;
 }
 
-Settings.prototype.showInstrumentScreen = function() {
-    this.buttonset.instrumentButtons.enabled = true
+Settings.prototype.hideLabel = function() {
+    this.items.label.enabled = false;
 }
 
-Settings.prototype.showResumeButtons = function() {
-    this.buttonset.resumeButtons.enabled = true;
+Settings.prototype.showResumebuttons = function() {
+    this.items.resumebuttons.enabled = true;
 }
 
-Settings.prototype.hideResumeButtons = function() {
-    this.buttonset.resumeButtons.enabled = false;
+Settings.prototype.hideResumebuttons = function() {
+    this.items.resumebuttons.enabled = false;
+}
+
+Settings.prototype.showInstrumentbuttons = function() {
+    this.items.instrumentbuttons.enabled = true;
+}
+
+Settings.prototype.hideInstrumentbuttons = function() {
+    this.items.instrumentbuttons.enabled = false;
+}
+
+Settings.prototype.showMidibuttons = function() {
+    this.items.midibuttons.enabled = true;
+}
+
+Settings.prototype.hideMidibuttons = function() {
+    this.items.midibuttons.enabled = false;
 }
 
 Settings.prototype.hideAll = function() {
-    this.hideMidiButtons();
-    this.hideResumeButtons();
-    this.hideInstrumentButtons();
+    this.hideLabel();
+    this.hideMidibuttons();
+    this.hideResumebuttons();
+    this.hideInstrumentbuttons();
 }
+
+/** screens **/
+
+Settings.prototype.switchScreenTo = function(screenCallback) {
+    this.hideAll();
+
+    // noop
+    this.items.stage.onMtqContactDownOnce = function() {};
+
+    screenCallback.apply(this);
+}
+
+/**
+ * Start Screen
+ * show label
+ *
+ * when started first time
+ * --> trigger action when contact down on stage
+ *
+ * when started once
+ * --> show resume/ restart buttons
+ * --> trigger only on buttons
+ */
+Settings.prototype.showStartScreen = function() {
+    this.showLabel();
+
+    if (this.startedOnce) {
+        this.showResumeButtons();
+    } else {
+        var _this = this;
+        this.items.stage.onMtqContactDownOnce = function() {
+            _this.switchScreenTo(_this.showInstrumentScreen);
+        }
+    }
+
+    this.startedOnce = true;
+}
+
+/**
+ * Instrument Screen
+ * show instrument buttons
+ */
+Settings.prototype.showInstrumentScreen = function() {
+    this.showInstrumentbuttons();
+}
+
+/** pausing **/
 
 Settings.prototype.updateContact = function() {
     // get time delta
@@ -61,7 +131,3 @@ Settings.prototype.updateContact = function() {
     }
 
 }
-
-//Settings.prototype.checkContacts = function() {
-
-//}

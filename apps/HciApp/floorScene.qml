@@ -34,10 +34,10 @@ Item3D {
         parent.sceneEnabled.connect(setupLight);
 
         // init settings
-        settings1 = Settings.createSettings(topleftStage);
-        settings2 = Settings.createSettings(toprightStage);
-        settings3 = Settings.createSettings(bottomleftStage);
-        settings4 = Settings.createSettings(bottomrightStage);
+        settings1 = Settings.createSettings(topleftStage, label_player1, resume_player1, instrument_player1, player1);
+        settings2 = Settings.createSettings(toprightStage, label_player2, resume_player2, instrument_player2, player2);
+        settings3 = Settings.createSettings(bottomleftStage, label_player3, resume_player3, instrument_player3, player3);
+        settings4 = Settings.createSettings(bottomrightStage, label_player4, resume_player4, instrument_player4, player4);
     }
 
     function setupLight(){
@@ -110,6 +110,25 @@ Item3D {
             angle: 45
             axis: Qt.vector3d(0,0,1)
         }
+    }
+
+    /** create resume/ restart buttons for each player **/
+
+    // TODO: build actual elements
+    Item3D {
+        id: resume_player1
+    }
+
+    Item3D {
+        id: resume_player2
+    }
+
+    Item3D {
+        id: resume_player3
+    }
+
+    Item3D {
+        id: resume_player4
     }
 
     /** create insturment menu buttons for each player **/
