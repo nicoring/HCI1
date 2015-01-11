@@ -18,12 +18,10 @@ class MTQ_EXPORT_PLUGIN CircleController : public QQuickItem
 public:
     explicit CircleController(QQuickItem *parent = 0);
     virtual void paint(QPainter* painter);
-    void beat();
     void rotateToPlayer(int num);
     void chooseRandomSoloPlayer();
 
 signals:
-    void doBeat();
     void doRotateToPlayer(int playerNum);
 
 public slots:

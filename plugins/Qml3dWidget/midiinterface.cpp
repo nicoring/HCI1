@@ -18,6 +18,7 @@ MidiInterface *instance;
  */
 void MidiInterface::tunnelCallBack(double deltaTime, std::vector<unsigned char> *message, void *userData){
     unsigned int size = message->size();
+    qDebug() << message->at(0) << "and " << message->at(1);
     if(size == 0) return;
 
     unsigned char byte = (unsigned char) message->at(0);
@@ -113,9 +114,12 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
 
 
     // allocate the Midi-Messenger-Triple and init scheduler
+    messenger.push_back(251);
     messenger.push_back(0);
     messenger.push_back(0);
-    messenger.push_back(0);
+    if (midiOut != NULL) {
+        midiOut->sendMessage(&messenger);
+    }
 
     beatCounter = 0;
 

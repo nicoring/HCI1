@@ -260,10 +260,6 @@ Item3D {
         id: circleController
         objectName: "circle"
 
-        onDoBeat: {
-            circle.beat();
-        }
-
         onDoRotateToPlayer: {
             // playerNum is defined in circlecontroller.h should work:
             // http://qt-project.org/forums/viewthread/3502

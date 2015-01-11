@@ -14,7 +14,6 @@
 #pragma comment(lib, "winmm.lib")
 #include "Rtmidi.h"
 using namespace std;
-//#include "circlecontroller.h"
 
 namespace mtq {
 

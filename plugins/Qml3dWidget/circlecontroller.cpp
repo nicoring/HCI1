@@ -14,15 +14,6 @@ void CircleController::paint(QPainter *painter){
 }
 
 /**
- * Lets the Circle pulse once
- *
- * @brief CircleController::beat
- */
-void CircleController::beat() {
-    emit doBeat();
-}
-
-/**
  * Rotates the spinner three times and then stops by the given playerNumber
  *
  * @brief CircleController::rotateToPlayer
