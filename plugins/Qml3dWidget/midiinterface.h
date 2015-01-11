@@ -32,7 +32,10 @@ public:
     Q_INVOKABLE void buttonTapped(int player_id, int button_id);
     Q_INVOKABLE void buttonUp(int player_id, int button_id);
     Q_INVOKABLE void buttonDown(int player_id, int button_id);
+    void sendStartMessage();
+    void sendStopMessage();
     void clockBeat(double time);
+
     static void tunnelCallBack(double deltaTime, std::vector<unsigned char> *message, void *userData);
 
 signals:
@@ -46,7 +49,6 @@ private:
     RtMidiOut *midiOut;
     RtMidiIn *midiIn;
     vector<unsigned char> messenger;
-    char beatScheduler;
 };
 
 }

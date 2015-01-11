@@ -18,14 +18,13 @@ MidiInterface *instance;
  */
 void MidiInterface::tunnelCallBack(double deltaTime, std::vector<unsigned char> *message, void *userData){
     unsigned int size = message->size();
-    qDebug() << message->at(0) << "and " << message->at(1);
     if(size == 0) return;
 
     unsigned char byte = (unsigned char) message->at(0);
     switch (byte) {
     case 248:
         if(beatCounter == 0){
-            QMetaObject::invokeMethod(instance, "showBeat");
+            instance->clockBeat(deltaTime);
             qDebug() << "**************BEAT************** DELTA: " << deltaTime;
         }
         else if(beatCounter == 23){
@@ -114,12 +113,11 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
 
 
     // allocate the Midi-Messenger-Triple and init scheduler
-    messenger.push_back(251);
     messenger.push_back(0);
     messenger.push_back(0);
-    if (midiOut != NULL) {
-        midiOut->sendMessage(&messenger);
-    }
+    messenger.push_back(0);
+
+    sendStartMessage();
 
     beatCounter = 0;
 
@@ -155,7 +153,7 @@ void MidiInterface::buttonTapped(int player_id, int button_id)
 void MidiInterface::buttonDown(int player_id, int button_id)
 {
     qDebug() << "Player " << player_id << " on button " << button_id;
-    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + 32;
+    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1));
     unsigned char velocity = 127;
 
     messenger[0] = 144;
@@ -179,7 +177,7 @@ void MidiInterface::buttonDown(int player_id, int button_id)
 void MidiInterface::buttonUp(int player_id, int button_id)
 {
     qDebug() << "Player " << player_id << " released button " << button_id;
-    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + 32;
+    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1));
     unsigned char velocity = 127;
 
     messenger[0] = 128;
@@ -190,5 +188,24 @@ void MidiInterface::buttonUp(int player_id, int button_id)
         midiOut->sendMessage(&messenger);
     }
     qDebug() << "stop note " << note << "with velocity" << velocity;
+}
+
+void MidiInterface::sendStartMessage(){
+    messenger[0] = 250;
+    if (midiOut){
+        midiOut->sendMessage(&messenger);
+    }
+}
+
+void MidiInterface::sendStopMessage(){
+    messenger[0] = 252;
+    if (midiOut) {
+        midiOut->sendMessage(&messenger);
+    }
+}
+
+
+void MidiInterface::clockBeat(double time){
+    QMetaObject::invokeMethod(this, "showBeat");
 }
 
