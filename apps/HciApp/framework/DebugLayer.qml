@@ -24,6 +24,7 @@ Item{
              }
 
              shoe.tap.connect(debugTap);
+             shoe.doubleTap.connect(debugDoubleTap);
              shoe.contactDown.connect(contactDown);
              shoe.contactMove.connect(contactMove);
              shoe.contactUp.connect(contactUp);                         
@@ -36,6 +37,10 @@ Item{
 
     function debugTap(contactId, x, y){
         mtqIntegrator.setDebugContactTap(contactId, Qt.point(x,y), "DebugShoe #" + contactId);
+    }
+
+    function debugDoubleTap(contactId, x, y){
+        mtqIntegrator.setDebugContactDoubleTap(contactId, Qt.point(x,y), "DebugShoe #" + contactId);
     }
 
     function contactDown(contactId, x, y, rotation){

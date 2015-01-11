@@ -173,8 +173,10 @@ Viewport {
        }
        onClicked: {
             var p = Qt.point(mouse.x,mouse.y);
-            if (mouse.modifiers == Qt.ShiftModifier || Qt.ControlModifier == mouse.modifiers){
+            if (Qt.ControlModifier == mouse.modifiers){
                 mtqIntegrator.mouseClicked(p);
+            } else if (mouse.modifiers == Qt.ShiftModifier){
+                mtqIntegrator.mouseDoubleClick(p);
             }
        }
     }
