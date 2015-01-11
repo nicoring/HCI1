@@ -15,7 +15,9 @@ Item3D {
         axis: Qt.vector3d(0,0,1)
     }
 
+    property alias floorInstrument: floorInstrument
     FlatButton {
+        id: floorInstrument
 
         position: Qt.vector3d(-0.6, 0, 0)
 
@@ -33,9 +35,18 @@ Item3D {
             position: Qt.vector3d(0.2, -0.5, 0)
             sceneWidth: 2
         }
+
+        property var onTap
+        function mtqTap(id, position) {
+            if (onTap) {
+                onTap();
+            }
+        }
     }
 
+    property alias ownInstrument: ownInstrument
     FlatButton {
+        id: ownInstrument
 
         position: Qt.vector3d(0.6, 0, 0)
 
@@ -54,5 +65,11 @@ Item3D {
             sceneWidth: 2
         }
 
+        property var onTap
+        function mtqTap(id, position) {
+            if (onTap) {
+                onTap();
+            }
+        }
     }
 }
