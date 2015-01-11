@@ -82,7 +82,30 @@ OTHER_FILES += \
     floorScene.qml \
     widgets/Slice.qml \
     widgets/MainMenu.qml \
-    widgets/CubeQuad.qml
+    widgets/CubeQuad.qml \
+    framework/floorscene.3ds \
+    floorscene-2.3ds \
+    surf.jpeg \
+    meshs/circle.3ds \
+    meshs/middle_c.jpg \
+    meshs/ring.3ds \
+    meshs/notifica.jpg \
+    meshs/topleft.3ds \
+    meshs/top_left.jpg \
+    meshs/topright.3ds \
+    meshs/top_righ.jpg \
+    meshs/bottomleft.3ds \
+    meshs/left_bot.jpg \
+    meshs/bottomright.3ds \
+    meshs/right_bo.jpg \
+    widgets/Circle3D.qml \
+    widgets/Ring3D.qml \
+    widgets/Stage3D.qml \
+    widgets/MidiButton.qml \
+    widgets/MidiButtonSet.qml \
+    widgets/StartLabel.qml \
+    widgets/InstrumentButton.qml \
+    widgets/settings.js
 
 RESOURCES += \
     frameworkResources.qrc
@@ -96,4 +119,5 @@ HEADERS += \
     RtMidi.h \
     MidiConnection.h \
     MidiSender.h
+
 

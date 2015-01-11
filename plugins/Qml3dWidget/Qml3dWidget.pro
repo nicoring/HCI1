@@ -8,15 +8,24 @@ TYPE_DEPENDENCIES += PositionEvents
 
 include($${TO_BASE_DIR}/buildsystem/plugin.pri)
 
+LIBS += -lwinmm
+
 HEADERS += \
     qml3dwidget.h \
     mtqintegratorwidget.h \
     textdrawer.h \
-    simplepainter.h
-
+    simplepainter.h \
+    midiinterface.h \
+    RtMidi.h \
+    circlecontroller.h \
+    flooreventwidget.h
 
 SOURCES += \
     qml3dwidget.cpp \
     mtqintegratorwidget.cpp \
     textdrawer.cpp \
-    simplepainter.cpp
+    simplepainter.cpp \
+    midiinterface.cpp \
+    RtMidi.cpp \
+    circlecontroller.cpp \
+    flooreventwidget.cpp
