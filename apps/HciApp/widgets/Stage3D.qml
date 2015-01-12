@@ -8,8 +8,11 @@ import "../framework"
 Item3D {
     id: stage
 
+    /*
     property int player_id
     property MidiInterface midiInterface
+    property var onMtqContactDownOnce
+    */
 
     effect: LightShader {
         texture: "../framework/componentBase.png"
@@ -26,10 +29,13 @@ Item3D {
         }
     }
 
-    property var onContactDown
+    //property var onContactDown
+
+    /*
     function mtqContactDown(id, position) {
         if (onContactDown) {
             onContactDown();
         }
     }
+    */
 }

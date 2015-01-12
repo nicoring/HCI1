@@ -34,10 +34,10 @@ Item3D {
         parent.sceneEnabled.connect(setupLight);
 
         // init settings
-        settings1 = Settings.createSettings(topleftStage, label_player1, resume_player1, instrument_player1, player1);
-        settings2 = Settings.createSettings(toprightStage, label_player2, resume_player2, instrument_player2, player2);
-        settings3 = Settings.createSettings(bottomleftStage, label_player3, resume_player3, instrument_player3, player3);
-        settings4 = Settings.createSettings(bottomrightStage, label_player4, resume_player4, instrument_player4, player4);
+        settings1 = Settings.createSettings(topLeftOverlay, label_player1, resume_player1, instrument_player1, player1);
+        settings2 = Settings.createSettings(topRightOverlay, label_player2, resume_player2, instrument_player2, player2);
+        settings3 = Settings.createSettings(bottomLeftOverlay, label_player3, resume_player3, instrument_player3, player3);
+        settings4 = Settings.createSettings(bottomRightOverlay, label_player4, resume_player4, instrument_player4, player4);
     }
 
     function setupLight(){
@@ -221,9 +221,9 @@ Item3D {
     // exported from cinema4d
     // 3ds meshes have their own positions and scaling
     Item3D {
-        id: floorElems
+        id: floorElems3D
         scale: 2.3
-        position: Qt.vector3d(0,0,0)
+        position: Qt.vector3d(0,0,-0.1)
 
         Ring3D {
             id: ring
@@ -252,6 +252,27 @@ Item3D {
             id: topleftStage
             mesh: Mesh { source: "qrc:/models/meshs/bottomright.3ds" }
         }
+    }
+
+
+    StageOverlay {
+        id: topLeftOverlay
+        position: Qt.vector3d(-2.4, 1.4, 0.1)
+    }
+
+    StageOverlay {
+        id: topRightOverlay
+        position: Qt.vector3d(2.4, 1.4, 0.1)
+    }
+
+    StageOverlay {
+        id: bottomLeftOverlay
+        position: Qt.vector3d(-2.4, -1.5, 0.1)
+    }
+
+    StageOverlay {
+        id: bottomRightOverlay
+        position: Qt.vector3d(2.4, -1.5, 0.1)
     }
 
     /** controller widget for "beat-button" **/

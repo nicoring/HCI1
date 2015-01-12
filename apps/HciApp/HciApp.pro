@@ -105,7 +105,8 @@ OTHER_FILES += \
     widgets/MidiButtonSet.qml \
     widgets/StartLabel.qml \
     widgets/InstrumentButton.qml \
-    widgets/settings.js
+    widgets/settings.js \
+    widgets/StageOverlay.qml
 
 RESOURCES += \
     frameworkResources.qrc

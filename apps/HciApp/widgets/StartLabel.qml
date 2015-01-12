@@ -26,4 +26,11 @@ Item3D {
         fontColor: "black"
         position: Qt.vector3d(1,-0.5,0)
     }
+    /*
+    function mtqContactDown(id, position) {
+        if (parent.mtqContactDown) {
+            parent.mtqContactDow(id, position)
+        }
+    }
+    */
 }
