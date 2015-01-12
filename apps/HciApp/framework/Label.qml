@@ -34,7 +34,9 @@ Item3D{
         sceneHeight: label.sceneHeight
 
         function mtqTap(id,position){
-            parent.mtqTap(id,position);
+            if (parent.mtqTap) {
+                parent.mtqTap(id,position);
+            }
         }
     }
 }

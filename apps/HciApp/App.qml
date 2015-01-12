@@ -19,7 +19,7 @@ import "framework"
         saveShadowMapsToDisk: false
 
         //Disable shadows if they cause problems on your system (mainly in VMs)
-        drawShadows: true // set to false on VM!!
+        drawShadows: false // set to false on VM!!
 
         property var currentScene;
 
@@ -27,8 +27,8 @@ import "framework"
             mtqViewPort.getShadowMapEngine().shadowMapSize = 1024;
 
             currentScene = floorScene
-            vehicle.updateArrows();
             currentScene.showScene(true);
+
         }
 
         onMtqUserPositionChanged: {            
@@ -36,49 +36,9 @@ import "framework"
 
         focus:true
 
-        function switchToPreviousScene(){
-            currentScene = currentScene.switchToPreviousScene();
-        }
-        function switchToNextScene(){
-            currentScene = currentScene.switchToNextScene();
-        }
 
         Scene{
             id: floorScene
             file: "../floorScene.qml"
-        }
-
-        Vehicle{
-            id: vehicle
-
-            onSwitchLeft: {
-                switchToPreviousScene();
-                updateArrows();
-            }
-
-            onSwitchRight: {
-                switchToNextScene();
-                updateArrows();
-            }
-
-            function updateArrows(){
-                if (currentScene.previousScene == null){
-                    vehicle.leftArrowEnabled = false;
-                } else {
-                    vehicle.leftArrowEnabled = true;
-                }
-
-                if (currentScene.nextScene == null){
-                    vehicle.rightArrowEnabled = false;
-                } else {
-                    vehicle.rightArrowEnabled = true;
-                }
-            }
-
-            position: Qt.vector3d(-3.6,2.1,0)
-            scale: 0.8
-            transform:[
-                Rotation3D { angle:45; axis: Qt.vector3d(0, 0, 1)}
-            ]
         }
     }

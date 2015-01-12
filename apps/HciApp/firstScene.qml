@@ -59,6 +59,38 @@ Item3D{
         }
     }
 
+    //If you need global acces to Floor events, use the floorEventWidget in your scene / component
+    FloorEventWidget{
+        onMtqTap: {
+            console.log("Tap with id " + contactId + " at position " + position)
+        }
+        onMtqDoubleTap: {
+            console.log("DoubleTap with id " + contactId + " at position " + position)
+        }
+        onMtqContactDown: {
+            console.log("ContactDown with id " + contactId + " at position " + position)
+        }
+
+        /*
+        onMtqContactMove: {
+            console.log("ContactMove with id " + contactId + " at position " + position)
+
+            //more functions you can use to get detailed information for a contact
+            //(can be used at any time, but some information might not be available directly at the
+            // moment of contactDown or Tap - user recognition takes some time)
+            var user = getContactUser(contactId)
+            var tilting = getContactTilting(contactId)
+            var direction = getContactDirection(contactId)
+
+            console.log("user=" + user + " tilting=" + tilting + " direction=" + direction)
+        }
+        */
+
+        onMtqContactUp: {
+            console.log("ContactUp with id " + contactId + " at position " + position)
+        }
+    }
+
     ClickThroughMenu{
         id:ctmenu
         position: Qt.vector3d(-1.5,-1.5,0)
