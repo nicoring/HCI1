@@ -34,10 +34,13 @@ Item3D {
         parent.sceneEnabled.connect(setupLight);
 
         // init settings
-        settings1 = Settings.createSettings(topleftStage, label_player1, resume_player1, instrument_player1, player1);
-        settings2 = Settings.createSettings(toprightStage, label_player2, resume_player2, instrument_player2, player2);
-        settings3 = Settings.createSettings(bottomleftStage, label_player3, resume_player3, instrument_player3, player3);
-        settings4 = Settings.createSettings(bottomrightStage, label_player4, resume_player4, instrument_player4, player4);
+        settings1 = Settings.createSettings(topleftStage, label_player1, resume_player1, instrument_player1, player1, chorddis_player1);
+        settings2 = Settings.createSettings(toprightStage, label_player2, resume_player2, instrument_player2, player2, chorddis_player2);
+        settings3 = Settings.createSettings(bottomleftStage, label_player3, resume_player3, instrument_player3, player3, chorddis_player3);
+        settings4 = Settings.createSettings(bottomrightStage, label_player4, resume_player4, instrument_player4, player4, chorddis_player4);
+
+        // (line 190) Start the chord displays control -> TODO: Starts with the beat button
+        slidingTimer.running = true;
     }
 
     function setupLight(){
@@ -131,7 +134,7 @@ Item3D {
         id: resume_player4
     }
 
-    /** create insturment menu buttons for each player **/
+    /** create instrument menu buttons for each player **/
 
     InstrumentButton {
         id: instrument_player1
@@ -177,6 +180,78 @@ Item3D {
 
         transform: Rotation3D {
             angle: 40
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    /** create chords display for each player **/
+
+    // Global timer which controlls all chord displays
+    Timer {
+        id: slidingTimer
+        interval: 2000 // TODO: One bar/measure each 2 seconds -> Make it depending on the beat
+        running: false
+        repeat: true
+        onTriggered: {
+            if (chorddis_player1.enabled === true) {
+                chorddis_player1.doOneSlidingStep();
+            }
+            if (chorddis_player2.enabled === true) {
+                chorddis_player2.doOneSlidingStep();
+            }
+            if (chorddis_player3.enabled === true) {
+                chorddis_player3.doOneSlidingStep();
+            }
+            if (chorddis_player4.enabled === true) {
+                chorddis_player4.doOneSlidingStep();
+            }
+        }
+    }
+
+    ChordDisplay {
+        id: chorddis_player1
+        position: Qt.vector3d(-1.55,1.3,0.2)
+        scale: 0.75
+        enabled: false
+
+        transform: Rotation3D {
+            angle: -120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    ChordDisplay {
+        id: chorddis_player2
+        position: Qt.vector3d(1.55,1.3,0.2)
+        scale: 0.75
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    ChordDisplay {
+        id: chorddis_player3
+        position: Qt.vector3d(-1.5,-1.4,0.2)
+        scale: 0.75
+        enabled: false
+
+        transform: Rotation3D {
+            angle: -60
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    ChordDisplay {
+        id: chorddis_player4
+        position: Qt.vector3d(1.5,-1.4,0.2)
+        scale: 0.75
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 60
             axis: Qt.vector3d(0,0,1)
         }
     }

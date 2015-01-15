@@ -1,10 +1,11 @@
-function createSettings(stage, label, resumebuttons, instrumentbuttons, midibuttons) {
+function createSettings(stage, label, resumebuttons, instrumentbuttons, midibuttons, chorddisplay) {
     return new Settings({
                             stage: stage,
                             label: label,
                             resumebuttons: resumebuttons,
                             instrumentbuttons: instrumentbuttons,
-                            midibuttons: midibuttons
+                            midibuttons: midibuttons,
+                            chorddisplay: chorddisplay
                         });
 }
 
@@ -60,9 +61,18 @@ Settings.prototype.hideMidibuttons = function() {
     this.items.midibuttons.enabled = false;
 }
 
+Settings.prototype.showChorddisplay = function() {
+    this.items.chorddisplay.enabled = true;
+}
+
+Settings.prototype.hideChorddisplay = function() {
+    this.items.chorddisplay.enabled = false;
+}
+
 Settings.prototype.hideAll = function() {
     this.hideLabel();
     this.hideMidibuttons();
+    this.hideChorddisplay();
     this.hideResumebuttons();
     this.hideInstrumentbuttons();
 }
@@ -140,8 +150,7 @@ Settings.prototype.showFloorInstrumentScreen = function() {
  * show chord hints
  */
 Settings.prototype.showOwnInstrumentScreen = function() {
-    // TODO: no chord hints yet
-    // empty floor for now
+    this.showChorddisplay();
 }
 
 /** pausing **/

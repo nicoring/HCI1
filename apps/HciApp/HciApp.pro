@@ -105,7 +105,10 @@ OTHER_FILES += \
     widgets/MidiButtonSet.qml \
     widgets/StartLabel.qml \
     widgets/InstrumentButton.qml \
-    widgets/settings.js
+    widgets/settings.js \
+    widgets/ChordDisplay.qml \
+    widgets/Chord.qml \
+    widgets/chordControl.js
 
 RESOURCES += \
     frameworkResources.qrc
