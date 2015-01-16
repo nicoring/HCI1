@@ -254,6 +254,20 @@ Item3D {
         }
     }
 
+//    CupBoard {
+//        id: cupBoardTest
+//        position: Qt.vector3d(-2,-1,1)
+//        scale: 7
+//        transform {
+
+//            Rotation3D {
+//                angle: 90
+//                axis: Qt.vector3d(0,1,0)
+//            }
+
+//        }
+//    }
+
 
     StageOverlay {
         id: topLeftOverlay

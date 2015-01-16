@@ -54,5 +54,7 @@
         <file>meshs/circle.3ds</file>
         <file>meshs/circle3.3ds</file>
         <file>transparent.png</file>
+        <file>meshs/CubeSurf.jpg</file>
+        <file>meshs/cupboard.3ds</file>
     </qresource>
 </RCC>

@@ -106,7 +106,8 @@ OTHER_FILES += \
     widgets/StartLabel.qml \
     widgets/InstrumentButton.qml \
     widgets/settings.js \
-    widgets/StageOverlay.qml
+    widgets/StageOverlay.qml \
+    widgets/CupBoard.qml
 
 RESOURCES += \
     frameworkResources.qrc
