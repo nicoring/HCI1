@@ -59,5 +59,5 @@ function generateRandomChord() {
 
 /** Load the new chord image for the hidden chord object*/
 function loadChordImage(state, nextChord) {
-    state.hidden.effect.texture = "../guitar chords/" + nextChord + ".jpg";
+    state.hidden.effect.texture = "../guitar chords/" + nextChord + ".png";
 }

@@ -9,7 +9,7 @@ import "../widgets/chordControl.js" as Control
 
 HighResQuad {
     effect : LightShader {
-        texture: "../framework/componentBase.png"
+        texture: "../transparent.png"
     }
 
     transform: [
@@ -27,7 +27,7 @@ HighResQuad {
         scale: 0
         position: Qt.vector3d(-0.4, 0.05, 0.2)
         effect : LightShader {
-            texture: "../guitar chords/A-Dur.jpg"
+            texture: "../guitar chords/A-Dur.png"
         }
     }
 
@@ -37,7 +37,7 @@ HighResQuad {
         scale: 0.5
         position: Qt.vector3d(-0.3, 0.05, 0.2)
         effect : LightShader {
-            texture: "../guitar chords/G-Dur.jpg"
+            texture: "../guitar chords/G-Dur.png"
         }
     }
 
@@ -47,7 +47,7 @@ HighResQuad {
         scale: 0.75
         position: Qt.vector3d(0.1, 0.05, 0.2)
         effect : LightShader {
-            texture: "../guitar chords/Fis-Moll.jpg"
+            texture: "../guitar chords/Fis-Moll.png"
         }
     }
 
