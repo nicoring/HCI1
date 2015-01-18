@@ -1,3 +1,5 @@
+// --- Control of chords display ----------------------------------------------
+
 /** Move all three chords one step from left to right*/
 function startSliding() {
     goToNextChordAnimation.running = true;
@@ -45,19 +47,15 @@ function rearrangeAnimationTargets(state) {
     scaleForNextAnimation.target = state.current;
 }
 
-/** Get all available chords and take one of them randomly */
-function generateRandomChord() {
-    // @disable-check M112
-    var chords = new Array("A-Dur", "A-Moll", "As-Dur", "B-Dur",
-                           "C-Dur", "C-Moll", "D-Dur", "D-Moll",
-                           "E-Dur", "E-Moll", "Es-Dur" ,"F-Dur",
-                           "Fis-Moll", "F-Moll", "G-Dur", "G-Moll",
-                           "H-Moll");
-    var randomIndex = Math.floor((Math.random() * 17));
-    return chords[randomIndex];
-}
-
 /** Load the new chord image for the hidden chord object*/
 function loadChordImage(state, nextChord) {
     state.hidden.effect.texture = "../guitar chords/" + nextChord + ".png";
+}
+
+/** For initializing the images after selecting a cardence*/
+function loadChordsImages(c1, c2, c3) {
+    var state = Control.getCurrentChordState();
+    state.current.effect.texture = "../guitar chords/" + c1 + ".png"; // first chord
+    state.next.effect.texture = "../guitar chords/" + c2 + ".png"; // second chord
+    state.hidden.effect.texture = "../guitar chords/" + c3 + ".png"; // third chord
 }

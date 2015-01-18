@@ -7,9 +7,9 @@ import "../framework"
 
 HighResQuad {
     id: chord
-    property int rid // Property id isn't accessible for any reason (?)
+    property int rid // Property id isn't accessible -> Workaround
     effect : LightShader {
-        texture: "../guitar chords/G-Dur.jpg"
+        texture: "../guitar chords/G.png"
     }
 
     transform: [

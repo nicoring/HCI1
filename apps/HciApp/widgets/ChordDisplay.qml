@@ -27,7 +27,7 @@ HighResQuad {
         scale: 0
         position: Qt.vector3d(-0.4, 0.05, 0.2)
         effect : LightShader {
-            texture: "../guitar chords/A-Dur.png"
+            texture: "../guitar chords/A.png"
         }
     }
 
@@ -37,7 +37,7 @@ HighResQuad {
         scale: 0.5
         position: Qt.vector3d(-0.3, 0.05, 0.2)
         effect : LightShader {
-            texture: "../guitar chords/G-Dur.png"
+            texture: "../guitar chords/G.png"
         }
     }
 
@@ -47,27 +47,28 @@ HighResQuad {
         scale: 0.75
         position: Qt.vector3d(0.1, 0.05, 0.2)
         effect : LightShader {
-            texture: "../guitar chords/Fis-Moll.png"
+            texture: "../guitar chords/Fism.png"
         }
     }
 
     // --- Actions ----------------------------
 
-    function doOneSlidingStep() {
+    function loadChords(c1, c2, c3) {
+        Control.loadChordsImages(c1, c2, c3);
+    }
+
+    function doOneSlidingStep(nextNextChord) {
         // Determine the chords positions (-> current, next, hidden)
         var state = Control.getCurrentChordState();
-
-        // Load next chord which will show up on the left side
-        var nextChord = Control.generateRandomChord();
-
-        // Load image for next chord which will show up
-        Control.loadChordImage(state, nextChord);
 
         // Start animation for chord sliding
         Control.startSliding();
 
         // Rearrange animation targets for the next slide animation step
         Control.rearrangeAnimationTargets(state);
+
+        // Preload chord which will show up on the left side in the next step
+        Control.loadChordImage(state, nextNextChord);
     }
 
     ParallelAnimation {
