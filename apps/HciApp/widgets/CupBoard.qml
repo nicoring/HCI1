@@ -8,7 +8,21 @@ import "../framework"
 Item3D {
     id: cupboard
     mesh: Mesh { source: "qrc:/models/meshs/cupboard.3ds" }
-    effect: LightShader {
-     texture: "../framework/componentBase.png"
-    }
+
+    scale: 2.5
+    transform: [
+        Rotation3D {
+            angle: 90
+            axis: Qt.vector3d(0,1,0)
+        },
+        Rotation3D {
+            angle: 90
+            axis: Qt.vector3d(1,0,0)
+        },
+        Rotation3D {
+            angle: 90
+            axis: Qt.vector3d(0,0,1)
+        }
+
+    ]
 }
