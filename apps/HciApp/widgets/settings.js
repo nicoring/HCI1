@@ -1,10 +1,14 @@
-function createSettings(stage, label, resumebuttons, instrumentbuttons, midibuttons) {
+function createSettings(stage, label, resumebuttons, instrumentbuttons, midibuttons, chordsbtn, chorddisplay, pentbtn, pentscreen) {
     return new Settings({
                             stage: stage,
                             label: label,
                             resumebuttons: resumebuttons,
                             instrumentbuttons: instrumentbuttons,
-                            midibuttons: midibuttons
+                            midibuttons: midibuttons,
+                            showChords: chordsbtn,
+                            chorddisplay: chorddisplay,
+                            showPentatonic: pentbtn,
+                            pentscreen: pentscreen
                         });
 }
 
@@ -60,11 +64,33 @@ Settings.prototype.hideMidibuttons = function() {
     this.items.midibuttons.enabled = false;
 }
 
+Settings.prototype.showChorddisplay = function() {
+    this.items.chorddisplay.enabled = true;
+    this.items.showPentatonic.enabled = true;
+}
+
+Settings.prototype.hideChorddisplay = function() {
+    this.items.chorddisplay.enabled = false;
+    this.items.showPentatonic.enabled = false;
+}
+
+Settings.prototype.showPentatonicScreen = function() {
+    this.items.pentscreen.enabled = true;
+    this.items.showChords.enabled = true;
+}
+
+Settings.prototype.hidePentatonicScreen = function() {
+    this.items.pentscreen.enabled = false;
+    this.items.showChords.enabled = false;
+}
+
 Settings.prototype.hideAll = function() {
     this.hideLabel();
     this.hideMidibuttons();
     this.hideResumebuttons();
     this.hideInstrumentbuttons();
+    this.hideChorddisplay();
+    this.hidePentatonicScreen();
 }
 
 /** screens **/
@@ -80,6 +106,15 @@ Settings.prototype.setupScreens = function() {
         _this.switchScreenTo(_this.showFloorInstrumentScreen);
     }
     this.items.instrumentbuttons.ownInstrument.onTap = function() {
+        _this.switchScreenTo(_this.showOwnInstrumentScreen);
+    }
+
+    // chords button (to switch to the pentatonic display)
+    this.items.showPentatonic.onTap = function() {
+        _this.switchScreenTo(_this.showPentatonicScreen);
+    }
+    // pentatonic button (to switch to the chords display)
+    this.items.showChords.onTap = function() {
         _this.switchScreenTo(_this.showOwnInstrumentScreen);
     }
 }
@@ -140,8 +175,7 @@ Settings.prototype.showFloorInstrumentScreen = function() {
  * show chord hints
  */
 Settings.prototype.showOwnInstrumentScreen = function() {
-    // TODO: no chord hints yet
-    // empty floor for now
+    this.showChorddisplay();
 }
 
 /** pausing **/

@@ -107,13 +107,20 @@ OTHER_FILES += \
     widgets/InstrumentButton.qml \
     widgets/settings.js \
     widgets/StageOverlay.qml \
-    widgets/CupBoard.qml
+    widgets/CupBoard.qml\
+    widgets/ChordDisplay.qml \
+    widgets/Chord.qml \
+    widgets/chordControl.js \
+    widgets/PentatonicScreen.qml \
+    widgets/PentatonicButton.qml \
+    widgets/ChordButton.qml \
+    widgets/musicControl.js
 
 RESOURCES += \
     frameworkResources.qrc
 
-HEADERS +=
+SOURCES +=
 
-SOURCES += \
+HEADERS +=
 
 

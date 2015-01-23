@@ -7,6 +7,7 @@ import "framework/GlobalLight.js" as GlobalLight
 import "framework"
 import "widgets"
 import "widgets/settings.js" as Settings
+import "widgets/musicControl.js" as MusicControl
 
 Item3D {
 
@@ -34,10 +35,16 @@ Item3D {
         parent.sceneEnabled.connect(setupLight);
 
         // init settings
-        settings1 = Settings.createSettings(topLeftOverlay, label_player1, resume_player1, instrument_player1, player1);
-        settings2 = Settings.createSettings(topRightOverlay, label_player2, resume_player2, instrument_player2, player2);
-        settings3 = Settings.createSettings(bottomLeftOverlay, label_player3, resume_player3, instrument_player3, player3);
-        settings4 = Settings.createSettings(bottomRightOverlay, label_player4, resume_player4, instrument_player4, player4);
+        settings1 = Settings.createSettings(topLeftOverlay, label_player1, resume_player1, instrument_player1, player1, showChordsBtn_player1, chorddis_player1, showPentatonicBtn_player1, pentscreen_player1);
+        settings2 = Settings.createSettings(topRightOverlay, label_player2, resume_player2, instrument_player2, player2, showChordsBtn_player2, chorddis_player2, showPentatonicBtn_player2, pentscreen_player2);
+        settings3 = Settings.createSettings(bottomLeftOverlay, label_player3, resume_player3, instrument_player3, player3, showChordsBtn_player3, chorddis_player3, showPentatonicBtn_player3, pentscreen_player3);
+        settings4 = Settings.createSettings(bottomRightOverlay, label_player4, resume_player4, instrument_player4, player4, showChordsBtn_player4, chorddis_player4, showPentatonicBtn_player4, pentscreen_player4);
+
+        // Initialize harmony section
+        MusicControl.useKey("C"); // Generate a cardence and load the pentatonic image -> TODO: Key sent by the MIDI interface
+        MusicControl.useBeat(120 / 4); // 120 bpm -> TODO: Sent by MIDI interface [:4 for more speed while debugging]
+        // useBeat also starts the Timer -> TODO: Wait for first instrument selection
+
     }
 
     function setupLight(){
@@ -131,11 +138,11 @@ Item3D {
         id: resume_player4
     }
 
-    /** create insturment menu buttons for each player **/
+    /** create instrument menu buttons for each player **/
 
     InstrumentButton {
         id: instrument_player1
-        position: Qt.vector3d(-2.2,1.4,0.2)
+        position: Qt.vector3d(-2.2,1.4,0.5)
         scale: 0.8
         enabled: false
 
@@ -147,7 +154,7 @@ Item3D {
 
     InstrumentButton {
         id: instrument_player2
-        position: Qt.vector3d(2.2,1.4,0.2)
+        position: Qt.vector3d(2.2,1.4,0.5)
         scale: 0.8
         enabled: false
 
@@ -159,7 +166,7 @@ Item3D {
 
     InstrumentButton {
         id: instrument_player3
-        position: Qt.vector3d(-2.2,-1.4,0.2)
+        position: Qt.vector3d(-2.2,-1.4,0.5)
         scale: 0.8
         enabled: false
 
@@ -171,7 +178,7 @@ Item3D {
 
     InstrumentButton {
         id: instrument_player4
-        position: Qt.vector3d(2.2,-1.4,0.2)
+        position: Qt.vector3d(2.2,-1.4,0.5)
         scale: 0.8
         enabled: false
 
@@ -181,8 +188,205 @@ Item3D {
         }
     }
 
-    /** create midi button sets for each player **/
+    /** buttons to switch to the pentatonic screen **/
 
+    ChordButton {
+        id: showChordsBtn_player1
+
+        position: Qt.vector3d(-3,0.45,0.5)
+        enabled: false
+
+        transform: [
+            Rotation3D {
+                angle: -180
+                axis: Qt.vector3d(0,0,1)
+            }
+        ]
+    }
+
+    ChordButton {
+        id: showChordsBtn_player2
+
+        position: Qt.vector3d(3,0.45,0.5)
+        enabled: false
+
+        transform: [
+            Rotation3D {
+                angle: -180
+                axis: Qt.vector3d(0,0,1)
+            }
+        ]
+    }
+
+    ChordButton {
+        id: showChordsBtn_player3
+
+        position: Qt.vector3d(-3,-0.55,0.5)
+        enabled: true
+    }
+
+    ChordButton {
+        id: showChordsBtn_player4
+
+        position: Qt.vector3d(3,-0.55,0.5)
+        enabled: false
+    }
+
+    /** create chords display for each player **/
+
+    // Global timer which controlls all chord displays
+    Timer {
+        id: slidingTimer
+        interval: 2000
+        running: false
+        repeat: true
+        onTriggered: {
+            MusicControl.doOneSlidingStep();
+        }
+    }
+
+    ChordDisplay {
+        id: chorddis_player1
+        position: Qt.vector3d(-1.55,1.3,0.5)
+        scale: 0.85
+        enabled: false
+
+        transform: Rotation3D {
+            angle: -120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    ChordDisplay {
+        id: chorddis_player2
+        position: Qt.vector3d(1.55,1.3,0.5)
+        scale: 0.85
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    ChordDisplay {
+        id: chorddis_player3
+        position: Qt.vector3d(-1.5,-1.4,0.5)
+        scale: 0.95
+        enabled: false
+
+        transform: Rotation3D {
+            angle: -60
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    ChordDisplay {
+        id: chorddis_player4
+        position: Qt.vector3d(1.5,-1.4,0.5)
+        scale: 0.95
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 60
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    /** buttons to switch to the pentatonic screen **/
+
+    PentatonicButton {
+        id: showPentatonicBtn_player1
+
+        position: Qt.vector3d(-3,0.45,0.5)
+        enabled: false
+
+        transform: [
+            Rotation3D {
+                angle: -180
+                axis: Qt.vector3d(0,0,1)
+            }
+        ]
+    }
+
+    PentatonicButton {
+        id: showPentatonicBtn_player2
+
+        position: Qt.vector3d(3,0.45,0.5)
+        enabled: false
+
+        transform: [
+            Rotation3D {
+                angle: -180
+                axis: Qt.vector3d(0,0,1)
+            }
+        ]
+    }
+
+    PentatonicButton {
+        id: showPentatonicBtn_player3
+
+        position: Qt.vector3d(-3,-0.55,0.5)
+        enabled: false
+    }
+
+    PentatonicButton {
+        id: showPentatonicBtn_player4
+
+        position: Qt.vector3d(3,-0.55,0.5)
+        enabled: false
+    }
+
+    /** create pentatonic screen **/
+    PentatonicScreen {
+        id: pentscreen_player1
+        position: Qt.vector3d(-1.55,1.3,0.2)
+        scale: 0.75
+        enabled: false
+
+        transform: Rotation3D {
+            angle: -120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    PentatonicScreen {
+        id: pentscreen_player2
+        position: Qt.vector3d(1.55,1.3,0.2)
+        scale: 0.75
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 120
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    PentatonicScreen {
+        id: pentscreen_player3
+        position: Qt.vector3d(-1.5,-1.4,0.2)
+        scale: 0.75
+        enabled: false
+
+        transform: Rotation3D {
+            angle: -60
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    PentatonicScreen {
+        id: pentscreen_player4
+        position: Qt.vector3d(1.5,-1.4,0.2)
+        scale: 0.75
+        enabled: false
+
+        transform: Rotation3D {
+            angle: 60
+            axis: Qt.vector3d(0,0,1)
+        }
+    }
+
+    /** create midi button sets for each player **/
     MidiButtonSet {
         id: player1
         player_id: 1
