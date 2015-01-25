@@ -110,9 +110,8 @@ OTHER_FILES += \
     widgets/Chord.qml \
     widgets/chordControl.js \
     widgets/PentatonicScreen.qml \
-    widgets/PentatonicButton.qml \
-    widgets/ChordButton.qml \
-    widgets/musicControl.js
+    widgets/musicControl.js \
+    widgets/MusicDisplaySwitch.qml
 
 RESOURCES += \
     frameworkResources.qrc
