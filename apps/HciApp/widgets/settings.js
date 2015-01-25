@@ -126,6 +126,7 @@ Settings.prototype.switchScreenTo = function(screenCallback) {
 
     // noop
     this.items.stage.onContactDown = function() {};
+    this.items.label.onContactDown = function() {};
 
     screenCallback.apply(this);
 }
@@ -149,6 +150,9 @@ Settings.prototype.showStartScreen = function() {
     } else {
         var _this = this;
         this.items.stage.onContactDown = function() {
+            _this.switchScreenTo(_this.showInstrumentScreen);
+        }
+        this.items.label.onContactDown = function() {
             _this.switchScreenTo(_this.showInstrumentScreen);
         }
     }
