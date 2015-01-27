@@ -84,7 +84,6 @@ OTHER_FILES += \
     widgets/MainMenu.qml \
     widgets/CubeQuad.qml \
     framework/floorscene.3ds \
-    floorscene-2.3ds \
     surf.jpeg \
     meshs/circle.3ds \
     meshs/middle_c.jpg \

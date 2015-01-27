@@ -57,5 +57,10 @@
         <file>meshs/CubeSurf.jpg</file>
         <file>meshs/ConnectS.jpg</file>
         <file>meshs/cupboard.3ds</file>
+        <file>images/bass.png</file>
+        <file>images/drum.png</file>
+        <file>images/pad.png</file>
+        <file>images/samplesounds.png</file>
+        <file>images/guitar.png</file>
     </qresource>
 </RCC>

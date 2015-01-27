@@ -462,18 +462,35 @@ Item3D {
         CupBoard {
             id: cupBoardTopLeft
             position: Qt.vector3d(-4,1.3,0.5)
+            transform: Rotation3D {
+                angle: 90
+                axis: Qt.vector3d(0,0,1)
+            }
+
         }
         CupBoard {
             id: cupBoardTopRight
             position: Qt.vector3d(4,1.3,0.5)
+            transform: Rotation3D {
+                angle: -90
+                axis: Qt.vector3d(0,0,1)
+            }
         }
         CupBoard {
             id: cupBoardBottomLeft
             position: Qt.vector3d(-4,-1.3,0.5)
+            transform: Rotation3D {
+                angle: 90
+                axis: Qt.vector3d(0,0,1)
+            }
         }
         CupBoard {
             id: cupBoardBottomRight
             position: Qt.vector3d(4,-1.3,0.5)
+            transform: Rotation3D {
+                angle: -90
+                axis: Qt.vector3d(0,0,1)
+            }
         }
     }
 
