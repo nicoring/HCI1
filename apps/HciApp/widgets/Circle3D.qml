@@ -44,7 +44,7 @@ Item3D {
         //hide: true
         position: Qt.vector3d(0,0,0.2)
         effect : LightShader {
-            texture: "qrc:/models/images/drum.png"
+            texture: "qrc:/models/images/arrow.png"
         }
         transform {
             Rotation3D {
