@@ -25,7 +25,8 @@ Item3D {
     }
 
     signal changedInstrument
-
+    signal selectedVirtualInstrument (int instrumentIndex)
+    signal selectedOwnInstrument
 
     HighResQuad {
         scale: 0.45
@@ -33,9 +34,13 @@ Item3D {
         effect : LightShader {
             texture: "qrc:/models/images/drum.png"
         }
+        function mtqTap(id, position) {
+            changedInstrument();
+            selectedVirtualInstrument(0);
 
-        function mtqTap() {
-            changedInstrument(1)
+            if (parent.mtqTap) {
+                parent.mtqTap(id, position);
+            }
         }
     }
 
@@ -45,8 +50,13 @@ Item3D {
         effect : LightShader {
             texture: "qrc:/models/images/bass.png"
         }
-        function mtqTap() {
-            changedInstrument(2)
+        function mtqTap(id, position) {
+            changedInstrument();
+            selectedVirtualInstrument(1);
+
+            if (parent.mtqTap) {
+                parent.mtqTap(id, position);
+            }
         }
     }
 
@@ -56,8 +66,13 @@ Item3D {
         effect : LightShader {
             texture: "qrc:/models/images/samplesounds.png"
         }
-        function mtqTap() {
-            changedInstrument(3)
+        function mtqTap(id, position) {
+            changedInstrument();
+            selectedVirtualInstrument(2);
+
+            if (parent.mtqTap) {
+                parent.mtqTap(id, position);
+            }
         }
     }
 
@@ -67,8 +82,13 @@ Item3D {
         effect : LightShader {
             texture: "qrc:/models/images/pad.png"
         }
-        function mtqTap() {
-            changedInstrument(4)
+        function mtqTap(id, position) {
+            changedInstrument();
+            selectedVirtualInstrument(3);
+
+            if (parent.mtqTap) {
+                parent.mtqTap(id, position);
+            }
         }
     }
 
@@ -78,8 +98,13 @@ Item3D {
         effect : LightShader {
             texture: "qrc:/models/images/guitar.png"
         }
-        function mtqTap() {
-            changedInstrument(5)
+        function mtqTap(id, position) {
+            changedInstrument();
+            selectedOwnInstrument();
+
+            if (parent.mtqTap) {
+                parent.mtqTap(id, position);
+            }
         }
     }
 }
