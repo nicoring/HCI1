@@ -10,20 +10,20 @@ Item3D {
     enabled: true
 
     TapLabel {
-        text: "Come here"
-        fontSize: 60
+        text: "Choose an instrument"
+        fontSize: 36
         sceneWidth: 3
         sceneHeight: 3
-        fontColor: "black"
+        fontColor: "white"
         position: Qt.vector3d(0.7,-0.5,0)
     }
 
     TapLabel {
-        text: "\nto start!"
-        fontSize: 60
+        text: "\nand start jamming!"
+        fontSize: 36
         sceneWidth: 3
         sceneHeight: 3
-        fontColor: "black"
+        fontColor: "white"
         position: Qt.vector3d(1,-0.5,0)
     }
 
