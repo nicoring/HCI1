@@ -29,13 +29,11 @@ Item3D {
         }
     }
 
-    //property var onContactDown
-
-    /*
+    property var onContactDown
     function mtqContactDown(id, position) {
         if (onContactDown) {
             onContactDown();
         }
     }
-    */
+
 }

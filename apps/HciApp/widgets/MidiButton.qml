@@ -12,6 +12,7 @@ FlatButton {
 
     property int button_id
     property int player_id
+    property int offset
 
     // load midi interface qml widget
     property MidiInterface midiInterface
@@ -35,7 +36,7 @@ FlatButton {
         }
 
         console.info(id, position, button_id, player_id);
-        midiInterface.buttonTapped(player_id, button_id)
+        midiInterface.buttonTapped(player_id, button_id, offset)
     }
 
    /**
@@ -47,7 +48,7 @@ FlatButton {
         }
 
         console.info('contact down', id, position, button_id, player_id);
-        midiInterface.buttonDown(player_id, button_id);
+        midiInterface.buttonDown(player_id, button_id, offset);
     }
 
    /**
@@ -59,6 +60,6 @@ FlatButton {
         }
 
         console.info('contact up', id, position, button_id, player_id);
-        midiInterface.buttonUp(player_id, button_id);
+        midiInterface.buttonUp(player_id, button_id, offset);
     }
 }

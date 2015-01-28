@@ -117,9 +117,9 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
     messenger.push_back(0);
     messenger.push_back(0);
 
-    sendStartMessage();
-
     beatCounter = 0;
+
+    sendStartMessage();
 
     instance = this;
 }
@@ -137,7 +137,7 @@ void MidiInterface::paint(QPainter *painter){
  * @param player_id
  * @param button_id
  */
-void MidiInterface::buttonTapped(int player_id, int button_id)
+void MidiInterface::buttonTapped(int player_id, int button_id, int offset)
 {
     qDebug() << "Player " << player_id << " tapped button " << button_id;
 }
@@ -150,10 +150,10 @@ void MidiInterface::buttonTapped(int player_id, int button_id)
  * @param player_id
  * @param button_id
  */
-void MidiInterface::buttonDown(int player_id, int button_id)
+void MidiInterface::buttonDown(int player_id, int button_id, int offset)
 {
     qDebug() << "Player " << player_id << " on button " << button_id;
-    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1));
+    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + offset;
     unsigned char velocity = 127;
 
     messenger[0] = 144;
@@ -174,10 +174,10 @@ void MidiInterface::buttonDown(int player_id, int button_id)
  * @param player_id
  * @param button_id
  */
-void MidiInterface::buttonUp(int player_id, int button_id)
+void MidiInterface::buttonUp(int player_id, int button_id, int offset)
 {
     qDebug() << "Player " << player_id << " released button " << button_id;
-    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1));
+    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + offset;
     unsigned char velocity = 127;
 
     messenger[0] = 128;
@@ -191,21 +191,38 @@ void MidiInterface::buttonUp(int player_id, int button_id)
 }
 
 void MidiInterface::sendStartMessage(){
-    messenger[0] = 250;
+    // Specified start message
+    messenger[0] = 145;
+    messenger[1] = 100;
+    messenger[2] = 100;
     if (midiOut){
         midiOut->sendMessage(&messenger);
     }
 }
 
 void MidiInterface::sendStopMessage(){
-    messenger[0] = 252;
+    messenger[0] = 145;
+    messenger[1] = 102;
+    messenger[2] = 100;
     if (midiOut) {
         midiOut->sendMessage(&messenger);
     }
 }
 
-
 void MidiInterface::clockBeat(double time){
     QMetaObject::invokeMethod(this, "showBeat");
+}
+
+void MidiInterface::triggerMetronome(){
+    messenger[0] = 145;
+    messenger[1] = 104;
+    messenger[2] = 100;
+    if (midiOut) {
+        midiOut->sendMessage(&messenger);
+    }
+}
+
+MidiInterface::~MidiInterface(void){
+    sendStopMessage();
 }
 

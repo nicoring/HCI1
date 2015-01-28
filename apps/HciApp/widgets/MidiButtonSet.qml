@@ -11,7 +11,13 @@ Item3D {
     id: buttonset
 
     property int player_id
+    property int offset
     property MidiInterface midiInterface
+
+
+    function setInstrument(number) {
+        offset = number * 16;
+    }
 
     /*********************
      * initialize buttonset
@@ -21,10 +27,11 @@ Item3D {
      * --> on out and longer than time threshold
      *     -> show 'come here' label
      *     -> resume button which loads previous settings
+     * --> offset depends on the chosen instrument. So if another
+     *     is chosen, the offset has to be updated on each button.
      */
 
     /** keyboard buttons **/
-
     Item3D {
         id: midibuttons
         enabled: true
@@ -34,6 +41,7 @@ Item3D {
 
             button_id: 1
             player_id: buttonset.player_id
+            offset: buttonset.offset
             midiInterface: buttonset.midiInterface
 
             position: Qt.vector3d(0,0,0)
@@ -44,6 +52,7 @@ Item3D {
 
             button_id: 2
             player_id: buttonset.player_id
+            offset: buttonset.offset
             midiInterface: buttonset.midiInterface
 
             position: Qt.vector3d(1.1, 0, 0)
@@ -54,6 +63,7 @@ Item3D {
 
             button_id: 3
             player_id: buttonset.player_id
+            offset: buttonset.offset
             midiInterface: buttonset.midiInterface
 
             position: Qt.vector3d(0, 1.1, 0)
@@ -64,6 +74,7 @@ Item3D {
 
             button_id: 4
             player_id: buttonset.player_id
+            offset: buttonset.offset
             midiInterface: buttonset.midiInterface
 
             position: Qt.vector3d(1.1, 1.1, 0)

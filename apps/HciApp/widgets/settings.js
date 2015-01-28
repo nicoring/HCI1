@@ -1,14 +1,13 @@
-function createSettings(stage, label, resumebuttons, instrumentbuttons, midibuttons, chordsbtn, chorddisplay, pentbtn, pentscreen) {
+function createSettings(stage, label, resumebuttons, instrumentbuttons, midibuttons, chorddisplay, pentscreen, switchbutton) {
     return new Settings({
                             stage: stage,
                             label: label,
                             resumebuttons: resumebuttons,
                             instrumentbuttons: instrumentbuttons,
                             midibuttons: midibuttons,
-                            showChords: chordsbtn,
                             chorddisplay: chorddisplay,
-                            showPentatonic: pentbtn,
-                            pentscreen: pentscreen
+                            pentscreen: pentscreen,
+                            switchbutton: switchbutton
                         });
 }
 
@@ -66,22 +65,22 @@ Settings.prototype.hideMidibuttons = function() {
 
 Settings.prototype.showChorddisplay = function() {
     this.items.chorddisplay.enabled = true;
-    this.items.showPentatonic.enabled = true;
+    this.items.switchbutton.enabled = true;
 }
 
 Settings.prototype.hideChorddisplay = function() {
     this.items.chorddisplay.enabled = false;
-    this.items.showPentatonic.enabled = false;
+    this.items.switchbutton.enabled = false;
 }
 
 Settings.prototype.showPentatonicScreen = function() {
     this.items.pentscreen.enabled = true;
-    this.items.showChords.enabled = true;
+    this.items.switchbutton.enabled = true;
 }
 
 Settings.prototype.hidePentatonicScreen = function() {
     this.items.pentscreen.enabled = false;
-    this.items.showChords.enabled = false;
+    this.items.switchbutton.enabled = false;
 }
 
 Settings.prototype.hideAll = function() {
@@ -109,21 +108,27 @@ Settings.prototype.setupScreens = function() {
         _this.switchScreenTo(_this.showOwnInstrumentScreen);
     }
 
-    // chords button (to switch to the pentatonic display)
-    this.items.showPentatonic.onTap = function() {
-        _this.switchScreenTo(_this.showPentatonicScreen);
-    }
-    // pentatonic button (to switch to the chords display)
-    this.items.showChords.onTap = function() {
-        _this.switchScreenTo(_this.showOwnInstrumentScreen);
-    }
+    this.items.switchbutton.children[0].enabled.connect(function() {
+        if (_this.items.switchbutton.enabled) {
+            _this.switchScreenTo(_this.showChorddisplay);
+        }
+    });
+
+    this.items.switchbutton.children[0].disabled.connect(function() {
+        if (_this.items.switchbutton.enabled) {
+            _this.switchScreenTo(_this.showPentatonicScreen);
+        }
+    });
 }
 
 Settings.prototype.switchScreenTo = function(screenCallback) {
     this.hideAll();
 
+    console.log(this.items.stage);
+
     // noop
     this.items.stage.onContactDown = function() {};
+    this.items.label.onContactDown = function() {};
 
     screenCallback.apply(this);
 }
@@ -149,6 +154,9 @@ Settings.prototype.showStartScreen = function() {
         this.items.stage.onContactDown = function() {
             _this.switchScreenTo(_this.showInstrumentScreen);
         }
+        this.items.label.onContactDown = function() {
+            _this.switchScreenTo(_this.showInstrumentScreen);
+        }
     }
 
     this.startedOnce = true;
@@ -172,7 +180,7 @@ Settings.prototype.showFloorInstrumentScreen = function() {
 
 /**
  * Own Instrument Screen
- * show chord hints
+ * default: show chord hints (alternative: pentatonic)
  */
 Settings.prototype.showOwnInstrumentScreen = function() {
     this.showChorddisplay();

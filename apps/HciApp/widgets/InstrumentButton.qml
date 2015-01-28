@@ -21,14 +21,14 @@ Item3D {
 
         position: Qt.vector3d(-0.6, 0, 0)
 
-        Label {
+        TapLabel {
             text: "Floor"
             fontSize: 50
             fontColor: "black"
             position: Qt.vector3d(0.1, -0.2, 0)
         }
 
-        Label {
+        TapLabel {
             text: "Instrument"
             fontSize: 50
             fontColor: "black"
@@ -50,14 +50,14 @@ Item3D {
 
         position: Qt.vector3d(0.6, 0, 0)
 
-        Label {
+        TapLabel {
             text: "Own"
             fontSize: 50
             fontColor: "black"
             position: Qt.vector3d(0.1, -0.2, 0)
         }
 
-        Label {
+        TapLabel {
             text: "Instrument"
             fontSize: 50
             fontColor: "black"

@@ -26,14 +26,16 @@ class MTQ_EXPORT_PLUGIN MidiInterface : public QQuickPaintedItem
 public:
     explicit MidiInterface(QQuickItem *parent = 0);
     virtual void paint(QPainter* painter);
+    virtual ~MidiInterface(void);
 
     // triggered by user interaction
     // signal the midi transmission class from Alex
-    Q_INVOKABLE void buttonTapped(int player_id, int button_id);
-    Q_INVOKABLE void buttonUp(int player_id, int button_id);
-    Q_INVOKABLE void buttonDown(int player_id, int button_id);
+    Q_INVOKABLE void buttonTapped(int player_id, int button_id, int offset);
+    Q_INVOKABLE void buttonUp(int player_id, int button_id, int offset);
+    Q_INVOKABLE void buttonDown(int player_id, int button_id, int offset);
     void sendStartMessage();
     void sendStopMessage();
+    void triggerMetronome();
     void clockBeat(double time);
 
     static void tunnelCallBack(double deltaTime, std::vector<unsigned char> *message, void *userData);
