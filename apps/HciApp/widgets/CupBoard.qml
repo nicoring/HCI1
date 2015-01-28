@@ -24,12 +24,18 @@ Item3D {
         ]
     }
 
+    signal changedInstrument
+
 
     HighResQuad {
         scale: 0.45
         position: Qt.vector3d(-1,0,0.301)
         effect : LightShader {
             texture: "qrc:/models/images/drum.png"
+        }
+
+        function mtqTap() {
+            changedInstrument(1)
         }
     }
 
@@ -39,6 +45,9 @@ Item3D {
         effect : LightShader {
             texture: "qrc:/models/images/bass.png"
         }
+        function mtqTap() {
+            changedInstrument(2)
+        }
     }
 
     HighResQuad {
@@ -46,6 +55,9 @@ Item3D {
         position: Qt.vector3d(0,0,0.301)
         effect : LightShader {
             texture: "qrc:/models/images/samplesounds.png"
+        }
+        function mtqTap() {
+            changedInstrument(3)
         }
     }
 
@@ -55,6 +67,9 @@ Item3D {
         effect : LightShader {
             texture: "qrc:/models/images/pad.png"
         }
+        function mtqTap() {
+            changedInstrument(4)
+        }
     }
 
     HighResQuad {
@@ -62,6 +77,9 @@ Item3D {
         position: Qt.vector3d(1,0,0.301)
         effect : LightShader {
             texture: "qrc:/models/images/guitar.png"
+        }
+        function mtqTap() {
+            changedInstrument(5)
         }
     }
 }

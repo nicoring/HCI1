@@ -6,28 +6,59 @@ import QtQuick.Window 2.1
 import "../framework"
 
 Item3D {
-    id: middleCircle
-    mesh: Mesh { source: "qrc:/models/meshs/circle3.3ds" }
-    effect: LightShader {
-     texture: "../framework/componentBase.png"
+    id: circleComponent
+    Item3D {
+        id: middleCircle
+        mesh: Mesh { source: "qrc:/models/meshs/circle3.3ds" }
+        effect: LightShader {
+         texture: "../framework/componentBase.png"
+        }
+
+        transform {
+            Rotation3D {
+                angle: 90
+                axis: Qt.vector3d(1,0,0)
+            }
+
+            Rotation3D {
+                id: zAxisRotationCircle
+                angle: 0
+                axis: Qt.vector3d(0,0,1)
+            }
+
+            Scale3D {
+                id: radiusScale
+                scale: Qt.vector3d(1.1,1.1,1)
+            }
+        }
+
+        function mtqTap(position, id) {
+            parent.mtqTap(position, id)
+        }
     }
 
-    transform {
-        Rotation3D {
-            angle: 90
-            axis: Qt.vector3d(1,0,0)
+    HighResQuad {
+        id: arrow
+        scale: 0.4
+        enabled: false
+        //hide: true
+        position: Qt.vector3d(0,0,0.2)
+        effect : LightShader {
+            texture: "qrc:/models/images/drum.png"
+        }
+        transform {
+            Rotation3D {
+                id: zAxisRotationArrow
+                angle: 0
+                axis: Qt.vector3d(0,0,1)
+
+            }
         }
 
-        Rotation3D {
-            id: zAxisRotation
-            angle: 0
-            axis: Qt.vector3d(0,0,1)
+        function mtqTap(position, id) {
+            parent.mtqTap(position, id)
         }
 
-        Scale3D {
-            id: radiusScale
-            scale: Qt.vector3d(1.1,1.1,1)
-        }
     }
 
     SequentialAnimation {
@@ -52,7 +83,7 @@ Item3D {
         id: arrowRotationAnimation
         NumberAnimation {
             id: zAxisFullRotationAnimation
-            target: zAxisRotation
+            target: zAxisRotationArrow
             properties: "angle"
             duration: 1400
             from: 0
@@ -62,7 +93,7 @@ Item3D {
 
         NumberAnimation {
             id: zAxisAngleRotationAnimation
-            target: zAxisRotation
+            target: zAxisRotationArrow
             properties: "angle"
             duration: 500
             from: 0
@@ -71,12 +102,21 @@ Item3D {
     }
 
     function mtqTap(position, id) {
-        rotateToPlayer(3)
+        //rotateToPlayer(3)
         //beat()
+        enableSpinner()
     }
 
     function beat() {
         beatAnimation.start()
+    }
+
+    function enableSpinner() {
+        arrow.enabled = true
+    }
+
+    function disableSpinner() {
+        arrow.enabled = false
     }
 
 
