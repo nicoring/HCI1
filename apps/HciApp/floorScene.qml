@@ -35,10 +35,17 @@ Item3D {
         parent.sceneEnabled.connect(setupLight);
 
         // init settings
-        settings1 = Settings.createSettings(topLeftOverlay, label_player1, resume_player1, instrument_player1, player1, showChordsBtn_player1, chorddis_player1, showPentatonicBtn_player1, pentscreen_player1);
-        settings2 = Settings.createSettings(topRightOverlay, label_player2, resume_player2, instrument_player2, player2, showChordsBtn_player2, chorddis_player2, showPentatonicBtn_player2, pentscreen_player2);
-        settings3 = Settings.createSettings(bottomLeftOverlay, label_player3, resume_player3, instrument_player3, player3, showChordsBtn_player3, chorddis_player3, showPentatonicBtn_player3, pentscreen_player3);
-        settings4 = Settings.createSettings(bottomRightOverlay, label_player4, resume_player4, instrument_player4, player4, showChordsBtn_player4, chorddis_player4, showPentatonicBtn_player4, pentscreen_player4);
+        settings1 = Settings.createSettings(topleftStage,
+                                            label_player1,
+                                            resume_player1,
+                                            instrument_player1,
+                                            player1,
+                                            chorddis_player1,
+                                            pentscreen_player1,
+                                            switchBtn_player1);
+        settings2 = Settings.createSettings(toprightStage, label_player2, resume_player2, instrument_player2, player2, chorddis_player2, pentscreen_player2, switchBtn_player2);
+        settings3 = Settings.createSettings(bottomleftStage, label_player3, resume_player3, instrument_player3, player3, chorddis_player3, pentscreen_player3, switchBtn_player3);
+        settings4 = Settings.createSettings(bottomrightStage, label_player4, resume_player4, instrument_player4, player4, chorddis_player4, pentscreen_player4, switchBtn_player4);
 
         // Initialize harmony section
         MusicControl.useKey("C"); // Generate a cardence and load the pentatonic image -> TODO: Key sent by the MIDI interface
@@ -79,7 +86,6 @@ Item3D {
             texture: "floorPanelsquad.jpg"
         }
     }
-
 
     /** create start labels for each player **/
 
@@ -144,7 +150,7 @@ Item3D {
         id: instrument_player1
         position: Qt.vector3d(-2.2,1.4,0.5)
         scale: 0.8
-        enabled: false
+        enabled: true
 
         transform: Rotation3D {
             angle: -120
@@ -188,14 +194,13 @@ Item3D {
         }
     }
 
-    /** buttons to switch to the pentatonic screen **/
+    /** buttons to switch between pentatonic and chords screen **/
 
-    ChordButton {
-        id: showChordsBtn_player1
+    MusicDisplaySwitch {
+        id: switchBtn_player1
 
-        position: Qt.vector3d(-3,0.45,0.5)
+        position: Qt.vector3d(-3,0.45,0.2)
         enabled: false
-
         transform: [
             Rotation3D {
                 angle: -180
@@ -204,12 +209,11 @@ Item3D {
         ]
     }
 
-    ChordButton {
-        id: showChordsBtn_player2
+    MusicDisplaySwitch {
+        id: switchBtn_player2
 
-        position: Qt.vector3d(3,0.45,0.5)
+        position: Qt.vector3d(3,0.45,0.2)
         enabled: false
-
         transform: [
             Rotation3D {
                 angle: -180
@@ -218,17 +222,17 @@ Item3D {
         ]
     }
 
-    ChordButton {
-        id: showChordsBtn_player3
+    MusicDisplaySwitch {
+        id: switchBtn_player3
 
-        position: Qt.vector3d(-3,-0.55,0.5)
-        enabled: true
+        position: Qt.vector3d(-3,-0.55,0.2)
+        enabled: false
     }
 
-    ChordButton {
-        id: showChordsBtn_player4
+    MusicDisplaySwitch {
+        id: switchBtn_player4
 
-        position: Qt.vector3d(3,-0.55,0.5)
+        position: Qt.vector3d(3,-0.55,0.2)
         enabled: false
     }
 
@@ -293,50 +297,6 @@ Item3D {
         }
     }
 
-    /** buttons to switch to the pentatonic screen **/
-
-    PentatonicButton {
-        id: showPentatonicBtn_player1
-
-        position: Qt.vector3d(-3,0.45,0.5)
-        enabled: false
-
-        transform: [
-            Rotation3D {
-                angle: -180
-                axis: Qt.vector3d(0,0,1)
-            }
-        ]
-    }
-
-    PentatonicButton {
-        id: showPentatonicBtn_player2
-
-        position: Qt.vector3d(3,0.45,0.5)
-        enabled: false
-
-        transform: [
-            Rotation3D {
-                angle: -180
-                axis: Qt.vector3d(0,0,1)
-            }
-        ]
-    }
-
-    PentatonicButton {
-        id: showPentatonicBtn_player3
-
-        position: Qt.vector3d(-3,-0.55,0.5)
-        enabled: false
-    }
-
-    PentatonicButton {
-        id: showPentatonicBtn_player4
-
-        position: Qt.vector3d(3,-0.55,0.5)
-        enabled: false
-    }
-
     /** create pentatonic screen **/
     PentatonicScreen {
         id: pentscreen_player1
@@ -390,6 +350,7 @@ Item3D {
     MidiButtonSet {
         id: player1
         player_id: 1
+        offset: 0
         midiInterface: midiInterface
         position: Qt.vector3d(-3.5,0.8,0.2)
         enabled: false
@@ -398,6 +359,7 @@ Item3D {
     MidiButtonSet {
         id: player2
         player_id: 2
+        offset: 0
         midiInterface: midiInterface
         position: Qt.vector3d(2.2,0.8,0.2)
         enabled: false
@@ -406,6 +368,7 @@ Item3D {
     MidiButtonSet {
         id: player3
         player_id: 3
+        offset: 0
         midiInterface: midiInterface
         position: Qt.vector3d(-3.5,-2,0.2)
         enabled: false
@@ -414,6 +377,7 @@ Item3D {
     MidiButtonSet {
         id: player4
         player_id: 4
+        offset: 0
         midiInterface: midiInterface
         position: Qt.vector3d(2.2,-2,0.2)
         enabled: false
@@ -495,25 +459,25 @@ Item3D {
     }
 
 
-    StageOverlay {
-        id: topLeftOverlay
-        position: Qt.vector3d(-2.4, 1.4, 0.1)
-    }
+//    StageOverlay {
+//        id: topLeftOverlay
+//        position: Qt.vector3d(-2.4, 1.4, 0.1)
+//    }
 
-    StageOverlay {
-        id: topRightOverlay
-        position: Qt.vector3d(2.4, 1.4, 0.1)
-    }
+//    StageOverlay {
+//        id: topRightOverlay
+//        position: Qt.vector3d(2.4, 1.4, 0.1)
+//    }
 
-    StageOverlay {
-        id: bottomLeftOverlay
-        position: Qt.vector3d(-2.4, -1.5, 0.1)
-    }
+//    StageOverlay {
+//        id: bottomLeftOverlay
+//        position: Qt.vector3d(-2.4, -1.5, 0.1)
+//    }
 
-    StageOverlay {
-        id: bottomRightOverlay
-        position: Qt.vector3d(2.4, -1.5, 0.1)
-    }
+//    StageOverlay {
+//        id: bottomRightOverlay
+//        position: Qt.vector3d(2.4, -1.5, 0.1)
+//    }
 
     /** controller widget for "beat-button" **/
 
