@@ -23,29 +23,8 @@ Item3D {
       *******************************
       */
 
-
-    /** each player needs a controlled menu flow **/
-
-    property var settings1
-    property var settings2
-    property var settings3
-    property var settings4
-
     Component.onCompleted: {
         parent.sceneEnabled.connect(setupLight);
-
-        // init settings
-        settings1 = Settings.createSettings(topleftStage,
-                                            label_player1,
-                                            resume_player1,
-                                            instrument_player1,
-                                            player1,
-                                            chorddis_player1,
-                                            pentscreen_player1,
-                                            switchBtn_player1);
-        settings2 = Settings.createSettings(toprightStage, label_player2, resume_player2, instrument_player2, player2, chorddis_player2, pentscreen_player2, switchBtn_player2);
-        settings3 = Settings.createSettings(bottomleftStage, label_player3, resume_player3, instrument_player3, player3, chorddis_player3, pentscreen_player3, switchBtn_player3);
-        settings4 = Settings.createSettings(bottomrightStage, label_player4, resume_player4, instrument_player4, player4, chorddis_player4, pentscreen_player4, switchBtn_player4);
 
         // Initialize harmony section
         MusicControl.useKey("C"); // Generate a cardence and load the pentatonic image -> TODO: Key sent by the MIDI interface
@@ -87,158 +66,32 @@ Item3D {
         }
     }
 
-    /** create start labels for each player **/
+    /** controller widget for "beat-button" **/
 
-    StartLabel {
-        id: label_player1
-        position: Qt.vector3d(-3,1.8,0.2)
-        transform: Rotation3D {
-            angle: 225
-            axis: Qt.vector3d(0,0,1)
+    CircleController {
+        id: circleController
+        objectName: "circle"
+
+        onDoRotateToPlayer: {
+            // playerNum is defined in circlecontroller.h should work:
+            // http://qt-project.org/forums/viewthread/3502
+            // playerNum is emitted by doRotateToPlayer
+            circle.rotateToPlayer(playerNum);
         }
     }
 
-    StartLabel {
-        id: label_player2
-        position: Qt.vector3d(3,1.6,0.2)
-        transform: Rotation3D {
-            angle: 135
-            axis: Qt.vector3d(0,0,1)
+    /** midi interface which connects ableton to the virtual instrument **/
+
+    MidiInterface {
+        id: midiInterface
+
+        function showBeat() {
+            circle.beat();
         }
     }
 
-    StartLabel {
-        id: label_player3
-        position: Qt.vector3d(-3,-1.8,0.2)
-        transform: Rotation3D {
-            angle: 315
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
+    /** Global timer which controlls all chord displays **/
 
-    StartLabel {
-        id: label_player4
-        position: Qt.vector3d(2.8,-2,0.2)
-        transform: Rotation3D {
-            angle: 45
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    /** create resume/ restart buttons for each player **/
-
-    // TODO: build actual elements
-    Item3D {
-        id: resume_player1
-    }
-
-    Item3D {
-        id: resume_player2
-    }
-
-    Item3D {
-        id: resume_player3
-    }
-
-    Item3D {
-        id: resume_player4
-    }
-
-    /** create instrument menu buttons for each player **/
-
-    InstrumentButton {
-        id: instrument_player1
-        position: Qt.vector3d(-2.2,1.4,0.5)
-        scale: 0.8
-        enabled: true
-
-        transform: Rotation3D {
-            angle: -120
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    InstrumentButton {
-        id: instrument_player2
-        position: Qt.vector3d(2.2,1.4,0.5)
-        scale: 0.8
-        enabled: false
-
-        transform: Rotation3D {
-            angle: 120
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    InstrumentButton {
-        id: instrument_player3
-        position: Qt.vector3d(-2.2,-1.4,0.5)
-        scale: 0.8
-        enabled: false
-
-        transform: Rotation3D {
-            angle: -40
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    InstrumentButton {
-        id: instrument_player4
-        position: Qt.vector3d(2.2,-1.4,0.5)
-        scale: 0.8
-        enabled: false
-
-        transform: Rotation3D {
-            angle: 40
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    /** buttons to switch between pentatonic and chords screen **/
-
-    MusicDisplaySwitch {
-        id: switchBtn_player1
-
-        position: Qt.vector3d(-3,0.45,0.2)
-        enabled: false
-        transform: [
-            Rotation3D {
-                angle: -180
-                axis: Qt.vector3d(0,0,1)
-            }
-        ]
-    }
-
-    MusicDisplaySwitch {
-        id: switchBtn_player2
-
-        position: Qt.vector3d(3,0.45,0.2)
-        enabled: false
-        transform: [
-            Rotation3D {
-                angle: -180
-                axis: Qt.vector3d(0,0,1)
-            }
-        ]
-    }
-
-    MusicDisplaySwitch {
-        id: switchBtn_player3
-
-        position: Qt.vector3d(-3,-0.55,0.2)
-        enabled: false
-    }
-
-    MusicDisplaySwitch {
-        id: switchBtn_player4
-
-        position: Qt.vector3d(3,-0.55,0.2)
-        enabled: false
-    }
-
-    /** create chords display for each player **/
-
-    // Global timer which controlls all chord displays
     Timer {
         id: slidingTimer
         interval: 2000
@@ -247,140 +100,6 @@ Item3D {
         onTriggered: {
             MusicControl.doOneSlidingStep();
         }
-    }
-
-    ChordDisplay {
-        id: chorddis_player1
-        position: Qt.vector3d(-1.55,1.3,0.5)
-        scale: 0.85
-        enabled: false
-
-        transform: Rotation3D {
-            angle: -120
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    ChordDisplay {
-        id: chorddis_player2
-        position: Qt.vector3d(1.55,1.3,0.5)
-        scale: 0.85
-        enabled: false
-
-        transform: Rotation3D {
-            angle: 120
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    ChordDisplay {
-        id: chorddis_player3
-        position: Qt.vector3d(-1.5,-1.4,0.5)
-        scale: 0.95
-        enabled: false
-
-        transform: Rotation3D {
-            angle: -60
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    ChordDisplay {
-        id: chorddis_player4
-        position: Qt.vector3d(1.5,-1.4,0.5)
-        scale: 0.95
-        enabled: false
-
-        transform: Rotation3D {
-            angle: 60
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    /** create pentatonic screen **/
-    PentatonicScreen {
-        id: pentscreen_player1
-        position: Qt.vector3d(-1.55,1.3,0.2)
-        scale: 0.75
-        enabled: false
-
-        transform: Rotation3D {
-            angle: -120
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    PentatonicScreen {
-        id: pentscreen_player2
-        position: Qt.vector3d(1.55,1.3,0.2)
-        scale: 0.75
-        enabled: false
-
-        transform: Rotation3D {
-            angle: 120
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    PentatonicScreen {
-        id: pentscreen_player3
-        position: Qt.vector3d(-1.5,-1.4,0.2)
-        scale: 0.75
-        enabled: false
-
-        transform: Rotation3D {
-            angle: -60
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    PentatonicScreen {
-        id: pentscreen_player4
-        position: Qt.vector3d(1.5,-1.4,0.2)
-        scale: 0.75
-        enabled: false
-
-        transform: Rotation3D {
-            angle: 60
-            axis: Qt.vector3d(0,0,1)
-        }
-    }
-
-    /** create midi button sets for each player **/
-    MidiButtonSet {
-        id: player1
-        player_id: 1
-        offset: 0
-        midiInterface: midiInterface
-        position: Qt.vector3d(-3.5,0.8,0.2)
-        enabled: false
-    }
-
-    MidiButtonSet {
-        id: player2
-        player_id: 2
-        offset: 0
-        midiInterface: midiInterface
-        position: Qt.vector3d(2.2,0.8,0.2)
-        enabled: false
-    }
-
-    MidiButtonSet {
-        id: player3
-        player_id: 3
-        offset: 0
-        midiInterface: midiInterface
-        position: Qt.vector3d(-3.5,-2,0.2)
-        enabled: false
-    }
-
-    MidiButtonSet {
-        id: player4
-        player_id: 4
-        offset: 0
-        midiInterface: midiInterface
-        position: Qt.vector3d(2.2,-2,0.2)
-        enabled: false
     }
 
     /** stage environment **/
@@ -402,107 +121,122 @@ Item3D {
         }
 
         Stage3D {
-            id: bottomrightStage
-            mesh: Mesh { source: "qrc:/models/meshs/topleft.3ds" }
-        }
+            id: topleftStage
+            mesh: Mesh { source: "qrc:/models/meshs/bottomright.3ds" }
 
-        Stage3D {
-            id: bottomleftStage
-            mesh: Mesh { source: "qrc:/models/meshs/topright.3ds" }
+            player_id: 1
+            midiInterface: midiInterface
+
+            Component.onCompleted: {
+
+                labelPosition = Qt.vector3d(0.9,1.25,0.2);
+                labelRotation = 135;
+
+                cupboardPosition = Qt.vector3d(0.55,1.8,0.1);
+                cupboardRotation = 0;
+
+                midiPosition = Qt.vector3d(0.32,0.87,0.2);
+
+                ownInstrument.chordsPosition = Qt.vector3d(1.30,1.55,0.2);
+                ownInstrument.chordsRotation = 135;
+
+                ownInstrument.pentatonicsPosition = Qt.vector3d(1.35,1.65,0.2);
+                ownInstrument.pentatonicsRotation = 135;
+
+                ownInstrument.switchPosition = Qt.vector3d(0.4,2.8,0.2);
+                ownInstrument.switchRotation = 90;
+
+            }
+
         }
 
         Stage3D {
             id: toprightStage
             mesh: Mesh { source: "qrc:/models/meshs/bottomleft.3ds" }
+
+            player_id: 2
+            midiInterface: midiInterface
+
+            Component.onCompleted: {
+
+                labelPosition = Qt.vector3d(0.65,-1.4,0.2);
+                labelRotation = 45;
+
+                cupboardPosition = Qt.vector3d(0.55,-1.8,0.1);
+                cupboardRotation = 180;
+
+                midiPosition = Qt.vector3d(0.32,-1.37,0.2);
+
+                ownInstrument.chordsPosition = Qt.vector3d(1.30,-1.55,0.2);
+                ownInstrument.chordsRotation = 45;
+
+                ownInstrument.pentatonicsPosition = Qt.vector3d(1.35,-1.65,0.2);
+                ownInstrument.pentatonicsRotation = 45;
+
+                ownInstrument.switchPosition = Qt.vector3d(0.4,-2.85,0.2);
+                ownInstrument.switchRotation = 90;
+
+            }
         }
 
         Stage3D {
-            id: topleftStage
-            mesh: Mesh { source: "qrc:/models/meshs/bottomright.3ds" }
-        }
-    }
+            id: bottomrightStage
+            mesh: Mesh { source: "qrc:/models/meshs/topleft.3ds" }
 
-    Item3D {
-        CupBoard {
-            id: cupBoardTopLeft
-            position: Qt.vector3d(-4,1.3,0.5)
-            transform: Rotation3D {
-                angle: 90
-                axis: Qt.vector3d(0,0,1)
-            }
+            player_id: 3
+            midiInterface: midiInterface
 
-        }
-        CupBoard {
-            id: cupBoardTopRight
-            position: Qt.vector3d(4,1.3,0.5)
-            transform: Rotation3D {
-                angle: -90
-                axis: Qt.vector3d(0,0,1)
-            }
-        }
-        CupBoard {
-            id: cupBoardBottomLeft
-            position: Qt.vector3d(-4,-1.3,0.5)
-            transform: Rotation3D {
-                angle: 90
-                axis: Qt.vector3d(0,0,1)
+            Component.onCompleted: {
+
+                labelPosition = Qt.vector3d(-1,-1.2,0.2);
+                labelRotation = -45;
+
+                cupboardPosition = Qt.vector3d(-0.60,-1.8,0.1);
+                cupboardRotation = 180;
+
+                midiPosition = Qt.vector3d(-0.85,-1.37,0.2);
+
+                ownInstrument.chordsPosition = Qt.vector3d(-1.3,-1.55,0.2);
+                ownInstrument.chordsRotation = -45;
+
+                ownInstrument.pentatonicsPosition = Qt.vector3d(-1.4,-1.60,0.2);
+                ownInstrument.pentatonicsRotation = -45;
+
+                ownInstrument.switchPosition = Qt.vector3d(-0.5,-2.85,0.2);
+                ownInstrument.switchRotation = 270;
+
             }
         }
-        CupBoard {
-            id: cupBoardBottomRight
-            position: Qt.vector3d(4,-1.3,0.5)
-            transform: Rotation3D {
-                angle: -90
-                axis: Qt.vector3d(0,0,1)
+
+        Stage3D {
+            id: bottomleftStage
+            mesh: Mesh { source: "qrc:/models/meshs/topright.3ds" }
+
+            player_id: 3
+            midiInterface: midiInterface
+
+            Component.onCompleted: {
+
+                labelPosition = Qt.vector3d(-0.7,1.35,0.2);
+                labelRotation = -135;
+
+                cupboardPosition = Qt.vector3d(-0.60,1.8,0.1);
+                cupboardRotation = 0;
+
+                midiPosition = Qt.vector3d(-0.85,0.87,0.2);
+
+                ownInstrument.chordsPosition = Qt.vector3d(-1.3,1.55,0.2);
+                ownInstrument.chordsRotation = -135;
+
+                ownInstrument.pentatonicsPosition = Qt.vector3d(-1.4,1.60,0.2);
+                ownInstrument.pentatonicsRotation = -135;
+
+                ownInstrument.switchPosition = Qt.vector3d(-0.5,2.85,0.2);
+                ownInstrument.switchRotation = 270;
+
             }
         }
+
     }
-
-
-//    StageOverlay {
-//        id: topLeftOverlay
-//        position: Qt.vector3d(-2.4, 1.4, 0.1)
-//    }
-
-//    StageOverlay {
-//        id: topRightOverlay
-//        position: Qt.vector3d(2.4, 1.4, 0.1)
-//    }
-
-//    StageOverlay {
-//        id: bottomLeftOverlay
-//        position: Qt.vector3d(-2.4, -1.5, 0.1)
-//    }
-
-//    StageOverlay {
-//        id: bottomRightOverlay
-//        position: Qt.vector3d(2.4, -1.5, 0.1)
-//    }
-
-    /** controller widget for "beat-button" **/
-
-    CircleController {
-        id: circleController
-        objectName: "circle"
-
-        onDoRotateToPlayer: {
-            // playerNum is defined in circlecontroller.h should work:
-            // http://qt-project.org/forums/viewthread/3502
-            // playerNum is emitted by doRotateToPlayer
-            circle.rotateToPlayer(playerNum);
-        }
-    }
-
-
-
-    // create midi interface only once
-    MidiInterface {
-        id: midiInterface
-
-        function showBeat() {
-            circle.beat();
-        }
-    }
-
 
 }
