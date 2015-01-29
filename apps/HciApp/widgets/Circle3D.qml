@@ -7,6 +7,16 @@ import "../framework"
 
 Item3D {
     id: circleComponent
+
+    signal spinningStopped()
+    signal rotationStopped()
+
+    Component.onCompleted: {
+        //enableSpinner()
+        //spinToPlayer(1)
+        //rotateFromToPlayer(2,4)
+    }
+
     Item3D {
         id: middleCircle
         mesh: Mesh { source: "qrc:/models/meshs/circle3.3ds" }
@@ -41,7 +51,6 @@ Item3D {
         id: arrow
         scale: 0.4
         enabled: false
-        //hide: true
         position: Qt.vector3d(0,0,0.2)
         effect : LightShader {
             texture: "qrc:/models/images/arrow.png"
@@ -99,12 +108,31 @@ Item3D {
             from: 0
             to: 0
         }
+        onRunningChanged: {
+            if (!arrowRotationAnimation.running) {
+                spinningStopped()
+            }
+        }
+    }
+
+    NumberAnimation {
+        id: zAxisFromToAnimation
+        target: zAxisRotationArrow
+        properties: "angle"
+        duration: 500
+        from: 0
+        to: 0
+        onRunningChanged: {
+            if (!zAxisAngleRotationAnimation.running) {
+                rotationStopped()
+            }
+        }
     }
 
     function mtqTap(position, id) {
-        //rotateToPlayer(3)
-        //beat()
         enableSpinner()
+        //rotateToPlayer(1)
+        rotateFromToPlayer(2,4)
     }
 
     function beat() {
@@ -131,9 +159,9 @@ Item3D {
       *             *               *
       *******************************
       */
-    function rotateToPlayer(player) {
-        var angle, duration
-        var fullDurationSlow = 2000
+
+    function getAngleForPlayer(player) {
+        var angle
         switch (player) {
             case 1:
                 angle = 135
@@ -148,10 +176,32 @@ Item3D {
                 angle = 315
                 break;
         }
+        return angle
+    }
 
-        // adapt rotation speed to the angle of the rotation
-        duration = fullDurationSlow * (angle / 360)
+    // adapt rotation speed to the angle of the rotation
+    function getDurationForRotation(rotationAngle) {
+        var fullDurationSlow = 2000
+        return fullDurationSlow * (rotationAngle / 360)
+    }
 
+    function rotateFromToPlayer(player1, player2) {
+        var angle1 = getAngleForPlayer(player1)
+        var angle2 = getAngleForPlayer(player2)
+        var rotationAngle = Math.abs(angle1 - angle2)
+        var duration = getDurationForRotation(rotationAngle)
+
+        zAxisFromToAnimation.from = angle1
+        zAxisFromToAnimation.to = angle2
+        zAxisFromToAnimation.duration = duration
+        zAxisFromToAnimation.start()
+    }
+
+    function spinToPlayer(player) {
+        var angle = getAngleForPlayer(player)
+        var duration = getDurationForRotation(angle)
+
+        zAxisAngleRotationAnimation.from = 0
         zAxisAngleRotationAnimation.to = angle
         zAxisAngleRotationAnimation.duration = duration
         arrowRotationAnimation.start()
