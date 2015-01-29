@@ -28,7 +28,7 @@ FlatButton {
     ]
 
     function mtqContactDown(id, position) {
-        console.info('contact down', contactId, position, button_id, player_id);
+        console.info('contact down', id, position, button_id, player_id);
         midiInterface.buttonDown(player_id, button_id, offset);
 
         if (parent.mtqContactDown) {
@@ -38,7 +38,7 @@ FlatButton {
 
 
     function mtqContactUp(id, position) {
-        console.info('contact up', contactId, position, button_id, player_id);
+        console.info('contact up', id, position, button_id, player_id);
         midiInterface.buttonUp(player_id, button_id, offset);
 
         if (parent.mtqContactDown) {
