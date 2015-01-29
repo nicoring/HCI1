@@ -26,10 +26,36 @@ Item3D {
         }
     }
 
-    property var onContactDown
-    function mtqContactDown(id, position) {
-        if (onContactDown) {
-            onContactDown();
+    Timer {
+        id: pauseTimer
+        interval: 10000
+        repeat: false
+
+        onTriggered: {
+            hideOwnInstrument();
+            hideVirtualInstrument();
+            // TODO: or show some kind of resume display
+            showStartLabel();
+        }
+    }
+
+    FloorEventWidget {
+        property int contactsOnStage: 0
+
+        onMtqContactDown: {
+            contactsOnStage++;
+
+            if (contactsOnStage === 0) {
+                pauseTimer.stop();
+            }
+        }
+
+        onMtqContactUp: {
+            contactsOnStage--;
+
+            if (contactsOnStage === 0) {
+               pauseTimer.restart();
+            }
         }
     }
 
@@ -46,6 +72,10 @@ Item3D {
 
     function hideStartLabel() {
        label.enabled = false;
+    }
+
+    function showStartLabel() {
+        label.enabled = true;
     }
 
     property alias labelPosition: label.position
