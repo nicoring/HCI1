@@ -1,4 +1,5 @@
 #include "midiinterface.h"
+#include <QDebug>
 using namespace mtq;
 
 MTQ_QML_REGISTER_PLUGIN(MidiInterface)
@@ -74,6 +75,9 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
         // try to open defined port
         try {
             midiOut->openPort(outPort);
+            qDebug() << "Found ports:" << "\n";
+            qDebug() << "1." << midiOut->getPortName(0).c_str();
+            qDebug() << "2." << midiOut->getPortName(1).c_str();
         }
         catch(RtMidiError &error) {
             error.printMessage();
@@ -97,6 +101,7 @@ MidiInterface::MidiInterface(QQuickItem *parent) :
     }
     else {
         try {
+            qDebug() << midiIn->getPortName(0).c_str();
             midiIn->openPort(inPort);
         }
         catch(RtMidiError &error) {

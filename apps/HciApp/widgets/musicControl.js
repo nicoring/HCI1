@@ -14,7 +14,7 @@ chords["A"] = ["A", "Hm", "D", "E", "Fism"]; // "Fism" -> "Fis-Moll" / "F sharp 
 
 // Global variables to control the music support
 var key = undefined;
-var cardence = undefined;
+var cadence = undefined;
 var curIndex = 0;
 
 /** Throw an error if the key is not allowed -> Otherwise return it*/
@@ -35,7 +35,7 @@ function checkForAllowedKey(key) {
 }
 
 function doOneSlidingStep() {
-    var preloadChord = cardence[getChordIndex(curIndex + 3)];
+    var preloadChord = cadence[getChordIndex(curIndex + 3)];
     // Slides the chord from left to right and preloads the following 'next chord'
     topleftStage.chords.doOneSlidingStep(preloadChord);
     toprightStage.chords.doOneSlidingStep(preloadChord);
@@ -44,29 +44,29 @@ function doOneSlidingStep() {
     curIndex++;
 }
 
-/** Returns a valid cardence array index */
+/** Returns a valid cadence array index */
 function getChordIndex(i){
-    if (cardence !== undefined) {
-        return i % cardence.length;
+    if (cadence !== undefined) {
+        return i % cadence.length;
     } else {
-        throw "The cardence is not initialized";
+        throw "The cadence is not initialized";
     }
 }
 
 /** MIDI interface should use this method to say which key to use.
- It generates a suitable cardence (sequence of chords) which will
+ It generates a suitable cadence (sequence of chords) which will
  be shown on the chord display and loads the pentatonic image.*/
 function useKey(k) {
     // Take a cadence -> I, VI, IV, V (TODO: implement more choices)
     var keyChords = chords[checkForAllowedKey(k)];
-    cardence = [keyChords[0], keyChords[4], keyChords[2], keyChords[3]];
+    cadence = [keyChords[0], keyChords[4], keyChords[2], keyChords[3]];
     key = k;
 
     // Load chord images
     var c1, c2, c3; // The three next chords
-    c1 = cardence[curIndex];
-    c2 = cardence[getChordIndex(curIndex + 1)];
-    c3 = cardence[getChordIndex(curIndex + 2)];
+    c1 = cadence[curIndex];
+    c2 = cadence[getChordIndex(curIndex + 1)];
+    c3 = cadence[getChordIndex(curIndex + 2)];
     topleftStage.chords.loadChords(c1, c2, c3);
     toprightStage.chords.loadChords(c1, c2, c3);
     bottomleftStage.chords.loadChords(c1, c2, c3);
