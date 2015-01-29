@@ -63,5 +63,6 @@
         <file>images/guitar.png</file>
         <file>meshs/middle_spinner.jpg</file>
         <file>images/arrow.png</file>
+        <file>meshs/instrumentButton.3ds</file>
     </qresource>
 </RCC>

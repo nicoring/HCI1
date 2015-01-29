@@ -7,8 +7,14 @@ import "../framework/GlobalLight.js" as GlobalLight
 import "../framework"
 import "."
 
-FlatButton {
+Item3D {
     id: midiButton
+
+    mesh: Mesh { source: "qrc:/models/meshs/instrumentButton.3ds" }
+    effect: LightShader {
+     texture: "../framework/componentBase.png"
+    }
+    scale: 1
 
     property int button_id
     property int player_id
@@ -18,13 +24,18 @@ FlatButton {
     property MidiInterface midiInterface
 
     // 3d elements --> push into floor to be visible
-    position: Qt.vector3d(0,0,-1)
+    position: Qt.vector3d(0,0,1)
 
     // scale to small button size
     transform: [
         Scale3D {
-            scale: Qt.vector3d(1,1,0.1)
+            scale: Qt.vector3d(2,1,2)
+        },
+        Rotation3D {
+            angle: 90
+            axis: Qt.vector3d(1,0,0)
         }
+
     ]
 
     /**
