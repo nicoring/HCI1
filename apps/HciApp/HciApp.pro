@@ -113,7 +113,8 @@ OTHER_FILES += \
     widgets/PentatonicScreen.qml \
     widgets/musicControl.js \
     widgets/MusicDisplaySwitch.qml \
-    widgets/TapLabel.qml
+    widgets/TapLabel.qml \
+    widgets/MidiButtonMesh.qml
 
 RESOURCES += \
     frameworkResources.qrc

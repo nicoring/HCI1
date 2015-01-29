@@ -62,5 +62,8 @@
         <file>images/samplesounds.png</file>
         <file>images/guitar.png</file>
         <file>images/arrow.png</file>
+        <file>meshs/instrumentButton.3ds</file>
+        <file>images/purple.png</file>
+        <file>images/purple-highlight.png</file>
     </qresource>
 </RCC>

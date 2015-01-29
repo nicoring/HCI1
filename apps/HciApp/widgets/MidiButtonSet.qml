@@ -38,6 +38,12 @@ Item3D {
             midiInterface: buttonset.midiInterface
 
             position: Qt.vector3d(0,0,0)
+            transform {
+                Rotation3D {
+                    angle: 0
+                    axis: Qt.vector3d(0,0,1)
+                }
+            }
         }
 
         MidiButton {
@@ -47,6 +53,13 @@ Item3D {
             player_id: buttonset.player_id
             offset: buttonset.offset
             midiInterface: buttonset.midiInterface
+
+            transform {
+                Rotation3D {
+                    angle: 90
+                    axis: Qt.vector3d(0,0,1)
+                }
+            }
 
             position: Qt.vector3d(1.1, 0, 0)
         }
@@ -59,6 +72,13 @@ Item3D {
             offset: buttonset.offset
             midiInterface: buttonset.midiInterface
 
+            transform {
+                Rotation3D {
+                    angle: 270
+                    axis: Qt.vector3d(0,0,1)
+                }
+            }
+
             position: Qt.vector3d(0, 1.1, 0)
         }
 
@@ -69,6 +89,13 @@ Item3D {
             player_id: buttonset.player_id
             offset: buttonset.offset
             midiInterface: buttonset.midiInterface
+
+            transform {
+                Rotation3D {
+                    angle: 180
+                    axis: Qt.vector3d(0,0,1)
+                }
+            }
 
             position: Qt.vector3d(1.1, 1.1, 0)
         }
