@@ -14,7 +14,6 @@ Item3D {
     property int offset
     property MidiInterface midiInterface
 
-
     function setInstrument(number) {
         offset = number * 16;
     }
@@ -72,6 +71,30 @@ Item3D {
             midiInterface: buttonset.midiInterface
 
             position: Qt.vector3d(1.1, 1.1, 0)
+        }
+
+        function mtqContactDown(id, position) {
+            if (parent.mtqContactDown) {
+                parent.mtqContactDown(id, position);
+            }
+        }
+
+        function mtqContactUp(id, position) {
+            if (parent.mtqContactDown) {
+                parent.mtqContactDown(id, position);
+            }
+        }
+    }
+
+    function mtqContactDown(id, position) {
+        if (parent.mtqContactDown) {
+            parent.mtqContactDown(id, position);
+        }
+    }
+
+    function mtqContactUp(id, position) {
+        if (parent.mtqContactDown) {
+            parent.mtqContactDown(id, position);
         }
     }
 }
