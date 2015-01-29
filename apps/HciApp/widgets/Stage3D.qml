@@ -26,10 +26,30 @@ Item3D {
         }
     }
 
-    property var onContactDown
+    Timer {
+        id: pauseTimer
+        interval: 1000
+        repeat: false
+
+        onTriggered: {
+            hideOwnInstrument();
+            hideVirtualInstrument();
+            // TODO: or show some kind of resume display
+            showStartLabel();
+        }
+    }
+
+    property int contactsOnStage: 0
     function mtqContactDown(id, position) {
-        if (onContactDown) {
-            onContactDown();
+        contactsOnStage++;
+        pauseTimer.stop();
+    }
+
+    function mtqContactUp(id, position) {
+        contactsOnStage--;
+
+        if (contactsOnStage === 0) {
+           pauseTimer.restart();
         }
     }
 
@@ -46,6 +66,10 @@ Item3D {
 
     function hideStartLabel() {
        label.enabled = false;
+    }
+
+    function showStartLabel() {
+        label.enabled = true;
     }
 
     property alias labelPosition: label.position
@@ -87,9 +111,9 @@ Item3D {
     MidiButtonSet {
         id: midi
         scale: 1 / floorElems3D.scale
-        player_id: player_id
+        player_id: stage.player_id
         offset: 0
-        midiInterface: midiInterface
+        midiInterface: stage.midiInterface
         enabled: false
     }
 

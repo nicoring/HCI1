@@ -27,7 +27,7 @@ Item3D {
         parent.sceneEnabled.connect(setupLight);
 
         // Initialize harmony section
-        MusicControl.useKey("C"); // Generate a cardence and load the pentatonic image -> TODO: Key sent by the MIDI interface
+        MusicControl.useKey("C"); // Generate a cadence and load the pentatonic image -> TODO: Key sent by the MIDI interface
         MusicControl.useBeat(120 / 4); // 120 bpm -> TODO: Sent by MIDI interface [:4 for more speed while debugging]
         // useBeat also starts the Timer -> TODO: Wait for first instrument selection
 
