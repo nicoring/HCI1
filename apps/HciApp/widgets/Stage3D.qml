@@ -41,7 +41,6 @@ Item3D {
 
     property int contactsOnStage: 0
     function mtqContactDown(id, position) {
-        console.log('\n\n\n',contactId, 'contact down\n\n\n');
         contactsOnStage++;
         pauseTimer.stop();
     }
