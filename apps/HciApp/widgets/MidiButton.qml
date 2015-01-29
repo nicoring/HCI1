@@ -7,14 +7,8 @@ import "../framework/GlobalLight.js" as GlobalLight
 import "../framework"
 import "."
 
-Item3D {
+MidiButtonMesh {
     id: midiButton
-
-    mesh: Mesh { source: "qrc:/models/meshs/instrumentButton.3ds" }
-    effect: LightShader {
-     texture: "../framework/componentBase.png"
-    }
-    scale: 1
 
     property int button_id
     property int player_id
@@ -29,13 +23,8 @@ Item3D {
     // scale to small button size
     transform: [
         Scale3D {
-            scale: Qt.vector3d(2,1,2)
-        },
-        Rotation3D {
-            angle: 90
-            axis: Qt.vector3d(1,0,0)
+            scale: Qt.vector3d(2.5,2.5,1)
         }
-
     ]
 
     /**
@@ -45,7 +34,7 @@ Item3D {
         if (parent.mtqTap) {
             parent.mtqTap(id, position);
         }
-
+        unhighlight()
         console.info(id, position, button_id, player_id);
         midiInterface.buttonTapped(player_id, button_id, offset)
     }
@@ -57,7 +46,7 @@ Item3D {
         if (parent.mtqTap) {
             parent.mtqTap(id, position);
         }
-
+        highlight()
         console.info('contact down', id, position, button_id, player_id);
         midiInterface.buttonDown(player_id, button_id, offset);
     }
@@ -69,7 +58,7 @@ Item3D {
         if (parent.mtqTap) {
             parent.mtqTap(id, position);
         }
-
+        unhighlight()
         console.info('contact up', id, position, button_id, player_id);
         midiInterface.buttonUp(player_id, button_id, offset);
     }
