@@ -114,7 +114,9 @@ OTHER_FILES += \
     widgets/musicControl.js \
     widgets/MusicDisplaySwitch.qml \
     widgets/TapLabel.qml \
-    widgets/MidiButtonMesh.qml
+    widgets/MidiButtonMesh.qml \
+    widgets/controller.js \
+    widgets/Timer.qml
 
 RESOURCES += \
     frameworkResources.qrc

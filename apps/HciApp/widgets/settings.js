@@ -29,6 +29,10 @@ function Settings(items) {
     this.switchScreenTo(this.showStartScreen);
 }
 
+Settings.prototype.isActive = function() {
+    return !this.noOneOnStage && this.startedOnce;
+}
+
 /** show/ hide helpers **/
 
 Settings.prototype.showLabel = function() {

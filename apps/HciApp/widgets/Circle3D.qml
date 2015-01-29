@@ -11,6 +11,8 @@ Item3D {
     signal spinningStopped()
     signal rotationStopped()
 
+    property int fullDurationSlow: 2000
+
     Component.onCompleted: {
         //enableSpinner()
         //spinToPlayer(1)
@@ -115,19 +117,23 @@ Item3D {
         }
     }
 
-    NumberAnimation {
-        id: zAxisFromToAnimation
-        target: zAxisRotationArrow
-        properties: "angle"
-        duration: 500
-        from: 0
-        to: 0
+    SequentialAnimation {
+        id: fromToAnimation
+        NumberAnimation {
+            id: zAxisFromToAnimation
+            target: zAxisRotationArrow
+            properties: "angle"
+            duration: 500
+            from: 0
+            to: 0
+        }
+        PauseAnimation { duration: 1000 }
         onRunningChanged: {
-            if (!zAxisAngleRotationAnimation.running) {
+            if (!fromToAnimation.running) {
                 rotationStopped()
             }
         }
-    }
+     }
 
     function mtqTap(position, id) {
         enableSpinner()
@@ -181,7 +187,6 @@ Item3D {
 
     // adapt rotation speed to the angle of the rotation
     function getDurationForRotation(rotationAngle) {
-        var fullDurationSlow = 2000
         return fullDurationSlow * (rotationAngle / 360)
     }
 
@@ -194,7 +199,17 @@ Item3D {
         zAxisFromToAnimation.from = angle1
         zAxisFromToAnimation.to = angle2
         zAxisFromToAnimation.duration = duration
-        zAxisFromToAnimation.start()
+        fromToAnimation.start()
+    }
+
+    function rotateToPlayer(player) {
+        var angle = getAngleForPlayer(player)
+        var duration = getDurationForRotation(angle)
+
+        zAxisFromToAnimation.from = 0
+        zAxisFromToAnimation.to = angle
+        zAxisFromToAnimation.duration = duration
+        fromToAnimation.start()
     }
 
     function spinToPlayer(player) {

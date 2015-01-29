@@ -11,6 +11,10 @@ Item3D {
     property int player_id
     property MidiInterface midiInterface
 
+    property bool isActive: false
+    signal deactivated()
+    signal activated()
+
     effect: LightShader {
         texture: "../framework/componentBase.png"
     }
@@ -32,10 +36,14 @@ Item3D {
         repeat: false
 
         onTriggered: {
-            hideOwnInstrument();
-            hideVirtualInstrument();
-            // TODO: or show some kind of resume display
-            showStartLabel();
+            if (isActive) {
+                hideOwnInstrument();
+                hideVirtualInstrument();
+                // TODO: or show some kind of resume display
+                showStartLabel();
+
+                deactivated()
+            }
         }
     }
 
@@ -43,6 +51,10 @@ Item3D {
     function mtqContactDown(id, position) {
         contactsOnStage++;
         pauseTimer.stop();
+        if (!isActive) {
+            isActive = true;
+            activated();
+        }
     }
 
     function mtqContactUp(id, position) {

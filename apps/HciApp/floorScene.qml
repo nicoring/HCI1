@@ -8,6 +8,7 @@ import "framework"
 import "widgets"
 import "widgets/settings.js" as Settings
 import "widgets/musicControl.js" as MusicControl
+import "widgets/controller.js" as Controller
 
 Item3D {
 
@@ -23,6 +24,8 @@ Item3D {
       *******************************
       */
 
+    property var controller
+
     Component.onCompleted: {
         parent.sceneEnabled.connect(setupLight);
 
@@ -30,6 +33,8 @@ Item3D {
         MusicControl.useKey("C"); // Generate a cadence and load the pentatonic image -> TODO: Key sent by the MIDI interface
         MusicControl.useBeat(120 / 4); // 120 bpm -> TODO: Sent by MIDI interface [:4 for more speed while debugging]
         // useBeat also starts the Timer -> TODO: Wait for first instrument selection
+
+        controller = Controller.createController(topleftStage, toprightStage, bottomleftStage, bottomrightStage, circle);
 
     }
 
@@ -66,19 +71,6 @@ Item3D {
         }
     }
 
-    /** controller widget for "beat-button" **/
-
-    CircleController {
-        id: circleController
-        objectName: "circle"
-
-        onDoRotateToPlayer: {
-            // playerNum is defined in circlecontroller.h should work:
-            // http://qt-project.org/forums/viewthread/3502
-            // playerNum is emitted by doRotateToPlayer
-            circle.rotateToPlayer(playerNum);
-        }
-    }
 
     /** midi interface which connects ableton to the virtual instrument **/
 
