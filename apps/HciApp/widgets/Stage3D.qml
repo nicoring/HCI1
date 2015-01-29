@@ -117,9 +117,9 @@ Item3D {
     MidiButtonSet {
         id: midi
         scale: 1 / floorElems3D.scale
-        player_id: player_id
+        player_id: stage.player_id
         offset: 0
-        midiInterface: midiInterface
+        midiInterface: stage.midiInterface
         enabled: false
     }
 
