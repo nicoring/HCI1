@@ -28,7 +28,7 @@ Item3D {
 
     Timer {
         id: pauseTimer
-        interval: 10000
+        interval: 1000
         repeat: false
 
         onTriggered: {
@@ -39,23 +39,18 @@ Item3D {
         }
     }
 
-    FloorEventWidget {
-        property int contactsOnStage: 0
+    property int contactsOnStage: 0
+    function mtqContactDown(id, position) {
+        console.log('\n\n\n',contactId, 'contact down\n\n\n');
+        contactsOnStage++;
+        pauseTimer.stop();
+    }
 
-        onMtqContactDown: {
-            contactsOnStage++;
+    function mtqContactUp(id, position) {
+        contactsOnStage--;
 
-            if (contactsOnStage === 0) {
-                pauseTimer.stop();
-            }
-        }
-
-        onMtqContactUp: {
-            contactsOnStage--;
-
-            if (contactsOnStage === 0) {
-               pauseTimer.restart();
-            }
+        if (contactsOnStage === 0) {
+           pauseTimer.restart();
         }
     }
 
