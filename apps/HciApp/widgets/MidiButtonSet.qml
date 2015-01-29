@@ -20,18 +20,12 @@ Item3D {
     }
 
     /*********************
-     * initialize buttonset
-     * --> show 'come here' label
-     * --> on over, tag as active
-     *     -> show menu buttons
-     * --> on out and longer than time threshold
-     *     -> show 'come here' label
-     *     -> resume button which loads previous settings
      * --> offset depends on the chosen instrument. So if another
      *     is chosen, the offset has to be updated on each button.
      */
 
     /** keyboard buttons **/
+
     Item3D {
         id: midibuttons
         enabled: true

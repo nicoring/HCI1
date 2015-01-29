@@ -37,10 +37,10 @@ function checkForAllowedKey(key) {
 function doOneSlidingStep() {
     var preloadChord = cardence[getChordIndex(curIndex + 3)];
     // Slides the chord from left to right and preloads the following 'next chord'
-    chorddis_player1.doOneSlidingStep(preloadChord);
-    chorddis_player2.doOneSlidingStep(preloadChord);
-    chorddis_player3.doOneSlidingStep(preloadChord);
-    chorddis_player4.doOneSlidingStep(preloadChord);
+    topleftStage.chords.doOneSlidingStep(preloadChord);
+    toprightStage.chords.doOneSlidingStep(preloadChord);
+    bottomleftStage.chords.doOneSlidingStep(preloadChord);
+    bottomrightStage.chords.doOneSlidingStep(preloadChord);
     curIndex++;
 }
 
@@ -67,13 +67,13 @@ function useKey(k) {
     c1 = cardence[curIndex];
     c2 = cardence[getChordIndex(curIndex + 1)];
     c3 = cardence[getChordIndex(curIndex + 2)];
-    chorddis_player1.loadChords(c1, c2, c3);
-    chorddis_player2.loadChords(c1, c2, c3);
-    chorddis_player3.loadChords(c1, c2, c3);
-    chorddis_player4.loadChords(c1, c2, c3);
+    topleftStage.chords.loadChords(c1, c2, c3);
+    toprightStage.chords.loadChords(c1, c2, c3);
+    bottomleftStage.chords.loadChords(c1, c2, c3);
+    bottomrightStage.chords.loadChords(c1, c2, c3);
 
     // Load pentatonic image
-    pentscreen_player1.loadImage(chords[k][4]); // Change from Major to Minor (e.G. C Major -> A Minor)
+    topleftStage.pentatonics.loadImage(chords[k][4]); // Change from Major to Minor (e.G. C Major -> A Minor)
 
 }
 

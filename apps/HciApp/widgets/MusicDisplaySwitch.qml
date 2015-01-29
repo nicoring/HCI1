@@ -10,9 +10,10 @@ Item3D{
     id: displayswitch
     position: Qt.vector3d(0, 0, 0)
 
+    property alias slider: slider
     Slider{
         position: Qt.vector3d(0, 0, 0.3)
-        id: sliderbody
+        id: slider
         scale: 0.2
         enabled: true
     }
@@ -21,7 +22,7 @@ Item3D{
         text: "Pentatonic    Chords"
         sceneWidth: 2.0
         fontSize: 22
-        fontColor: "black"
+        fontColor: "white"
         position: Qt.vector3d(0.3, -0.22, 0.1)
     }
 }
