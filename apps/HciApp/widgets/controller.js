@@ -161,7 +161,10 @@ Controller.prototype.startSession = function() {
 
 Controller.prototype.wait = function(time, cb) {
     var timer = createTimer({interval: time});
-    timer.triggered.connect(cb);
+    var _this = this;
+    timer.triggered.connect(function() {
+        cb.apply(_this, arguments);
+    });
     timer.start();
 }
 

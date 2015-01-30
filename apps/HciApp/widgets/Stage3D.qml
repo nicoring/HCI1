@@ -32,11 +32,12 @@ Item3D {
 
     Timer {
         id: pauseTimer
-        interval: 1000
+        interval: 10000
         repeat: false
 
         onTriggered: {
             if (isActive) {
+                isActive = false;
                 hideOwnInstrument();
                 hideVirtualInstrument();
                 // TODO: or show some kind of resume display
