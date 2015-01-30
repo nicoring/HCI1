@@ -33,7 +33,9 @@ MidiButtonMesh {
 
     function mtqContactDown(id, position) {
         highlight()
-        console.info('contact down', id, position, button_id, player_id, instrument_id);
+        console.info('contact down', id, position)
+        console.info('button id', button_id, 'player id', player_id, 'instrument id', instrument_id);
+        console.info('--- contact down ---');
         midiInterface.buttonDown(player_id, button_id, instrument_id);
 
         if (parent.mtqContactDown) {
@@ -44,7 +46,10 @@ MidiButtonMesh {
 
     function mtqContactUp(id, position) {
         unhighlight()
-        console.info('contact up', id, position, button_id, player_id, instrument_id);
+        console.info('contact up', id, position)
+        console.info('button id', button_id, 'player id',  player_id, 'instrument id', instrument_id);
+        console.info('--- contact up ---');
+
         midiInterface.buttonUp(player_id, button_id, instrument_id);
 
         if (parent.mtqContactDown) {
