@@ -172,10 +172,39 @@ Item3D {
         }
 
         Stage3D {
+            id: bottomleftStage
+            mesh: Mesh { source: "qrc:/models/meshs/topright.3ds" }
+
+            player_id: 3
+            midiInterface: midiInterface
+
+            Component.onCompleted: {
+
+                labelPosition = Qt.vector3d(-0.7,1.35,0.2);
+                labelRotation = -135;
+
+                cupboardPosition = Qt.vector3d(-0.60,1.8,0.1);
+                cupboardRotation = 0;
+
+                midiPosition = Qt.vector3d(-0.85,0.87,0.2);
+
+                ownInstrument.chordsPosition = Qt.vector3d(-1.3,1.55,0.2);
+                ownInstrument.chordsRotation = -135;
+
+                ownInstrument.pentatonicsPosition = Qt.vector3d(-1.4,1.60,0.2);
+                ownInstrument.pentatonicsRotation = -135;
+
+                ownInstrument.switchPosition = Qt.vector3d(-0.5,2.85,0.2);
+                ownInstrument.switchRotation = 270;
+
+            }
+        }
+
+        Stage3D {
             id: bottomrightStage
             mesh: Mesh { source: "qrc:/models/meshs/topleft.3ds" }
 
-            player_id: 3
+            player_id: 4
             midiInterface: midiInterface
 
             Component.onCompleted: {
@@ -200,34 +229,6 @@ Item3D {
             }
         }
 
-        Stage3D {
-            id: bottomleftStage
-            mesh: Mesh { source: "qrc:/models/meshs/topright.3ds" }
-
-            player_id: 4
-            midiInterface: midiInterface
-
-            Component.onCompleted: {
-
-                labelPosition = Qt.vector3d(-0.7,1.35,0.2);
-                labelRotation = -135;
-
-                cupboardPosition = Qt.vector3d(-0.60,1.8,0.1);
-                cupboardRotation = 0;
-
-                midiPosition = Qt.vector3d(-0.85,0.87,0.2);
-
-                ownInstrument.chordsPosition = Qt.vector3d(-1.3,1.55,0.2);
-                ownInstrument.chordsRotation = -135;
-
-                ownInstrument.pentatonicsPosition = Qt.vector3d(-1.4,1.60,0.2);
-                ownInstrument.pentatonicsRotation = -135;
-
-                ownInstrument.switchPosition = Qt.vector3d(-0.5,2.85,0.2);
-                ownInstrument.switchRotation = 270;
-
-            }
-        }
 
     }
 
