@@ -87,6 +87,8 @@ Item3D {
             duration: 100
             to: Qt.vector3d(1.1,1.1,1)
         }
+        PauseAnimation { duration: 200 }
+        loops: Animation.Infinite
     }
 
     SequentialAnimation {
@@ -142,7 +144,9 @@ Item3D {
     }
 
     function beat() {
-        beatAnimation.start()
+        if (!beatAnimation.running) {
+            beatAnimation.start();
+        }
     }
 
     function enableSpinner() {
