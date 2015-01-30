@@ -96,6 +96,10 @@ Item3D {
         }
     }
 
+    function hasInstrument() {
+        return midi.enabled || ownInstrumentSet.enabled;
+    }
+
     property alias cupboardPosition: cupboard.position
     property alias cupboardRotation: cupboard_rotation.angle
     CupBoard {
