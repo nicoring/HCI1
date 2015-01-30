@@ -68,6 +68,9 @@ Controller.prototype.changed = function() {
         case MODUS.WARM_UP:
             break;
         case MODUS.SESSION:
+            if (this.activePlayerCount <= 0) {
+                this.state = MODUS.READY;
+            }
             break;
     }
 }
@@ -77,10 +80,9 @@ Controller.prototype.startWarmUp = function() {
     var _this = this;
 
     function endWarmUp() {
-        circle.disableSpinner();
-        var timer = createTimer({interval: 1000});
-        timer.triggered.connect(function () { _this.startSession(); });
-        timer.start();
+        _this.circle.disableSpinner();
+        _this.circle.rotationStopped.disconnect(rotateToNextPlayer);
+        _this.wait(1000, _this.startSession);
     }
 
     function rotateToNextPlayer() {
@@ -113,15 +115,54 @@ Controller.prototype.startWarmUp = function() {
     }
 
     activePlayers = this.getActivePlayers();
-    circle.enableSpinner();
+    this.circle.enableSpinner();
     soloPlayer = activePlayers.shift();
-    circle.rotateToPlayer(soloPlayer.number);
-    circle.rotationStopped.connect(rotateToNextPlayer);
+    this.circle.rotateToPlayer(soloPlayer.number);
+    this.circle.rotationStopped.connect(rotateToNextPlayer);
 }
 
 Controller.prototype.startSession = function() {
+    var _this = this;
+
+    function getRandomPlayerOf(players) {
+      var playerCount = players.length;
+      var playerNum = Math.floor(Math.random() * playerCount);
+      return players[playerNum];
+    }
+
+    function getRandomTime() {
+      return Math.floor(Math.random() * 5000) + 1000;
+    }
+
+    function startSoloAfterRandomTime() {
+        _this.circle.disableSpinner();
+        _this.wait(getRandomTime(), startSolo);
+    }
+
+    function endSession() {
+        _this.state = MODUS.READY;
+        _this.circle.spinningStopped.disconnect(startSoloAfterRandomTime);
+    }
+
+    function startSolo() {
+        if (_this.state === MODUS.SESSION) {
+            var soloPlayer = getRandomPlayerOf(_this.getActivePlayers());
+            _this.circle.enableSpinner();
+            _this.circle.spinToPlayer(soloPlayer.number);
+            _this.circle.spinningStopped.connect(startSoloAfterRandomTime);
+        } else {
+            endSession();
+        }
+    }
+
     this.state = MODUS.SESSION;
-    circle.beat();
+    this.wait(1000, startSolo);
+}
+
+Controller.prototype.wait = function(time, cb) {
+    var timer = createTimer({interval: time});
+    timer.triggered.connect(cb);
+    timer.start();
 }
 
 Controller.prototype.getActivePlayers = function() {

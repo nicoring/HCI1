@@ -12,11 +12,10 @@ Item3D {
     signal rotationStopped()
 
     property int fullDurationSlow: 2000
+    property int warmUpSoloTime: 1000
+    property int soloTime: 1000
 
     Component.onCompleted: {
-        //enableSpinner()
-        //spinToPlayer(1)
-        //rotateFromToPlayer(2,4)
     }
 
     Item3D {
@@ -110,6 +109,7 @@ Item3D {
             from: 0
             to: 0
         }
+        PauseAnimation { duration: soloTime }
         onRunningChanged: {
             if (!arrowRotationAnimation.running) {
                 spinningStopped()
@@ -127,7 +127,7 @@ Item3D {
             from: 0
             to: 0
         }
-        PauseAnimation { duration: 1000 }
+        PauseAnimation { duration: warmUpSoloTime }
         onRunningChanged: {
             if (!fromToAnimation.running) {
                 rotationStopped()
@@ -136,9 +136,9 @@ Item3D {
      }
 
     function mtqTap(position, id) {
-        enableSpinner()
+        //enableSpinner()
         //rotateToPlayer(1)
-        rotateFromToPlayer(2,4)
+        //rotateFromToPlayer(2,4)
     }
 
     function beat() {
