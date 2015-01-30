@@ -65,6 +65,10 @@
         <file>meshs/instrumentButton.3ds</file>
         <file>images/purple.png</file>
         <file>images/purple-highlight.png</file>
-        <file>images/test_session.png</file>
+        <file>images/warmUp.png</file>
+        <file>images/calmDown.png</file>
+        <file>images/session.png</file>
+        <file>images/soloTime.png</file>
+        <file>images/yourSolo.png</file>
     </qresource>
 </RCC>

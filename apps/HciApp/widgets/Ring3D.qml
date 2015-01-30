@@ -15,13 +15,13 @@ Item3D {
         position: Qt.vector3d(0,0,1)
         scale: 1.8
         transform: [
-            Rotation3D{
-                angle: 45
+            Rotation3D {
+                angle: 90
                 axis: Qt.vector3d(0,0,1)
             }
         ]
         effect: LightShader {
-            texture: "qrc:/models/images/test_session.png"
+            texture: "qrc:/models/images/warmUp.png"
         }
     }
 }
