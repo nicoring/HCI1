@@ -204,7 +204,7 @@ Item3D {
             id: bottomleftStage
             mesh: Mesh { source: "qrc:/models/meshs/topright.3ds" }
 
-            player_id: 3
+            player_id: 4
             midiInterface: midiInterface
 
             Component.onCompleted: {
