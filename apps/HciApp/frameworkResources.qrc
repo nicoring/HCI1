@@ -65,5 +65,6 @@
         <file>meshs/instrumentButton.3ds</file>
         <file>images/purple.png</file>
         <file>images/purple-highlight.png</file>
+        <file>images/test_session.png</file>
     </qresource>
 </RCC>
