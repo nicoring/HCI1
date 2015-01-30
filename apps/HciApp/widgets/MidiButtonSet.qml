@@ -11,16 +11,12 @@ Item3D {
     id: buttonset
 
     property int player_id
-    property int offset
+    property int instrument_id
     property MidiInterface midiInterface
 
-    function setInstrument(number) {
-        offset = number * 16;
-    }
-
     /*********************
-     * --> offset depends on the chosen instrument. So if another
-     *     is chosen, the offset has to be updated on each button.
+     * --> instrument_id depends on the chosen instrument. So if another
+     *     is chosen, the instrument_id has to be updated on each button.
      */
 
     /** keyboard buttons **/
@@ -34,7 +30,7 @@ Item3D {
 
             button_id: 1
             player_id: buttonset.player_id
-            offset: buttonset.offset
+            instrument_id: buttonset.instrument_id
             midiInterface: buttonset.midiInterface
 
             position: Qt.vector3d(0,0,0)
@@ -51,7 +47,7 @@ Item3D {
 
             button_id: 2
             player_id: buttonset.player_id
-            offset: buttonset.offset
+            instrument_id: buttonset.instrument_id
             midiInterface: buttonset.midiInterface
 
             transform {
@@ -69,7 +65,7 @@ Item3D {
 
             button_id: 3
             player_id: buttonset.player_id
-            offset: buttonset.offset
+            instrument_id: buttonset.instrument_id
             midiInterface: buttonset.midiInterface
 
             transform {
@@ -87,7 +83,7 @@ Item3D {
 
             button_id: 4
             player_id: buttonset.player_id
-            offset: buttonset.offset
+            instrument_id: buttonset.instrument_id
             midiInterface: buttonset.midiInterface
 
             transform {

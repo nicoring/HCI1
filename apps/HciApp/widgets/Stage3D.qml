@@ -113,7 +113,7 @@ Item3D {
 
         hideOwnInstrument();
         midi.enabled = true;
-        midi.offset = index;
+        midi.instrument_id = index;
     }
 
     function hideVirtualInstrument() {
@@ -125,7 +125,7 @@ Item3D {
         id: midi
         scale: 1 / floorElems3D.scale
         player_id: stage.player_id
-        offset: 0
+        instrument_id: 1
         midiInterface: stage.midiInterface
         enabled: false
     }

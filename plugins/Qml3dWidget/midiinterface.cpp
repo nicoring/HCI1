@@ -155,10 +155,10 @@ void MidiInterface::buttonTapped(int player_id, int button_id, int offset)
  * @param player_id
  * @param button_id
  */
-void MidiInterface::buttonDown(int player_id, int button_id, int offset)
+void MidiInterface::buttonDown(int player_id, int button_id, int instrument_id)
 {
     qDebug() << "Player " << player_id << " on button " << button_id;
-    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + offset;
+    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + (instrument_id - 1) * 16;
     unsigned char velocity = 127;
 
     messenger[0] = 144;
@@ -179,10 +179,10 @@ void MidiInterface::buttonDown(int player_id, int button_id, int offset)
  * @param player_id
  * @param button_id
  */
-void MidiInterface::buttonUp(int player_id, int button_id, int offset)
+void MidiInterface::buttonUp(int player_id, int button_id, int instrument_id)
 {
     qDebug() << "Player " << player_id << " released button " << button_id;
-    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + offset;
+    unsigned char note = (unsigned int) ((player_id - 1) * 4 + (button_id - 1)) + (instrument_id - 1) * 16;
     unsigned char velocity = 127;
 
     messenger[0] = 128;
