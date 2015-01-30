@@ -36,7 +36,7 @@ Item3D {
         }
         function mtqTap(id, position) {
             changedInstrument();
-            selectedVirtualInstrument(0);
+            selectedVirtualInstrument(1);
 
             if (parent.mtqTap) {
                 parent.mtqTap(id, position);
@@ -52,7 +52,7 @@ Item3D {
         }
         function mtqTap(id, position) {
             changedInstrument();
-            selectedVirtualInstrument(1);
+            selectedVirtualInstrument(2);
 
             if (parent.mtqTap) {
                 parent.mtqTap(id, position);
@@ -68,7 +68,7 @@ Item3D {
         }
         function mtqTap(id, position) {
             changedInstrument();
-            selectedVirtualInstrument(2);
+            selectedVirtualInstrument(3);
 
             if (parent.mtqTap) {
                 parent.mtqTap(id, position);
@@ -84,7 +84,7 @@ Item3D {
         }
         function mtqTap(id, position) {
             changedInstrument();
-            selectedVirtualInstrument(3);
+            selectedVirtualInstrument(4);
 
             if (parent.mtqTap) {
                 parent.mtqTap(id, position);

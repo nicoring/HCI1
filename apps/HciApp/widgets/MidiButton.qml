@@ -12,7 +12,7 @@ MidiButtonMesh {
 
     property int button_id
     property int player_id
-    property int offset
+    property int instrument_id
 
     // load midi interface qml widget
     property MidiInterface midiInterface
@@ -33,8 +33,8 @@ MidiButtonMesh {
 
     function mtqContactDown(id, position) {
         highlight()
-        console.info('contact down', id, position, button_id, player_id);
-        midiInterface.buttonDown(player_id, button_id, offset);
+        console.info('contact down', id, position, button_id, player_id, instrument_id);
+        midiInterface.buttonDown(player_id, button_id, instrument_id);
 
         if (parent.mtqContactDown) {
             parent.mtqContactDown(id, position);
@@ -44,8 +44,8 @@ MidiButtonMesh {
 
     function mtqContactUp(id, position) {
         unhighlight()
-        console.info('contact up', id, position, button_id, player_id);
-        midiInterface.buttonUp(player_id, button_id, offset);
+        console.info('contact up', id, position, button_id, player_id, instrument_id);
+        midiInterface.buttonUp(player_id, button_id, instrument_id);
 
         if (parent.mtqContactDown) {
             parent.mtqContactDown(id, position);
